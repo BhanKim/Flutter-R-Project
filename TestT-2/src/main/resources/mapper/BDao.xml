@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTO 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						
+<mapper namespace="com.springlec.base.dao.BDao">
+	<select id="bestCakeListDao" resultType="com.springlec.base.model.BDto">
+		SELECT * FROM education.student;
+	
+	</select>
+	
+	<select id="insert" >
+		insert  into student(scode,sname,sdept,sphone) 
+		values(#{scode},#{sname},#{sdept},#{sphone});
+	
+	</select>
+	
+</mapper>
