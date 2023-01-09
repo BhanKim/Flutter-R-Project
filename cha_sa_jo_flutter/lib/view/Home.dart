@@ -1,7 +1,9 @@
-import 'package:cha_sa_jo_flutter/view/board.dart';
+import 'package:cha_sa_jo_flutter/view/board/board.dart';
 import 'package:cha_sa_jo_flutter/view/carList.dart';
-import 'package:cha_sa_jo_flutter/view/chatting.dart';
-import 'package:cha_sa_jo_flutter/view/login.dart';
+import 'package:cha_sa_jo_flutter/view/chatting/chat_screen.dart';
+import 'package:cha_sa_jo_flutter/view/chatting/chatting.dart';
+import 'package:cha_sa_jo_flutter/view/login/login.dart';
+import 'package:cha_sa_jo_flutter/view/login/main_screen.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -16,6 +18,9 @@ class Home extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
+            SizedBox(
+              height: 200,
+            ),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(
@@ -24,7 +29,17 @@ class Home extends StatelessWidget {
                   },
                 ));
               },
-              child: Text('김영혁'),
+              child: Text('carList'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return Login();
+                  },
+                ));
+              },
+              child: Text('chart'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -34,17 +49,27 @@ class Home extends StatelessWidget {
                   },
                 ));
               },
-              child: Text('이예진'),
+              child: Text('board'),
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
-                    return Chatting();
+                    return ChatScreen();
                   },
                 ));
               },
-              child: Text('김진형'),
+              child: Text('chatting'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return LoginSignupScreen();
+                  },
+                ));
+              },
+              child: Text('login'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -54,7 +79,7 @@ class Home extends StatelessWidget {
                   },
                 ));
               },
-              child: Text('박태권'),
+              child: Text('sign-up'),
             ),
           ],
         ),
