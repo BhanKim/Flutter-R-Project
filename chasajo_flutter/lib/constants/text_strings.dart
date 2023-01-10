@@ -8,7 +8,7 @@ const String tSignup = "Signup";
 const String tPhoneNo = "Phone No";
 const String tPassword = "Password";
 const String tFullName = "Full Name";
-const String tForgetPassword = "Forget Password";
+const String tForgetPassword = "비밀번호를 잊어버렸습니다.";
 const String tSignInWithGoogle = "Sign-In with Google";
 
 // -- Splash Screen Text
