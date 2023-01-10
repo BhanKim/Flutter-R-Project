@@ -1,4 +1,4 @@
-import 'package:cha_sa_jo_flutter/view/board/board.dart';
+import 'package:cha_sa_jo_flutter/view/board/boardpage.dart';
 import 'package:cha_sa_jo_flutter/view/carList.dart';
 import 'package:cha_sa_jo_flutter/view/chatting/chat_screen.dart';
 import 'package:cha_sa_jo_flutter/view/chatting/chatting.dart';
@@ -45,7 +45,7 @@ class Home extends StatelessWidget {
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
-                    return Board();
+                    return BoardPage();
                   },
                 ));
               },
