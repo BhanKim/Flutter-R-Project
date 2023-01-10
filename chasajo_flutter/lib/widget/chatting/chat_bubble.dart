@@ -22,7 +22,12 @@ class ChatBubble extends StatelessWidget {
             SizedBox(
               width: isMe ? 0 : 10,
             ),
-            Text(userName),
+            Text(
+              userName,
+              style: TextStyle(
+                fontSize: 15,
+              ),
+            ),
             SizedBox(
               width: isMe ? 10 : 0,
             )

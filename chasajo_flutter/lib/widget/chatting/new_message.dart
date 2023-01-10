@@ -26,7 +26,8 @@ class _NewMessageState extends State<NewMessage> {
     );
 
     FirebaseFirestore.instance.collection('chat').add({
-      'text': _userEnterMessage,
+      'text': _controller.text,
+      //'text': _userEnterMessage,
       'time': Timestamp.now(),
       'userID': user!.uid,
       'userName': userData['userName'],
@@ -38,52 +39,40 @@ class _NewMessageState extends State<NewMessage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 8),
-      padding: EdgeInsets.all(8),
-      child: Row(
+      //color: Colors.blue[100],
+      padding: const EdgeInsets.all(8),
+      child: Column(
         children: [
-          //=========================
-          // StreamBuilder(
-          //   stream: FirebaseFirestore.instance
-          //       .collection('user')
-          //       .where('email', isEqualTo: user!.email)
-          //       .snapshots(),
-          //   builder: (context,
-          //       AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-          //     if (snapshot.connectionState == ConnectionState.waiting) {
-          //       return const Center(
-          //         child: CircularProgressIndicator(),
-          //       );
-          //     }
-          //     final userDocs = snapshot.data!.docs;
-          //     print(userDocs[0]['email']);
-          //     return Scaffold(
-          //       appBar: AppBar(
-          //         title: Text('data'),
-          //       ),
-          //     );
-          //   },
-          // ),
-          //=========================
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: TextField(
-                controller: _controller,
-                maxLines: null,
-                decoration: InputDecoration(labelText: 'Send a message'),
-                onChanged: (value) {
-                  setState(() {
-                    _userEnterMessage = value;
-                  });
-                },
+          Row(
+            children: [
+              const SizedBox(
+                width: 30,
               ),
-            ),
+              Expanded(
+                child: TextField(
+                  controller: _controller,
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                    labelText: '메세지를 입력해주세요.',
+                  ),
+                ),
+              ),
+              IconButton(
+                disabledColor: Colors.black,
+                onPressed: () {
+                  if (_controller.text.isNotEmpty) {
+                    _sendMessage();
+                  }
+                },
+                icon: const Icon(
+                  Icons.send,
+                ),
+                color: Colors.blue,
+              )
+            ],
           ),
-          IconButton(
-            onPressed: _userEnterMessage.trim().isEmpty ? null : _sendMessage,
-            icon: Icon(Icons.send),
-            color: Colors.blue,
+          const SizedBox(
+            height: 20,
           )
         ],
       ),

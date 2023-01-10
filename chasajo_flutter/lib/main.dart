@@ -1,5 +1,6 @@
 import 'package:cha_sa_jo_flutter/firebase_options.dart';
-import 'package:cha_sa_jo_flutter/view/Home.dart';
+
+import 'package:cha_sa_jo_flutter/view/Home/Home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
