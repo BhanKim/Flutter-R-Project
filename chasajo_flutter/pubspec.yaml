@@ -41,7 +41,7 @@ dependencies:
   firebase_auth: ^4.2.5
   get: ^4.6.5
   fl_chart: ^0.55.2
-
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
