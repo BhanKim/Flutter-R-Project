@@ -1,6 +1,7 @@
 import 'package:cha_sa_jo_flutter/model/tabbar.dart';
 import 'package:cha_sa_jo_flutter/view/Home/Home_Page.dart';
-import 'package:cha_sa_jo_flutter/view/board/board.dart';
+
+import 'package:cha_sa_jo_flutter/view/board/boardpage.dart';
 import 'package:cha_sa_jo_flutter/view/carList.dart';
 import 'package:cha_sa_jo_flutter/view/chatting/chat_screen.dart';
 import 'package:cha_sa_jo_flutter/view/login/login.dart';
@@ -34,7 +35,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       context,
       screens: [
         HomePage(),
-        Board(),
+        BoardPage(),
         LoginSignupScreen(),
       ],
       controller: controller,
