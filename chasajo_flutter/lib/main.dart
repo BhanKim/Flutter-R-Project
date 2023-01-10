@@ -1,6 +1,7 @@
 import 'package:cha_sa_jo_flutter/firebase_options.dart';
 
 import 'package:cha_sa_jo_flutter/view/Home/Home.dart';
+import 'package:cha_sa_jo_flutter/view/Home/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,8 +23,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        //backgroundColor: Colors.white,
       ),
-      home: const Home(),
+      home: SplashScreen(),
     );
   }
 }

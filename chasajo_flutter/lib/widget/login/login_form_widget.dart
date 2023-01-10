@@ -1,9 +1,12 @@
 import 'package:cha_sa_jo_flutter/constants/sizes.dart';
 import 'package:cha_sa_jo_flutter/constants/text_strings.dart';
+import 'package:cha_sa_jo_flutter/view/Home/Home.dart';
 import 'package:cha_sa_jo_flutter/view/chatting/chat_screen.dart';
+import 'package:cha_sa_jo_flutter/view/signup/singup_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
@@ -56,39 +59,50 @@ class LoginForm extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 // login 실행
-                onPressed: () {
-                  onPressed:
-                  () async {
-                    //
-                    try {
-                      final newUser = await FirebaseAuth.instance
-                          .signInWithEmailAndPassword(
-                        email: loginEmail,
-                        password: loginPassword,
-                      );
-                      if (newUser.user != null) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) {
-                              // return ChatListScreen();
-                              return ChatScreen();
-                            },
-                          ),
-                        );
-                      }
-                    } catch (e) {
-                      print(e);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("아이디 비밀번호를 확인해 주세요"),
+                onPressed: () async {
+                  print(loginEmail);
+                  print(loginPassword);
+                  try {
+                    final newUser =
+                        await FirebaseAuth.instance.signInWithEmailAndPassword(
+                      email: loginEmail,
+                      password: loginPassword,
+                    );
+                    if (newUser.user != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return Home();
+                          },
                         ),
                       );
                     }
-                  };
+                  } catch (e) {
+                    print(e);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("아이디 비밀번호를 확인해 주세요"),
+                      ),
+                    );
+                  }
                 },
                 child: Text(tLogin.toUpperCase()),
               ),
+            ),
+            const Text("OR"),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                  onPressed: () {
+                    // Navigator.push(context, MaterialPageRoute(
+                    //   builder: (context) {
+                    //     return SignupScreen();
+                    //   },
+                    // ));
+                    Get.to(SignupScreen());
+                  },
+                  child: Text('SING UP')),
             )
           ],
         ),

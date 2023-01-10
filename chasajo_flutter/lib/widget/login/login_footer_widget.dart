@@ -23,7 +23,9 @@ class LoginFooterWidget extends StatelessWidget {
         ),
         const SizedBox(height: tFormHeight - 20),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            //
+          },
           child: Text.rich(
             TextSpan(
                 text: tDontHaveAnAccount,
