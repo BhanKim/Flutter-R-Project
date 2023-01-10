@@ -37,20 +37,6 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Flutter Chat'),
-        // actions: [
-        //   IconButton(
-        //       onPressed: () {
-        //         Navigator.push(
-        //           context,
-        //           MaterialPageRoute(
-        //             builder: (context) {
-        //               return userTest();
-        //             },
-        //           ),
-        //         );
-        //       },
-        //       icon: Icon(Icons.exit_to_app_sharp))
-        // ],
       ),
       body: Container(
         height: MediaQuery.of(context).size.height,

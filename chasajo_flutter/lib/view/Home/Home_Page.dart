@@ -1,20 +1,18 @@
-import 'package:cha_sa_jo_flutter/view/board/board.dart';
+import 'package:cha_sa_jo_flutter/view/board/boardpage.dart';
 import 'package:cha_sa_jo_flutter/view/carList.dart';
 import 'package:cha_sa_jo_flutter/view/chatting/chat_screen.dart';
-import 'package:cha_sa_jo_flutter/view/chatting/chatting.dart';
 import 'package:cha_sa_jo_flutter/view/login/login.dart';
 import 'package:cha_sa_jo_flutter/view/login/main_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Test'),
-      ),
       body: Center(
         child: Column(
           children: [
@@ -45,7 +43,7 @@ class Home extends StatelessWidget {
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
-                    return Board();
+                    return BoardPage();
                   },
                 ));
               },

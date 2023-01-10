@@ -2,6 +2,7 @@ import 'package:cha_sa_jo_flutter/view/chatting/chat_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginSignupScreen extends StatefulWidget {
   const LoginSignupScreen({super.key});
@@ -166,10 +167,32 @@ class _LoginSignupScreenState extends State<LoginSignupScreen> {
                 },
                 child: const Text('회원가입'),
               ),
+              ElevatedButton(
+                onPressed: () {
+                  //비밀번호 재설정한 이메일을 입력 받아야한다.
+                  resetPassword('wlsgud0452@naver.com');
+                },
+                child: const Text('비밀번호재설정'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  //비밀번호 재설정한 이메일을 입력 받아야한다.
+                  FirebaseAuth.instance.signOut();
+                },
+                child: const Text('로그아웃'),
+              )
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future<void> resetPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      print('sdfknskjnsfd');
+    }
   }
 }
