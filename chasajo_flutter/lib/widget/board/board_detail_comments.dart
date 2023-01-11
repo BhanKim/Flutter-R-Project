@@ -1,6 +1,7 @@
 import 'package:cha_sa_jo_flutter/model/comment.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/state_manager.dart';
 
 class BoardComments extends StatefulWidget {
   const BoardComments({
@@ -29,6 +30,8 @@ class _BoardCommentsState extends State<BoardComments> {
   ScrollController scroller = ScrollController();
   late List<Comment> comments;
 
+  RxBool _isLightTheme = true.obs;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -48,6 +51,12 @@ class _BoardCommentsState extends State<BoardComments> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: getcomments(),
@@ -56,7 +65,10 @@ class _BoardCommentsState extends State<BoardComments> {
           Container(
             padding: EdgeInsets.zero,
             height: 30,
-            color: Color(0xffE6E6E6),
+            // color: Color(0xffE6E6E6),
+            color: _isLightTheme.isTrue
+                ? Color(0xffE6E6E6)
+                : Color.fromARGB(255, 76, 76, 76),
             child: Align(
               alignment: Alignment.centerLeft,
               child: Row(
@@ -235,9 +247,9 @@ class _BoardCommentsState extends State<BoardComments> {
     comments.clear();
     for (var doc in querySnapshot.docs) {
       Comment comment = Comment.fromQuerySnapShot(doc);
-      setState(() {
-        comments.add(comment);
-      });
+      // setState(() {
+      comments.add(comment);
+      // });
     }
     comments.isEmpty
         ? comments.add(Comment(

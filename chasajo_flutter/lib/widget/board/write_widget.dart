@@ -1,3 +1,4 @@
+import 'package:cha_sa_jo_flutter/view/Home/Home.dart';
 import 'package:cha_sa_jo_flutter/view/board/boardpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -122,7 +123,7 @@ class _WriteWidgetState extends State<WriteWidget> {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.pop(context);
-                Get.to(const BoardPage());
+                Get.to(const Home());
               },
               child: const Text(
                 'OK',
