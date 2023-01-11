@@ -31,4 +31,7 @@ public interface modelMapper {
 	// DELETE SEARCH LIST
 	@Delete("DELETE FROM carsearchlist WHERE sid=#{sid} AND sseq=#{sseq}")
 	int deleteSearchRow(@Param("sid") String id, @Param("sseq") String sseq);
-}
+	
+	@Select("SELECT sbrand, smodel, count(smodel) AS cnt FROM carsearchlist GROUP BY sbrand, smodel ORDER BY cnt DESC LIMIT 3")
+	List<carsearchlist> getList()
+;}
