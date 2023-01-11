@@ -42,6 +42,7 @@ class _CollectionState extends State<Collection> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -55,8 +56,8 @@ class _CollectionState extends State<Collection> {
                         height: 60,
                       ),
                       Container(
-                        height: 50,
-                        color: Colors.red,
+                        height: 5,
+                        color: Colors.lightGreen,
                       )
                     ],
                   ),
@@ -70,7 +71,7 @@ class _CollectionState extends State<Collection> {
                       Container(
                         height: 50,
                         width: 200,
-                        color: Colors.red,
+                        color: Colors.white,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -91,8 +92,8 @@ class _CollectionState extends State<Collection> {
                         height: 60,
                       ),
                       Container(
-                        height: 50,
-                        color: Colors.red,
+                        height: 5,
+                        color: Colors.lightGreen,
                       )
                     ],
                   ),
@@ -217,8 +218,8 @@ class _CollectionState extends State<Collection> {
                   child: Column(
                     children: [
                       Container(
-                        height: 50,
-                        color: Colors.blue,
+                        height: 5,
+                        color: Colors.lightGreen,
                       )
                     ],
                   ),
@@ -229,7 +230,7 @@ class _CollectionState extends State<Collection> {
                       Container(
                         height: 50,
                         width: 200,
-                        color: Colors.blue,
+                        color: Colors.white,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -247,8 +248,8 @@ class _CollectionState extends State<Collection> {
                   child: Column(
                     children: [
                       Container(
-                        height: 50,
-                        color: Colors.blue,
+                        height: 5,
+                        color: Colors.lightGreen,
                       )
                     ],
                   ),
@@ -373,8 +374,8 @@ class _CollectionState extends State<Collection> {
                   child: Column(
                     children: [
                       Container(
-                        height: 50,
-                        color: Colors.cyanAccent,
+                        height: 5,
+                        color: Colors.lightGreen,
                       )
                     ],
                   ),
@@ -385,7 +386,6 @@ class _CollectionState extends State<Collection> {
                       Container(
                         height: 50,
                         width: 200,
-                        color: Colors.cyanAccent,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -403,8 +403,8 @@ class _CollectionState extends State<Collection> {
                   child: Column(
                     children: [
                       Container(
-                        height: 50,
-                        color: Colors.cyanAccent,
+                        height: 5,
+                        color: Colors.lightGreen,
                       )
                     ],
                   ),
@@ -426,7 +426,6 @@ class _CollectionState extends State<Collection> {
                       const Text('A-class'),
                       Container(
                         height: 100,
-                        color: Colors.white,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -461,7 +460,6 @@ class _CollectionState extends State<Collection> {
                       Container(
                         height: 100,
                         width: 200,
-                        color: Colors.white,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -495,7 +493,6 @@ class _CollectionState extends State<Collection> {
                       const Text('C-class'),
                       Container(
                         height: 100,
-                        color: Colors.white,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -529,7 +526,7 @@ class _CollectionState extends State<Collection> {
                   child: Column(
                     children: [
                       Container(
-                        height: 50,
+                        height: 5,
                         color: Colors.lightGreen,
                       )
                     ],
@@ -541,7 +538,6 @@ class _CollectionState extends State<Collection> {
                       Container(
                         height: 50,
                         width: 200,
-                        color: Colors.lightGreen,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -559,7 +555,7 @@ class _CollectionState extends State<Collection> {
                   child: Column(
                     children: [
                       Container(
-                        height: 50,
+                        height: 5,
                         color: Colors.lightGreen,
                       )
                     ],
@@ -688,8 +684,8 @@ class _CollectionState extends State<Collection> {
                   child: Column(
                     children: [
                       Container(
-                        height: 50,
-                        color: Colors.orange,
+                        height: 5,
+                        color: Colors.lightGreen,
                       )
                     ],
                   ),
@@ -700,7 +696,7 @@ class _CollectionState extends State<Collection> {
                       Container(
                         height: 50,
                         width: 350,
-                        color: Colors.orange,
+                        color: Colors.white,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -718,9 +714,8 @@ class _CollectionState extends State<Collection> {
                   child: Column(
                     children: [
                       Container(
-                        height: 50,
-                        width: 130,
-                        color: Colors.orange,
+                        height: 5,
+                        color: Colors.lightGreen,
                       )
                     ],
                   ),

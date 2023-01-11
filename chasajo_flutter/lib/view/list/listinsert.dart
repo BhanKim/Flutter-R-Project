@@ -1,10 +1,14 @@
 import 'dart:convert';
 import 'dart:ffi';
 
+import 'package:cha_sa_jo_flutter/widget/carlist/MessageCol.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:toggle_switch/toggle_switch.dart';
 
@@ -62,6 +66,10 @@ class _InsertCarState extends State<InsertCar> {
   double smpg = 0;
   // int syear = 0;
   double senginesize = 0;
+  //user id불러오기
+  final user = FirebaseAuth.instance.currentUser;
+  Map<String, dynamic> userData = {};
+  String username = '';
 
 //sseq sid sbrand smodel stransmission
 //sfueltype smileage smpg syear senginesize
@@ -95,259 +103,249 @@ class _InsertCarState extends State<InsertCar> {
     }
   }
 
+  Future<void> _sendMessage() async {
+    FocusScope.of(context).unfocus();
+    final docRef = FirebaseFirestore.instance.collection("user").doc(user!.uid);
+    await docRef.get().then(
+      (DocumentSnapshot doc) {
+        userData = doc.data() as Map<String, dynamic>;
+      },
+      onError: (e) => print("Error getting document: $e"),
+    );
+  }
+
 //Manual     fuelType_D     fuelType_p
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('insert Car'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return CarselectList();
+    return FutureBuilder(
+      future: _sendMessage(),
+      builder: (context, snapshot) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('insert Car'),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  username = userData['email'];
+                  print(username);
+                  Get.to(
+                    CarselectList(),
+                    arguments: username,
+                  );
+                  //CarselectList();
                 },
-              ));
-            },
-            icon: Icon(Icons.arrow_right_alt_sharp),
+                icon: Icon(Icons.arrow_right_alt_sharp),
+              ),
+            ],
           ),
-        ],
-      ),
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 15,
-            child: Text(''),
-          ),
-          // Text('${widget.brand}'),
-          // Text('${widget.model}'),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                height: 50,
-                child: CupertinoPicker(
-                  itemExtent: 30,
-                  scrollController: FixedExtentScrollController(initialItem: 0),
-                  onSelectedItemChanged: (value) {
-                    setState(() {
-                      year = value;
-                      // print(years[year]);
-                      year = years[year];
-                    });
-                  },
-                  children: [
-                    Text("${years[0]}"),
-                    Text("${years[1]}"),
-                    Text("${years[2]}"),
-                    Text("${years[3]}"),
-                    Text("${years[4]}"),
-                    Text("${years[5]}"),
-                    Text("${years[6]}"),
-                    Text("${years[7]}"),
-                  ],
+          body: Column(
+            children: [
+              const SizedBox(
+                height: 15,
+                child: Text(''),
+              ),
+              // Text('${widget.brand}'),
+              // Text('${widget.model}'),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    height: 50,
+                    child: CupertinoPicker(
+                      itemExtent: 30,
+                      scrollController:
+                          FixedExtentScrollController(initialItem: 0),
+                      onSelectedItemChanged: (value) {
+                        setState(() {
+                          year = value;
+                          //
+                          // (years[year]);
+                          year = years[year];
+                        });
+                      },
+                      children: [
+                        Text("${years[0]}"),
+                        Text("${years[1]}"),
+                        Text("${years[2]}"),
+                        Text("${years[3]}"),
+                        Text("${years[4]}"),
+                        Text("${years[5]}"),
+                        Text("${years[6]}"),
+                        Text("${years[7]}"),
+                      ],
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                (values[_currentSliderValue]).toString(),
-                style: const TextStyle(fontSize: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    (values[_currentSliderValue]).toString(),
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  const SizedBox(
+                    width: 7,
+                  ),
+                  const Text(
+                    "Mile",
+                    style: TextStyle(fontSize: 20),
+                  )
+                ],
+              ),
+              Slider(
+                value: _currentSliderValue.toDouble(),
+                label: values[_currentSliderValue].toString(),
+                min: 0,
+                max: values.length - 1,
+                divisions: values.length - 1,
+                activeColor: Colors.blue.shade700,
+                inactiveColor: Colors.blue.shade100,
+                onChanged: (double value) {
+                  setState(() {
+                    _currentSliderValue = value.toInt();
+                    mileage = values[_currentSliderValue];
+                  });
+                },
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    (enginvalues[_enginSliderValue]).toString(),
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  const SizedBox(
+                    width: 7,
+                  ),
+                  const Text(
+                    "enginsize",
+                    style: TextStyle(fontSize: 20),
+                  )
+                ],
+              ),
+              Slider(
+                value: _enginSliderValue.toDouble(),
+                label: enginvalues[_enginSliderValue].toString(),
+                min: 0,
+                max: enginvalues.length - 1,
+                divisions: enginvalues.length - 1,
+                activeColor: Color.fromARGB(255, 25, 210, 185),
+                inactiveColor: Color.fromARGB(255, 187, 251, 243),
+                onChanged: (double enginvalues) {
+                  setState(() {
+                    _enginSliderValue = enginvalues.toInt();
+                    engineSize = _enginSliderValue / 2;
+                  });
+                },
+              ),
+
+              CupertinoPicker(
+                itemExtent: 30,
+                scrollController: FixedExtentScrollController(initialItem: 0),
+                onSelectedItemChanged: (value) {
+                  setState(() {
+                    mpg = value;
+                    mpg = mpgs[mpg];
+                  });
+                },
+                children: [
+                  Text("${mpgs[0]}"),
+                  Text("${mpgs[1]}"),
+                  Text("${mpgs[2]}"),
+                  Text("${mpgs[3]}"),
+                  Text("${mpgs[4]}"),
+                  Text("${mpgs[5]}"),
+                ],
               ),
               const SizedBox(
-                width: 7,
+                height: 15,
               ),
-              const Text(
-                "Mile",
-                style: TextStyle(fontSize: 20),
+              ToggleSwitch(
+                customWidths: const [110.0, 110.0],
+                cornerRadius: 20.0,
+                activeBgColors: const [
+                  [Colors.cyan],
+                  [Colors.redAccent]
+                ],
+                activeFgColor: Colors.white,
+                inactiveBgColor: Colors.grey,
+                inactiveFgColor: Colors.white,
+                totalSwitches: 2,
+                labels: const ['Manual', 'Auto'],
+                icons: const [null, null],
+                onToggle: (index) {
+                  if (index == 1) {
+                    Manual = "FALSE";
+                  } else if (index == 0) {
+                    Manual = "TRUE";
+                  }
+                },
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              ToggleSwitch(
+                customWidths: const [110.0, 110.0],
+                cornerRadius: 20.0,
+                activeBgColors: const [
+                  [Colors.cyan],
+                  [Colors.redAccent]
+                ],
+                activeFgColor: Colors.white,
+                inactiveBgColor: Colors.grey,
+                inactiveFgColor: Colors.white,
+                totalSwitches: 2,
+                labels: const ['Diesel', 'Petrol'],
+                icons: const [null, null],
+                onToggle: (index) {
+                  if (index == 1) {
+                    fuelType_D = "FALSE";
+                    fuelType_p = "TRUE";
+                  } else if (index == 0) {
+                    fuelType_D = "TRUE";
+                    fuelType_p = "FALSE";
+                  }
+                },
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+
+              ElevatedButton(
+                onPressed: () {
+                  sbrand = '${widget.brand}';
+                  smodel = '${widget.model}';
+                  if (fuelType_D == "TRUE") {
+                    stransmission = "Diesel";
+                  } else if (fuelType_D == "FALSE") {
+                    stransmission = "Petrol";
+                  }
+                  if (Manual == "TRUE") {
+                    sfueltype = "Menual";
+                  } else if (Manual == "FALSE") {
+                    sfueltype = "sfueltype";
+                  }
+                  Getjasondata();
+                  carinsert(userData['email']);
+                },
+                child: const Text('예측!'),
+              ),
+              Text('${result2}'),
+              // chart 로 가는 이동 경로 어떻게 할지 몰라서 대충 여기 넣어놈.
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => LineChartWidget(min, max)));
+                },
+                child: const Text('차트로 가즈아'),
               )
             ],
           ),
-          Slider(
-            value: _currentSliderValue.toDouble(),
-            label: values[_currentSliderValue].toString(),
-            min: 0,
-            max: values.length - 1,
-            divisions: values.length - 1,
-            activeColor: Colors.blue.shade700,
-            inactiveColor: Colors.blue.shade100,
-            onChanged: (double value) {
-              setState(() {
-                _currentSliderValue = value.toInt();
-                mileage = values[_currentSliderValue];
-              });
-            },
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                (enginvalues[_enginSliderValue]).toString(),
-                style: const TextStyle(fontSize: 20),
-              ),
-              const SizedBox(
-                width: 7,
-              ),
-              const Text(
-                "enginsize",
-                style: TextStyle(fontSize: 20),
-              )
-            ],
-          ),
-          Slider(
-            value: _enginSliderValue.toDouble(),
-            label: enginvalues[_enginSliderValue].toString(),
-            min: 0,
-            max: enginvalues.length - 1,
-            divisions: enginvalues.length - 1,
-            activeColor: Color.fromARGB(255, 25, 210, 185),
-            inactiveColor: Color.fromARGB(255, 187, 251, 243),
-            onChanged: (double enginvalues) {
-              setState(() {
-                _enginSliderValue = enginvalues.toInt();
-                engineSize = _enginSliderValue / 2;
-              });
-            },
-          ),
-
-          CupertinoPicker(
-            itemExtent: 30,
-            scrollController: FixedExtentScrollController(initialItem: 0),
-            onSelectedItemChanged: (value) {
-              setState(() {
-                mpg = value;
-
-                mpg = mpgs[mpg];
-              });
-            },
-            children: [
-              Text("${mpgs[0]}"),
-              Text("${mpgs[1]}"),
-              Text("${mpgs[2]}"),
-              Text("${mpgs[3]}"),
-              Text("${mpgs[4]}"),
-              Text("${mpgs[5]}"),
-            ],
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          ToggleSwitch(
-            customWidths: const [130.0, 90.0],
-            cornerRadius: 20.0,
-            activeBgColors: const [
-              [Colors.cyan],
-              [Colors.redAccent]
-            ],
-            activeFgColor: Colors.white,
-            inactiveBgColor: Colors.grey,
-            inactiveFgColor: Colors.white,
-            totalSwitches: 2,
-            labels: const ['Manual', ''],
-            icons: const [null, Icons.dangerous_outlined],
-            onToggle: (index) {
-              if (index == 1) {
-                Manual = "FALSE";
-              } else if (index == 0) {
-                Manual = "TRUE";
-              }
-            },
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          ToggleSwitch(
-            customWidths: const [130.0, 90.0],
-            cornerRadius: 20.0,
-            activeBgColors: const [
-              [Colors.cyan],
-              [Colors.redAccent]
-            ],
-            activeFgColor: Colors.white,
-            inactiveBgColor: Colors.grey,
-            inactiveFgColor: Colors.white,
-            totalSwitches: 2,
-            labels: const ['Diesel', ''],
-            icons: const [null, Icons.dangerous_outlined],
-            onToggle: (index) {
-              if (index == 1) {
-                fuelType_D = "FALSE";
-              } else if (index == 0) {
-                fuelType_D = "TRUE";
-              }
-            },
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          ToggleSwitch(
-            customWidths: const [130.0, 90.0],
-            cornerRadius: 20.0,
-            activeBgColors: const [
-              [Colors.cyan],
-              [Colors.redAccent]
-            ],
-            activeFgColor: Colors.white,
-            inactiveBgColor: Colors.grey,
-            inactiveFgColor: Colors.white,
-            totalSwitches: 2,
-            labels: const [
-              'Petrol',
-              '',
-            ],
-            icons: const [
-              null,
-              Icons.dangerous_outlined,
-            ],
-            onToggle: (index) {
-              if (index == 1) {
-                fuelType_p = "FALSE";
-              } else if (index == 0) {
-                fuelType_p = "TRUE";
-              }
-            },
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          ElevatedButton(
-            onPressed: () {
-              sbrand = '${widget.brand}';
-              smodel = '${widget.model}';
-              if (fuelType_D == "TRUE") {
-                stransmission = "Diesel";
-              } else if (fuelType_D == "FALSE") {
-                stransmission = "Petrol";
-              }
-              ;
-              if (Manual == "TRUE") {
-                sfueltype = "Menual";
-              } else if (Manual == "FALSE") {
-                sfueltype = "sfueltype";
-              }
-
-              Getjasondata();
-              carinsert();
-            },
-            child: const Text('예측!'),
-          ),
-          Text('${result2}'),
-          // chart 로 가는 이동 경로 어떻게 할지 몰라서 대충 여기 넣어놈.
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => LineChartWidget(min, max)));
-            },
-            child: const Text('차트로 가즈아'),
-          )
-        ],
-      ),
+        );
+      },
     );
   }
 
@@ -383,18 +381,18 @@ class _InsertCarState extends State<InsertCar> {
   }
 
   ///search/insert/{sid}
-  carinsert() async {
+  carinsert(String userEmail) async {
     var url = Uri.parse(
-        "http://localhost:8080/search/insert/dudgur@gmail.com?sid=dudgur@gmail.com&sbrand=$sbrand" +
+        "http://localhost:8080/search/insert/$userEmail?sid=$userEmail&sbrand=$sbrand" +
             "&smodel=$smodel&stransmission=$stransmission&sfueltype=$sfueltype&smileage=$mileage" +
             "&smpg=$mpg&syear=$year&senginesize=$engineSize");
 //sseq sid sbrand smodel stransmission sfueltype smileage smpg syear senginesize
     var response = await http.get(url);
-    var dataConvertedJson = json.decode(
+    var dataConvertedJson2 = json.decode(
       utf8.decode(response.bodyBytes),
     );
-    result = dataConvertedJson;
-    print(result);
+    result = dataConvertedJson2;
+    // print(result);
     // // print(int.parse(result));
     // result2 = int.parse(result);
     // setState(() {
