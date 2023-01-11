@@ -2,7 +2,6 @@ package com.javalec.base.controller;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,11 +30,13 @@ public class carController {
 		return mapper.getCarModelList(model);
 	}
 	
+	
 	// FOR SEARCH LIST USE THIS
 	@GetMapping("/search/list/{sid}")
 	public List<carsearchlist> getSearchList(@PathVariable("sid")String sid){
 		return mapper.getSearchList(sid);
-	}	
+	}
+	
 
 	// FOR INSERT SEARCH LIST
 	@GetMapping("/search/insert/{sid}")
@@ -49,7 +50,12 @@ public class carController {
 	public void deleteStudnetProfile(@PathVariable("sid") String id,@PathVariable("sseq") String sseq) {
 		mapper.deleteSearchRow(id, sseq);
 	}	
-
 	
+	// TEST
+	@GetMapping("/search/list/all")
+	public List<carsearchlist> getList(){
+		return mapper.getList();
+	}
+
 
 }

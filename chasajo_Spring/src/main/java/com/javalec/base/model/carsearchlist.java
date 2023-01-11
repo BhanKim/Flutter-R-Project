@@ -11,10 +11,12 @@ public class carsearchlist {
 	int smpg;
 	int syear;
 	double senginesize;
+	int cnt;
 	
 
+
 	public carsearchlist(int sseq, String sid, String sbrand, String smodel, String stransmission, String sfueltype,
-			int smileage, int smpg, int syear, double senginesize) {
+			int smileage, int smpg, int syear, double senginesize, int cnt) {
 		super();
 		this.sseq = sseq;
 		this.sid = sid;
@@ -26,6 +28,22 @@ public class carsearchlist {
 		this.smpg = smpg;
 		this.syear = syear;
 		this.senginesize = senginesize;
+		this.cnt = cnt;
+	}
+
+	public carsearchlist(String sbrand, String smodel, int cnt) {
+		super();
+		this.sbrand = sbrand;
+		this.smodel = smodel;
+		this.cnt = cnt;
+	}
+
+	public int getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
 	}
 
 	public int getSyear() {

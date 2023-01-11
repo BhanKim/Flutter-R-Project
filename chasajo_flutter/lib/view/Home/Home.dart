@@ -25,6 +25,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late PersistentTabController controller;
+  RxBool _isLightTheme = true.obs;
   @override
   void initState() {
     // TODO: implement initState
@@ -36,11 +37,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Switch(
-          value: true,
-          onChanged: (value) {
-            //
-          },
+        leading: ObxValue(
+          (data) => Switch(
+            value: _isLightTheme.value,
+            onChanged: (val) {
+              _isLightTheme.value = val;
+              Get.changeThemeMode(
+                _isLightTheme.value ? ThemeMode.light : ThemeMode.dark,
+              );
+              // _saveThemeStatus();
+            },
+          ),
+          false.obs,
         ),
         actions: [
           IconButton(
