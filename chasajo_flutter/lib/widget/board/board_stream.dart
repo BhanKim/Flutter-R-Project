@@ -1,7 +1,9 @@
 import 'package:cha_sa_jo_flutter/model/boardtype.dart';
+import 'package:cha_sa_jo_flutter/model/comment.dart';
 import 'package:cha_sa_jo_flutter/view/board/detailpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class BoardStream extends StatefulWidget {
   const BoardStream({
@@ -15,6 +17,22 @@ class BoardStream extends StatefulWidget {
 }
 
 class _BoardStreamState extends State<BoardStream> {
+  List<Comment> comments = [];
+  // Map<String, dynamic> aa = {};
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _commentCount().then((value) {
+      setState(() {
+        // comments = value;
+        // print(comments);
+        // print(value);
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -47,6 +65,11 @@ class _BoardStreamState extends State<BoardStream> {
       initdate: doc['initdate'],
       count: doc['count'],
     );
+
+    // _commentCount(doc).then((value) {
+    //   print(value);
+    // });
+
     return Container(
       height: 100,
       child: GestureDetector(
@@ -78,8 +101,8 @@ class _BoardStreamState extends State<BoardStream> {
                     Text(board.creator.length >= 5
                         ? ' ${board.creator.substring(0, 5)}... '
                         : ' ${board.creator} '),
-                    // Icon(Icons.message),
-                    // Text(' ${board.count} '),
+                    Icon(Icons.message),
+                    // Text(' $count '),
                     Icon(Icons.remove_red_eye_outlined),
                     Text(' ${board.count}'),
                     Spacer(),
@@ -114,6 +137,45 @@ class _BoardStreamState extends State<BoardStream> {
     );
   }
 
-  //
+  // 댓글 수 가져오기
+  Future<List<Comment>> _commentCount() async {
+    int count = 0;
 
+    CollectionReference<Map<String, dynamic>> collectionReference =
+        FirebaseFirestore.instance
+            .collection('carboard')
+            .doc()
+            .collection('comments');
+
+    QuerySnapshot<Map<String, dynamic>> querySnapshot =
+        await collectionReference.orderBy('createdate', descending: true).get();
+
+    print(querySnapshot);
+
+    for (var doc in querySnapshot.docs) {
+      Comment comment = Comment.fromQuerySnapShot(doc);
+      setState(() {
+        comments.add(comment);
+        print(comments);
+      });
+    }
+    print(comments);
+
+    return comments;
+
+    // await FirebaseFirestore.instance
+    //     .collection('carboard')
+    //     .doc(doc.id)
+    //     .collection('comments')
+    //     .get()
+    //     .then((value) {
+    //   print(value);
+    //   for (i in Qu){
+
+    //   }
+    //   count = value.size;
+    //   // print(count);
+    // });
+    // return count;
+  }
 } // End
