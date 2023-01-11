@@ -328,6 +328,4 @@ class _BoardCommentsState extends State<BoardComments> {
 
     return getcomments();
   }
-
-  void ListNull(List commentList) {}
 } // End
