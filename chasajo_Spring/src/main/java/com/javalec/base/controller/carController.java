@@ -36,7 +36,7 @@ public class carController {
 	public List<carsearchlist> getSearchList(@PathVariable("sid")String sid){
 		return mapper.getSearchList(sid);
 	}	
-	
+
 	// FOR INSERT SEARCH LIST
 	@GetMapping("/search/insert/{sid}")
 	public void insertSearchList(@PathVariable("sid")String sid,@RequestParam("sbrand")String sbrand,@RequestParam("smodel")String smodel,@RequestParam("stransmission")String stransmission,@RequestParam("sfueltype")String sfueltype,@RequestParam("smileage")String smileage,@RequestParam("smpg")String smpg,@RequestParam("syear")String syear,@RequestParam("senginesize")String senginesize) {

@@ -8,12 +8,12 @@ const String tSignup = "Signup";
 const String tPhoneNo = "Phone No";
 const String tPassword = "Password";
 const String tFullName = "Full Name";
-const String tForgetPassword = "비밀번호를 잊어버렸습니다.";
+const String tForgetPassword = "Did you forget your password?";
 const String tSignInWithGoogle = "Sign-In with Google";
 
 // -- Splash Screen Text
-const String tAppName = ".appable/";
-const String tAppTagLine = "Learn To Code. \nFree For Everyone";
+const String tAppName = "Car Bot";
+const String tAppTagLine = "Search for Carprice. \nFree For Everyone";
 
 // -- On Boarding Text
 const String tOnBoardingTitle1 = "Build Awesome Apps";
@@ -30,13 +30,12 @@ const String tOnBoardingCounter2 = "2/3";
 const String tOnBoardingCounter3 = "3/3";
 
 // -- Welcome Screen Text
-const String tWelcomeTitle = "Build Awesome Apps";
-const String tWelcomeSubTitle =
-    "Let's put your creativity on the development highway.";
+const String tWelcomeTitle = "Welcome to Carbot";
+const String tWelcomeSubTitle = "You can search your car price";
 
 // -- Login Screen Text
-const String tLoginTitle = "Welcome Back,";
-const String tLoginSubTitle = "Make it work, make it right, make it fast.";
+const String tLoginTitle = "Welcome Carbot";
+const String tLoginSubTitle = "Search the market price of my car.";
 const String tRememberMe = "Remember Me?";
 const String tDontHaveAnAccount = "Don't have an Account? ";
 

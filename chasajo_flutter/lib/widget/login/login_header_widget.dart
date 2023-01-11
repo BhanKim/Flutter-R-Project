@@ -9,9 +9,10 @@ class LoginHeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image(
-          image: const AssetImage(tSplashImage),
-          height: 100,
+        const SizedBox(height: 30),
+        const Image(
+          image: AssetImage(tSplashImage),
+          height: 250,
         ),
         Text(tLoginTitle, style: Theme.of(context).textTheme.headline3),
         Text(tLoginSubTitle, style: Theme.of(context).textTheme.bodyText1),

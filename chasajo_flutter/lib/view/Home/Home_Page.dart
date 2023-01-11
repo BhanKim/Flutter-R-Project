@@ -5,21 +5,32 @@ import 'package:cha_sa_jo_flutter/view/login/login.dart';
 import 'package:cha_sa_jo_flutter/view/login/login_screen.dart';
 import 'package:cha_sa_jo_flutter/view/login/main_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+  // THEME BOOL
+  bool isLightTheme = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: 200,
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) {
+                    return Login();
+                  },
+                ));
+              },
+              child: const Text('carList'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -29,17 +40,7 @@ class HomePage extends StatelessWidget {
                   },
                 ));
               },
-              child: Text('carList'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) {
-                    return Login();
-                  },
-                ));
-              },
-              child: Text('chart'),
+              child: const Text('chart'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -80,6 +81,22 @@ class HomePage extends StatelessWidget {
                 ));
               },
               child: Text('sign-up'),
+            ),
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(
+                    context.theme.colorScheme.secondary),
+              ),
+              onPressed: () {
+                if (isLightTheme) {
+                  Get.changeThemeMode(ThemeMode.dark);
+                  isLightTheme = false;
+                } else {
+                  Get.changeThemeMode(ThemeMode.light);
+                  isLightTheme = true;
+                }
+              },
+              child: Text('test_Theme Button'),
             ),
           ],
         ),
