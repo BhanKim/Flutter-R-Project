@@ -91,7 +91,7 @@ class _DetailPageState extends State<DetailPage> {
               children: [
                 SingleChildScrollView(
                   controller: scroller,
-                  physics: const AlwaysScrollableScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   padding: const EdgeInsets.all(8),
                   child: Column(
                     children: [
@@ -145,7 +145,7 @@ class _DetailPageState extends State<DetailPage> {
         .animateTo(direction,
             duration: Duration(seconds: seconds), curve: Curves.linear)
         .then((value) {
-      direction = (direction == max) ? min : max;
+      direction = (direction == max) ? max : min;
       animateToMaxMin(max, min, direction, seconds, scrollController);
     });
   }

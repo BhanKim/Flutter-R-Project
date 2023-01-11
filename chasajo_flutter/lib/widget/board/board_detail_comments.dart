@@ -82,7 +82,7 @@ class _BoardCommentsState extends State<BoardComments> {
                   ListView.builder(
                     // controller: scroller,
                     // scrollDirection: Axis.vertical,
-                    // physics: NeverScrollableScrollPhysics(),
+                    physics: BouncingScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: comments.length,
                     itemBuilder: (context, index) {
