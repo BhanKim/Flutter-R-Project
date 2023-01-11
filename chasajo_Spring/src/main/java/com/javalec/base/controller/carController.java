@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.javalec.base.mapper.modelMapper;
 import com.javalec.base.model.carModel;
+import com.javalec.base.model.carcnt;
 import com.javalec.base.model.carsearchlist;
 
 @RestController
@@ -52,8 +53,8 @@ public class carController {
 	}	
 	
 	// TEST
-	@GetMapping("/search/list/all")
-	public List<carsearchlist> getList(){
+	@GetMapping("/search/list/top/all")
+	public List<carcnt> getList(){
 		return mapper.getList();
 	}
 

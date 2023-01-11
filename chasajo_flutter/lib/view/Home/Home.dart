@@ -73,6 +73,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         ],
         controller: controller,
         items: _navBarsItems(),
+        backgroundColor: _isLightTheme.isTrue
+            ? Colors.white
+            : Color.fromARGB(255, 76, 76, 76),
       ),
     );
   }
