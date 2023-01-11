@@ -1,8 +1,11 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class CarselectList extends StatefulWidget {
@@ -13,6 +16,7 @@ class CarselectList extends StatefulWidget {
 }
 
 class _CarselectListState extends State<CarselectList> {
+  var userid = Get.arguments ?? "_";
   late List data = [];
   late int sseq = 0;
   late String sid = '';
@@ -26,22 +30,39 @@ class _CarselectListState extends State<CarselectList> {
   late double senginesize = 0;
   late List<String> carselect = [];
 
+  // user id result
+  final user = FirebaseAuth.instance.currentUser;
+  Map<String, dynamic> userData = {};
+
+  Future<void> _sendMessage() async {
+    FocusScope.of(context).unfocus();
+    final docRef = FirebaseFirestore.instance.collection("user").doc(user!.uid);
+    await docRef.get().then(
+      (DocumentSnapshot doc) {
+        userData = doc.data() as Map<String, dynamic>;
+      },
+      onError: (e) => print("Error getting document: $e"),
+    );
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     data.clear();
     // _Carselect();
+    // getJsonData();
+    print(userid);
   }
 
   //sseq sbrand smodel stransmission sfueltype smileage smpg syear senginesize
-
+// carinsert(userData['email']);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: FutureBuilder(
-          future: _Carselect(),
+          future: getJsonData(),
           builder: (context, snapshot) {
             if (snapshot.hasData == false) {
               return CircularProgressIndicator();
@@ -216,20 +237,18 @@ class _CarselectListState extends State<CarselectList> {
 
 // funtion
   Future<List> getJsonData() async {
-    var url = Uri.parse('http://localhost:8080/search/list/dudgur@gmail.com');
+    var url = Uri.parse('http://localhost:8080/search/list/$userid');
     var respnse = await http.get(url);
     var dataConvertedJson = json.decode(utf8.decode(respnse.bodyBytes));
-    // print(dataConvertedJson);
-
-    return dataConvertedJson;
+    data.addAll(dataConvertedJson);
+    return data;
   }
 
-  Future<List> _Carselect() async {
-    getJsonData().then((value) {
-      data.addAll(value);
-
-      print(data);
-    });
-    return carselect;
-  }
+  // Future<List> _Carselect(userData) async {
+  //   getJsonData().then((value) {
+  //     print(value);
+  //     data.addAll(value);
+  //   });
+  //   return data;
+  // }
 }//end
