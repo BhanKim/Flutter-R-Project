@@ -1,6 +1,7 @@
 import 'package:cha_sa_jo_flutter/model/comment.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/state_manager.dart';
 
 class BoardComments extends StatefulWidget {
   const BoardComments({
@@ -29,6 +30,8 @@ class _BoardCommentsState extends State<BoardComments> {
   ScrollController scroller = ScrollController();
   late List<Comment> comments;
 
+  RxBool _isLightTheme = true.obs;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -48,171 +51,185 @@ class _BoardCommentsState extends State<BoardComments> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.zero,
-          height: 30,
-          color: Color(0xffE6E6E6),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  '댓글',
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text('${comments.length}'),
-              ],
+    return FutureBuilder(
+      future: getcomments(),
+      builder: (context, snapshot) => Column(
+        children: [
+          Container(
+            padding: EdgeInsets.zero,
+            height: 30,
+            // color: Color(0xffE6E6E6),
+            color: _isLightTheme.isTrue
+                ? Color(0xffE6E6E6)
+                : Color.fromARGB(255, 76, 76, 76),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  const Text(
+                    '댓글',
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  snapshot.hasData == false
+                      ? Text(snapshot.hasData.toString())
+                      : Text('${comments.length}'),
+                ],
+              ),
             ),
           ),
-        ),
-        Column(
-          children: [
-            ListView.builder(
-              // controller: scroller,
-              // scrollDirection: Axis.vertical,
-              // physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: comments.length,
-              itemBuilder: (context, index) {
-                return comments[index].boardid == ''
-                    ? Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('No Comment'),
-                          ],
-                        ),
-                      )
-                    : Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-                              child: Row(
+          Column(
+            children: [
+              ListView.builder(
+                // controller: scroller,
+                // scrollDirection: Axis.vertical,
+                // physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: comments.length,
+                itemBuilder: (context, index) {
+                  return comments[index].boardid == ''
+                      ? Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Text('No Comment'),
+                            ],
+                          ),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      comments[index].commentor,
+                                      style: const TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    Text(
+                                      comments[index]
+                                          .createdate
+                                          .toDate()
+                                          .toLocal()
+                                          .toString()
+                                          .substring(0, 16),
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
                                 children: [
                                   Text(
-                                    comments[index].commentor,
+                                    comments[index].comment,
                                     style: const TextStyle(
                                       fontSize: 17,
-                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  Spacer(),
-                                  Text(
-                                    comments[index]
-                                        .createdate
-                                        .toDate()
-                                        .toLocal()
-                                        .toString()
-                                        .substring(0, 16),
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                    ),
-                                  ),
+                                  const Spacer(),
+                                  comments[index].commentor == widget.username
+                                      ? IconButton(
+                                          onPressed: () {
+                                            _showDeleteDialog(
+                                                context, comments[index].id!);
+                                          },
+                                          icon: const Icon(
+                                            Icons.delete_outline,
+                                            size: 18,
+                                          ),
+                                        )
+                                      : const Text(''),
                                 ],
                               ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  comments[index].comment,
-                                  style: const TextStyle(
-                                    fontSize: 17,
-                                  ),
-                                ),
-                                const Spacer(),
-                                comments[index].commentor == widget.username
-                                    ? IconButton(
-                                        onPressed: () {
-                                          _showDeleteDialog(
-                                              context, comments[index].id!);
-                                        },
-                                        icon: const Icon(
-                                          Icons.delete_outline,
-                                          size: 18,
-                                        ),
-                                      )
-                                    : const Text(''),
-                              ],
-                            ),
-                            const Divider(
-                              thickness: 1,
-                            ),
-                          ],
-                        ),
-                      );
-              },
-            )
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(8, 0, 8, 15),
-          child: Row(
-            children: [
-              Container(
-                width: 300,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      controller: commentController,
-                      decoration: const InputDecoration(
-                        hintText: '댓글을 입력해주세요',
-                        border: OutlineInputBorder(),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue),
-                        ),
-                      ),
-                      maxLines: 1,
-                      textInputAction: TextInputAction.newline,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return '내용을 입력해주세요.';
-                        }
-                        return null;
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              Column(
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      if (commentController.text.trim().isNotEmpty) {
-                        _addAction(widget.id, commentController.text.trim(),
-                                widget.username)
-                            .then((value) {
-                          setState(() {
-                            comments = value;
-                          });
-                          commentController.text = "";
-                        });
-                      }
-                    },
-                    icon: Icon(
-                      Icons.send,
-                    ),
-                  ),
-                ],
+                              const Divider(
+                                thickness: 1,
+                              ),
+                            ],
+                          ),
+                        );
+                },
               )
             ],
           ),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 0, 8, 15),
+            child: Row(
+              children: [
+                Container(
+                  width: 300,
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        controller: commentController,
+                        decoration: const InputDecoration(
+                          hintText: '댓글을 입력해주세요',
+                          border: OutlineInputBorder(),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.blue),
+                          ),
+                        ),
+                        maxLines: 1,
+                        textInputAction: TextInputAction.newline,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return '내용을 입력해주세요.';
+                          }
+                          return null;
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        if (commentController.text.trim().isNotEmpty) {
+                          _addAction(widget.id, commentController.text.trim(),
+                                  widget.username)
+                              .then((value) {
+                            setState(() {
+                              comments = value;
+                            });
+                            commentController.text = "";
+                          });
+                        }
+                      },
+                      icon: const Icon(
+                        Icons.send,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -230,14 +247,14 @@ class _BoardCommentsState extends State<BoardComments> {
     comments.clear();
     for (var doc in querySnapshot.docs) {
       Comment comment = Comment.fromQuerySnapShot(doc);
-      setState(() {
-        comments.add(comment);
-      });
+      // setState(() {
+      comments.add(comment);
+      // });
     }
     comments.isEmpty
         ? comments.add(Comment(
             boardid: '',
-            comment: '',
+            comment: '0',
             commentor: '',
             createdate: Timestamp.now()))
         : comments;

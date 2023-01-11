@@ -1,5 +1,8 @@
+import 'package:cha_sa_jo_flutter/view/Home/Home.dart';
+import 'package:cha_sa_jo_flutter/view/board/boardpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class UpdateWidget extends StatefulWidget {
   const UpdateWidget({
@@ -46,6 +49,7 @@ class _UpdateWidgetState extends State<UpdateWidget> {
               children: [
                 const Text(
                   '제목 : ',
+                  style: TextStyle(fontSize: 19),
                 ),
                 const SizedBox(
                   width: 10,
@@ -114,6 +118,7 @@ class _UpdateWidgetState extends State<UpdateWidget> {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.pop(context);
+                Get.to(const Home());
               },
               child: const Text(
                 'OK',
