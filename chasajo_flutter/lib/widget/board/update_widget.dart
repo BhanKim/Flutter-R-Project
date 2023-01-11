@@ -118,7 +118,7 @@ class _UpdateWidgetState extends State<UpdateWidget> {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.pop(context);
-                Get.to(const Home());
+                Get.to(const Home(tabIndex: 1));
               },
               child: const Text(
                 'OK',
