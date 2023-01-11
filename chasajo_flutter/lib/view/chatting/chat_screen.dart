@@ -1,6 +1,6 @@
 import 'package:cha_sa_jo_flutter/widget/chatting/message.dart';
 import 'package:cha_sa_jo_flutter/widget/chatting/new_message.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -35,9 +35,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Flutter Chat'),
-      ),
+      backgroundColor: Colors.white,
       body: Container(
         height: MediaQuery.of(context).size.height,
         child: Column(
