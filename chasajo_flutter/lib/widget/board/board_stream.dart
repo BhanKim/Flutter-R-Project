@@ -1,18 +1,20 @@
 import 'package:cha_sa_jo_flutter/model/boardtype.dart';
+import 'package:cha_sa_jo_flutter/view/board/detailpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class BoardStream extends StatefulWidget {
-  const BoardStream({super.key});
+  const BoardStream({
+    super.key,
+    required this.username,
+  });
+  final String username;
 
   @override
   State<BoardStream> createState() => _BoardStreamState();
 }
 
 class _BoardStreamState extends State<BoardStream> {
-  final user = FirebaseAuth.instance.currentUser!.uid;
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -59,7 +61,9 @@ class _BoardStreamState extends State<BoardStream> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      '${board.title}',
+                      board.title.length >= 25
+                          ? ' ${board.title.substring(0, 25)}... '
+                          : ' ${board.title} ',
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -70,8 +74,10 @@ class _BoardStreamState extends State<BoardStream> {
                 ),
                 Row(
                   children: [
-                    Icon(Icons.people),
-                    Text(' ${board.creator}  '),
+                    Icon(Icons.person),
+                    Text(board.creator.length >= 5
+                        ? ' ${board.creator.substring(0, 5)}... '
+                        : ' ${board.creator} '),
                     Icon(Icons.message),
                     Text(' ${board.count} '),
                     Icon(Icons.remove_red_eye_outlined),
@@ -89,25 +95,25 @@ class _BoardStreamState extends State<BoardStream> {
     );
   }
 
+  // ========== Functions ==================
+
+  // Detail Page 이동
   Future<void> _moveDetail(DocumentSnapshot doc, final board) async {
-    // (nickname != board.creator)
-    //     ? FirebaseFirestore.instance
-    //         .collection('carboard')
-    //         .doc(doc.id)
-    //         .update({"count": doc['count'] + 1})
-    //     : false;
-    // await Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (context) => DetailPage(
-    //       id: doc.id,
-    //       title: doc['title'],
-    //       content: doc['content'],
-    //       creator: doc['creator'],
-    //       initdate: doc['initdate'],
-    //       count: doc['count'],
-    //     ),
-    //   ),
-    // );
+    // 조회 수 증가
+    (widget.username != board.creator)
+        ? FirebaseFirestore.instance
+            .collection('carboard')
+            .doc(doc.id)
+            .update({"count": doc['count'] + 1})
+        : false;
+    await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DetailPage(id: doc.id, username: widget.username),
+      ),
+    );
   }
-}
+
+  //
+
+} // End
