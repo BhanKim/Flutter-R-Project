@@ -40,7 +40,7 @@ class _NewMessageState extends State<NewMessage> {
   Widget build(BuildContext context) {
     return Container(
       //color: Colors.blue[100],
-      padding: const EdgeInsets.all(8),
+      //padding: const EdgeInsets.all(8),
       child: Column(
         children: [
           Row(
