@@ -55,38 +55,44 @@ class _BoardCommentsState extends State<BoardComments> {
           padding: EdgeInsets.zero,
           height: 30,
           color: Color(0xffE6E6E6),
-          child: const Align(
+          child: Align(
             alignment: Alignment.centerLeft,
-            child: Text(
-              '    댓글',
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  '댓글',
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Text('${comments.length}'),
+              ],
             ),
           ),
         ),
-        comments.isEmpty
-            ? const Center(
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      'No Comment',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ),
-              )
-            : Column(
-                children: [
-                  ListView.builder(
-                    // controller: scroller,
-                    // scrollDirection: Axis.vertical,
-                    // physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: comments.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
+        Column(
+          children: [
+            ListView.builder(
+              // controller: scroller,
+              // scrollDirection: Axis.vertical,
+              // physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: comments.length,
+              itemBuilder: (context, index) {
+                return comments[index].boardid == ''
+                    ? Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('No Comment'),
+                          ],
+                        ),
+                      )
+                    : Padding(
                         padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,10 +155,10 @@ class _BoardCommentsState extends State<BoardComments> {
                           ],
                         ),
                       );
-                    },
-                  )
-                ],
-              ),
+              },
+            )
+          ],
+        ),
         Padding(
           padding: const EdgeInsets.fromLTRB(8, 0, 8, 15),
           child: Row(
@@ -214,9 +220,12 @@ class _BoardCommentsState extends State<BoardComments> {
   // 댓글 정보 가져오기
   Future<List<Comment>> getcomments() async {
     CollectionReference<Map<String, dynamic>> collectionReference =
-        FirebaseFirestore.instance.collection('comments');
+        FirebaseFirestore.instance
+            .collection('carboard')
+            .doc(widget.id)
+            .collection('comments');
     QuerySnapshot<Map<String, dynamic>> querySnapshot =
-        await collectionReference.where("boardid", isEqualTo: widget.id).get();
+        await collectionReference.orderBy('createdate').get();
 
     comments.clear();
     for (var doc in querySnapshot.docs) {
@@ -225,13 +234,24 @@ class _BoardCommentsState extends State<BoardComments> {
         comments.add(comment);
       });
     }
+    comments.isEmpty
+        ? comments.add(Comment(
+            boardid: '',
+            comment: '',
+            commentor: '',
+            createdate: Timestamp.now()))
+        : comments;
     return comments;
   }
 
   // 댓글 작성
   Future<List<Comment>> _addAction(
       String boardid, String comment, String commentor) async {
-    await FirebaseFirestore.instance.collection('comments').add({
+    await FirebaseFirestore.instance
+        .collection('carboard')
+        .doc(boardid)
+        .collection('comments')
+        .add({
       'boardid': boardid,
       "comment": comment,
       "commentor": commentor,
@@ -308,4 +328,6 @@ class _BoardCommentsState extends State<BoardComments> {
 
     return getcomments();
   }
-}// End
+
+  void ListNull(List commentList) {}
+} // End
