@@ -6,9 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
+import 'package:toggle_switch/toggle_switch.dart';
+
+import '../chart/linechart.dart';
+import 'C.select.dart';
 
 class InsertCar extends StatefulWidget {
-  const InsertCar({super.key});
+  final brand;
+  final model;
+  const InsertCar({super.key, this.brand, this.model});
 
   @override
   State<InsertCar> createState() => _InsertCarState();
@@ -40,12 +46,25 @@ class _InsertCarState extends State<InsertCar> {
   // 최소 최고치 계산 if 문
   late List<double> minresult = [];
   late List<double> maxresult = [];
-  double min = 0;
-  double max = 0;
+  late double min = 0;
+  late double max = 0;
   int moo = 0;
   int result2 = 0;
   bool value = true;
 
+  /// mysql insert  /// int sseq = 0;
+  String sid = '';
+  String sbrand = '';
+  String smodel = '';
+  String stransmission = '';
+  String sfueltype = '';
+  int smileage = 0;
+  double smpg = 0;
+  // int syear = 0;
+  double senginesize = 0;
+
+//sseq sid sbrand smodel stransmission
+//sfueltype smileage smpg syear senginesize
   @override
   void initState() {
     // TODO: implement initState
@@ -82,6 +101,18 @@ class _InsertCarState extends State<InsertCar> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('insert Car'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return CarselectList();
+                },
+              ));
+            },
+            icon: Icon(Icons.arrow_right_alt_sharp),
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -89,6 +120,8 @@ class _InsertCarState extends State<InsertCar> {
             height: 15,
             child: Text(''),
           ),
+          // Text('${widget.brand}'),
+          // Text('${widget.model}'),
           Center(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -180,6 +213,7 @@ class _InsertCarState extends State<InsertCar> {
               });
             },
           ),
+
           CupertinoPicker(
             itemExtent: 30,
             scrollController: FixedExtentScrollController(initialItem: 0),
@@ -202,100 +236,116 @@ class _InsertCarState extends State<InsertCar> {
           const SizedBox(
             height: 15,
           ),
-          // CupertinoSwitch(
-          //     value: value,
-          //     onChanged: (value) {
-          //       if (value == true) {
-          //         value == false;
-          //       } else {
-          //         value == true;
-          //       }
-          //     }),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CupertinoButton(
-                borderRadius: BorderRadius.circular(16.0),
-                color: Color.fromARGB(255, 0, 165, 151),
-                child: const Text(
-                  'Manual',
-                ),
-                onPressed: () {
-                  Manual = "TRUE";
-
-                  print(Manual);
-                },
-              ),
-              CupertinoButton(
-                borderRadius: BorderRadius.circular(16.0),
-                color: Color.fromARGB(255, 0, 94, 255),
-                child: const Text('Automatic'),
-                onPressed: () {
-                  Manual = "FALSE";
-
-                  print(Manual);
-                },
-              ),
+          ToggleSwitch(
+            customWidths: const [130.0, 90.0],
+            cornerRadius: 20.0,
+            activeBgColors: const [
+              [Colors.cyan],
+              [Colors.redAccent]
             ],
+            activeFgColor: Colors.white,
+            inactiveBgColor: Colors.grey,
+            inactiveFgColor: Colors.white,
+            totalSwitches: 2,
+            labels: const ['Manual', ''],
+            icons: const [null, Icons.dangerous_outlined],
+            onToggle: (index) {
+              if (index == 1) {
+                Manual = "FALSE";
+              } else if (index == 0) {
+                Manual = "TRUE";
+              }
+            },
           ),
           const SizedBox(
             height: 15,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CupertinoButton(
-                borderRadius: BorderRadius.circular(16.0),
-                color: Color.fromARGB(255, 0, 165, 151),
-                child: const Text('Diesel'),
-                onPressed: () {
-                  fuelType_D = "TRUE";
-                },
-              ),
-              CupertinoButton(
-                borderRadius: BorderRadius.circular(16.0),
-                color: Color.fromARGB(255, 0, 94, 255),
-                child: const Text('NOT Diesel'),
-                onPressed: () {
-                  fuelType_D = "FALSE";
-                },
-              ),
+          ToggleSwitch(
+            customWidths: const [130.0, 90.0],
+            cornerRadius: 20.0,
+            activeBgColors: const [
+              [Colors.cyan],
+              [Colors.redAccent]
             ],
+            activeFgColor: Colors.white,
+            inactiveBgColor: Colors.grey,
+            inactiveFgColor: Colors.white,
+            totalSwitches: 2,
+            labels: const ['Diesel', ''],
+            icons: const [null, Icons.dangerous_outlined],
+            onToggle: (index) {
+              if (index == 1) {
+                fuelType_D = "FALSE";
+              } else if (index == 0) {
+                fuelType_D = "TRUE";
+              }
+            },
           ),
           const SizedBox(
             height: 15,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CupertinoButton(
-                borderRadius: BorderRadius.circular(16.0),
-                color: Color.fromARGB(255, 0, 165, 151),
-                child: const Text('Petrol'),
-                onPressed: () {
-                  fuelType_p = "TRUE";
-                },
-              ),
-              CupertinoButton(
-                borderRadius: BorderRadius.circular(16.0),
-                color: Color.fromARGB(255, 0, 94, 255),
-                child: const Text('NOT Petrol'),
-                onPressed: () {
-                  fuelType_p = "FALSE";
-                },
-              ),
+          ToggleSwitch(
+            customWidths: const [130.0, 90.0],
+            cornerRadius: 20.0,
+            activeBgColors: const [
+              [Colors.cyan],
+              [Colors.redAccent]
             ],
+            activeFgColor: Colors.white,
+            inactiveBgColor: Colors.grey,
+            inactiveFgColor: Colors.white,
+            totalSwitches: 2,
+            labels: const [
+              'Petrol',
+              '',
+            ],
+            icons: const [
+              null,
+              Icons.dangerous_outlined,
+            ],
+            onToggle: (index) {
+              if (index == 1) {
+                fuelType_p = "FALSE";
+              } else if (index == 0) {
+                fuelType_p = "TRUE";
+              }
+            },
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           ElevatedButton(
             onPressed: () {
+              sbrand = '${widget.brand}';
+              smodel = '${widget.model}';
+              if (fuelType_D == "TRUE") {
+                stransmission = "Diesel";
+              } else if (fuelType_D == "FALSE") {
+                stransmission = "Petrol";
+              }
+              ;
+              if (Manual == "TRUE") {
+                sfueltype = "Menual";
+              } else if (Manual == "FALSE") {
+                sfueltype = "sfueltype";
+              }
+
               Getjasondata();
+              carinsert();
             },
             child: const Text('예측!'),
           ),
-          Text('${result2}')
+          Text('${result2}'),
+          // chart 로 가는 이동 경로 어떻게 할지 몰라서 대충 여기 넣어놈.
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => LineChartWidget(min, max)));
+            },
+            child: const Text('차트로 가즈아'),
+          )
         ],
       ),
     );
@@ -332,6 +382,38 @@ class _InsertCarState extends State<InsertCar> {
     });
   }
 
+  ///search/insert/{sid}
+  carinsert() async {
+    var url = Uri.parse(
+        "http://localhost:8080/search/insert/dudgur@gmail.com?sid=dudgur@gmail.com&sbrand=$sbrand" +
+            "&smodel=$smodel&stransmission=$stransmission&sfueltype=$sfueltype&smileage=$mileage" +
+            "&smpg=$mpg&syear=$year&senginesize=$engineSize");
+//sseq sid sbrand smodel stransmission sfueltype smileage smpg syear senginesize
+    var response = await http.get(url);
+    var dataConvertedJson = json.decode(
+      utf8.decode(response.bodyBytes),
+    );
+    result = dataConvertedJson;
+    print(result);
+    // // print(int.parse(result));
+    // result2 = int.parse(result);
+    // setState(() {
+    //   _showDialig(context, result);
+    //   minresult = [14650, 7490, 15470, 8490, 4290, 9690];
+    //   maxresult = [29490, 20450, 36990, 29991, 16950, 22995];
+    //   for (int i = -1; i < 6; i++) {
+    //     moo = i + 1;
+    //     if (result2 == moo) {
+    //       moo = moo - 1;
+    //       min = minresult[moo];
+    //       max = maxresult[moo];
+    //     }
+    //   }
+    // });
+  }
+
+  // desc 예측을 위한 피쳐 컬럼 값 출력 // 나중에 수정 예정..
+  // date 2023.01.11(수)
   _showDialig(BuildContext context, String result) {
     showDialog(
       context: context,

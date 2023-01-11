@@ -8,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
+import '../../widget/carlist/d.dart';
+import '../chart/d.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -24,7 +27,7 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
-                    return Login();
+                    return Collection();
                   },
                 ));
               },
@@ -34,7 +37,7 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
-                    return Login();
+                    return LineChart();
                   },
                 ));
               },
