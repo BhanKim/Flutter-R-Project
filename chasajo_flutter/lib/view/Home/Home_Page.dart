@@ -85,7 +85,7 @@ class HomePage extends StatelessWidget {
             ElevatedButton(
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(
-                    context.theme.colorScheme.secondary),
+                    context.theme.colorScheme.background),
               ),
               onPressed: () {
                 if (isLightTheme) {
