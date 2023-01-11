@@ -1,20 +1,23 @@
-import 'package:cha_sa_jo_flutter/view/board/boardpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class WriteWidget extends StatefulWidget {
-  const WriteWidget({
+class UpdateWidget extends StatefulWidget {
+  const UpdateWidget({
     super.key,
-    required this.username,
+    required this.id,
+    required this.title,
+    required this.content,
   });
-  final String username;
+
+  final String id;
+  final String title;
+  final String content;
 
   @override
-  State<WriteWidget> createState() => _WriteWidgetState();
+  State<UpdateWidget> createState() => _UpdateWidgetState();
 }
 
-class _WriteWidgetState extends State<WriteWidget> {
+class _UpdateWidgetState extends State<UpdateWidget> {
   late TextEditingController titleController;
   late TextEditingController contentController;
   final _form = GlobalKey<FormState>();
@@ -26,8 +29,8 @@ class _WriteWidgetState extends State<WriteWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    titleController = TextEditingController();
-    contentController = TextEditingController();
+    titleController = TextEditingController(text: widget.title);
+    contentController = TextEditingController(text: widget.content);
   }
 
   @override
@@ -51,9 +54,6 @@ class _WriteWidgetState extends State<WriteWidget> {
                   width: 250,
                   child: TextField(
                     controller: titleController,
-                    decoration: const InputDecoration(
-                      hintText: '제목을 입력해주세요',
-                    ),
                   ),
                 ),
               ],
@@ -63,7 +63,6 @@ class _WriteWidgetState extends State<WriteWidget> {
               child: TextFormField(
                 controller: contentController,
                 decoration: const InputDecoration(
-                  hintText: '내용을 입력해주세요',
                   border: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue),
@@ -84,7 +83,7 @@ class _WriteWidgetState extends State<WriteWidget> {
                 title = titleController.text;
                 content = contentController.text;
 
-                _addAction(title, content, widget.username);
+                _updateAction(title, content);
               },
               child: const Text("작성하기"),
             ),
@@ -94,35 +93,27 @@ class _WriteWidgetState extends State<WriteWidget> {
     );
   }
 
-  // ========== Function ============
-
-  // 새로운 게시글 작성
-  _addAction(String title, String content, String creator) {
-    FirebaseFirestore.instance.collection('carboard').add({
-      'title': title,
-      "content": content,
-      "creator": creator,
-      "initdate": Timestamp.now(),
-      "count": 0,
-    });
-    _showDialog(context);
+  // ========= Function ===========
+  _updateAction(String title, String content) {
+    FirebaseFirestore.instance.collection('carboard').doc(widget.id).update(
+      {'title': title, "content": content},
+    );
+    _showUpdateDialog(context);
   }
 
-  // 입력 확인창
-  _showDialog(BuildContext context) {
+  _showUpdateDialog(BuildContext context) {
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('입력 결과'),
-          content: const Text('작성되었습니다.'),
+          content: const Text('수정되었습니다.'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.pop(context);
-                Get.to(const BoardPage());
               },
               child: const Text(
                 'OK',

@@ -61,7 +61,9 @@ class _BoardStreamState extends State<BoardStream> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      '${board.title}',
+                      board.title.length >= 25
+                          ? ' ${board.title.substring(0, 25)}... '
+                          : ' ${board.title} ',
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -72,8 +74,10 @@ class _BoardStreamState extends State<BoardStream> {
                 ),
                 Row(
                   children: [
-                    Icon(Icons.people),
-                    Text(' ${board.creator}  '),
+                    Icon(Icons.person),
+                    Text(board.creator.length >= 5
+                        ? ' ${board.creator.substring(0, 5)}... '
+                        : ' ${board.creator} '),
                     Icon(Icons.message),
                     Text(' ${board.count} '),
                     Icon(Icons.remove_red_eye_outlined),
