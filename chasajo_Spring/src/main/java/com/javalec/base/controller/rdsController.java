@@ -37,11 +37,12 @@ public class rdsController {
 		String fuelType_p = request.getParameter("fuelType_p");
 		String fileName = request.getParameter("fileName");
 		
+		
 		RConnection conn1 = new RConnection();
 
 		conn1.voidEval("library(randomForest)");
         //get real path 
-		conn1.voidEval("rfs <- readRDS('http://localhost:8080/show_rds?name="+fileName+"','rb')");
+		conn1.voidEval("rfs <- readRDS(\"http://localhost:8080/show_rds?name="+fileName+"\",'rb')");
 		conn1.voidEval("result <- as.character(predict(rfs, (list(year=" + year + ", mileage=" + mileage + ","
 		+ "engineSize=" + engineSize + ", mpg=" + mpg + ", Manual=" + Manual + 
 		", fuelType_D=" + fuelType_D + ", fuelType_P=" + fuelType_p + "))))");

@@ -70,6 +70,7 @@ class _InsertCarState extends State<InsertCar> {
   final user = FirebaseAuth.instance.currentUser;
   Map<String, dynamic> userData = {};
   String username = '';
+  String fileName = 'Audi_A3.rds';
 
 //sseq sid sbrand smodel stransmission
 //sfueltype smileage smpg syear senginesize
@@ -326,6 +327,7 @@ class _InsertCarState extends State<InsertCar> {
                   } else if (Manual == "FALSE") {
                     sfueltype = "sfueltype";
                   }
+                  // GetRds();
                   Getjasondata();
                   carinsert(userData['email']);
                 },
@@ -350,14 +352,17 @@ class _InsertCarState extends State<InsertCar> {
   }
 
   /// fucntion
+  // GetRds() {
+  //   var url = Uri.parse('http://localhost:8080/show_rds?name=$fileName');
+  // }
 
   // desc 예측을 위한 피쳐 컬럼 값  입력.
   // date 2023.01.09
   Getjasondata() async {
     var url = Uri.parse(
         "http://localhost:8080/urlcar?year=$year&mileage=$mileage&engineSize=$engineSize" +
-            "&mpg=$mpg&Manual=$Manual&fuelType_D=$fuelType_D&fuelType_p=$fuelType_p");
-
+            "&mpg=$mpg&Manual=$Manual&fuelType_D=$fuelType_D&fuelType_p=$fuelType_p&fileName=$fileName");
+//&fileName=$fileName
     var response = await http.get(url);
     var dataConvertedJson = json.decode(
       utf8.decode(response.bodyBytes),
