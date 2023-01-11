@@ -5,7 +5,6 @@ import 'package:cha_sa_jo_flutter/view/board/boardpage.dart';
 import 'package:cha_sa_jo_flutter/view/carList.dart';
 import 'package:cha_sa_jo_flutter/view/chatting/chat_screen.dart';
 import 'package:cha_sa_jo_flutter/view/chatting/chatting.dart';
-import 'package:cha_sa_jo_flutter/view/login/login.dart';
 import 'package:cha_sa_jo_flutter/view/login/login_screen.dart';
 import 'package:cha_sa_jo_flutter/view/login/main_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -37,7 +36,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
         leading: Switch(
           value: true,
           onChanged: (value) {

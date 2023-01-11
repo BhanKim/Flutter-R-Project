@@ -1,8 +1,10 @@
 import 'package:cha_sa_jo_flutter/constants/colors.dart';
+import 'package:cha_sa_jo_flutter/constants/image_strings.dart';
 import 'package:cha_sa_jo_flutter/constants/sizes.dart';
 import 'package:cha_sa_jo_flutter/constants/text_strings.dart';
 import 'package:cha_sa_jo_flutter/view/login/login_screen.dart';
 import 'package:cha_sa_jo_flutter/view/login/main_screen.dart';
+import 'package:cha_sa_jo_flutter/view/signup/singup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,7 +21,7 @@ class welcomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Image.asset(
-              'images/bdtest.png',
+              tSplashImage,
               height: height * 0.6,
             ),
             Column(
@@ -59,13 +61,13 @@ class welcomePage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       // 회원가입 페이지 이동
-                      Get.to(const LoginSignupScreen());
+                      // Get.to(const LoginSignupScreen());
+                      Get.to(const SignupScreen());
                     },
                     style: OutlinedButton.styleFrom(
                       shape: RoundedRectangleBorder(),
                       foregroundColor: tWhiteColor,
-                      backgroundColor: tSecondaryColor,
-                      side: BorderSide(color: tSecondaryColor),
+                      // side: BorderSide(color: tSecondaryColor),
                       padding: EdgeInsets.symmetric(vertical: tButtonHeight),
                     ),
                     child: Text(tSignup.toUpperCase()),

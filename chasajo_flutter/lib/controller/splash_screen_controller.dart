@@ -1,6 +1,4 @@
-import 'package:cha_sa_jo_flutter/view/Home/Home.dart';
 import 'package:cha_sa_jo_flutter/view/Home/welcome.dart';
-import 'package:cha_sa_jo_flutter/view/login/login_screen.dart';
 import 'package:get/get.dart';
 
 class SplashScreenController extends GetxController {
@@ -16,7 +14,7 @@ class SplashScreenController extends GetxController {
     await Future.delayed(const Duration(milliseconds: 2000));
     Get.off(
       // Get.off Instead of Get.offAll()
-      () => const LoginScreen(),
+      () => const welcomePage(),
       duration: const Duration(milliseconds: 1000), //Transition Time
       transition: Transition.fadeIn, //Screen Switch Transition
     );
