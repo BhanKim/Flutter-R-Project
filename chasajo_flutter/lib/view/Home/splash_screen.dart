@@ -22,8 +22,8 @@ class SplashScreen extends StatelessWidget {
             durationInMs: 1600,
             animate: TAnimatePosition(
               topAfter: 0,
-              topBefore: -30,
-              leftBefore: -30,
+              topBefore: -40,
+              leftBefore: -40,
               leftAfter: 0,
             ),
             child: const Image(image: AssetImage(tSplashTopIcon)),
@@ -38,21 +38,22 @@ class SplashScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(tAppName, style: Theme.of(context).textTheme.headline3),
-                Text(tAppTagLine, style: Theme.of(context).textTheme.headline2)
+                const SizedBox(height: 100),
+                Text(tAppName, style: Theme.of(context).textTheme.headline5),
+                Text(tAppTagLine, style: Theme.of(context).textTheme.headline4)
               ],
             ),
           ),
           TFadeInAnimation(
             durationInMs: 2400,
-            animate: TAnimatePosition(bottomBefore: 0, bottomAfter: 100),
+            animate: TAnimatePosition(bottomBefore: 0, bottomAfter: 250),
             child: const Image(image: AssetImage(tSplashImage)),
           ),
           TFadeInAnimation(
             durationInMs: 2400,
             animate: TAnimatePosition(
                 bottomBefore: 0,
-                bottomAfter: 60,
+                bottomAfter: 80,
                 rightBefore: tDefaultSize,
                 rightAfter: tDefaultSize),
             child: Container(

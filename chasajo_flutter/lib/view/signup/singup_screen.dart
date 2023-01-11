@@ -16,7 +16,9 @@ class SignupScreen extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(tDefaultSize),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: const [
+              const SizedBox(height: 20),
               // Header Widget 사용법
               FormHeaderWidget(
                   image: tSplashImage,
