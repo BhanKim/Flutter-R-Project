@@ -31,11 +31,13 @@ public class carController {
 		return mapper.getCarModelList(model);
 	}
 	
+	
 	// FOR SEARCH LIST USE THIS
 	@GetMapping("/search/list/{sid}")
 	public List<carsearchlist> getSearchList(@PathVariable("sid")String sid){
 		return mapper.getSearchList(sid);
-	}	
+	}
+	
 
 	// FOR INSERT SEARCH LIST
 	@GetMapping("/search/insert/{sid}")
@@ -50,6 +52,5 @@ public class carController {
 		mapper.deleteSearchRow(id, sseq);
 	}	
 
-	
 
 }
