@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cha_sa_jo_flutter/model/comment.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -63,26 +65,29 @@ class _BoardCommentsState extends State<BoardComments> {
           ),
         ),
         comments.isEmpty
-            ? const Center(
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      'No Comment',
-                      style: TextStyle(
-                        fontSize: 16,
+            ? Column(
+                mainAxisSize: MainAxisSize.min,
+                children: const [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Text(
+                        'No Comment',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),
-                ),
+                ],
               )
             : Column(
                 children: [
                   ListView.builder(
                     // controller: scroller,
                     // scrollDirection: Axis.vertical,
-                    physics: BouncingScrollPhysics(),
+                    physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: comments.length,
                     itemBuilder: (context, index) {

@@ -33,14 +33,14 @@ class _DetailPageState extends State<DetailPage> {
     // TODO: implement initState
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      double minScrollExtent1 = scroller.initialScrollOffset;
-      double maxScrollExtent1 = scroller.initialScrollOffset;
-      // minScrollExtent1 = scroller.position.minScrollExtent;
-      // maxScrollExtent1 = scroller.position.maxScrollExtent;
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    //   double minScrollExtent1 = scroller.initialScrollOffset;
+    //   double maxScrollExtent1 = scroller.initialScrollOffset;
+    // minScrollExtent1 = scroller.position.minScrollExtent;
+    // maxScrollExtent1 = scroller.position.maxScrollExtent;
 
-      //animateToMaxMin(0.0, 1.0, maxScrollExtent1, 25, scroller);
-    });
+    //animateToMaxMin(0.0, 1.0, maxScrollExtent1, 25, scroller);
+    // });
   }
 
   @override
@@ -92,6 +92,7 @@ class _DetailPageState extends State<DetailPage> {
               children: [
                 SingleChildScrollView(
                   controller: scroller,
+                  scrollDirection: Axis.vertical,
                   physics: const AlwaysScrollableScrollPhysics(),
                   padding: const EdgeInsets.all(8),
                   child: Column(

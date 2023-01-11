@@ -78,8 +78,8 @@ class _BoardStreamState extends State<BoardStream> {
                     Text(board.creator.length >= 5
                         ? ' ${board.creator.substring(0, 5)}... '
                         : ' ${board.creator} '),
-                    Icon(Icons.message),
-                    Text(' ${board.count} '),
+                    // Icon(Icons.message),
+                    // Text(' ${board.count} '),
                     Icon(Icons.remove_red_eye_outlined),
                     Text(' ${board.count}'),
                     Spacer(),
