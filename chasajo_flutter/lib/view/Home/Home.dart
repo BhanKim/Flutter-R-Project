@@ -25,7 +25,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late PersistentTabController controller;
-  RxBool _isLightTheme = false.obs;
+  RxBool _isLightTheme = true.obs;
   @override
   void initState() {
     // TODO: implement initState

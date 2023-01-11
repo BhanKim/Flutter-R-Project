@@ -3,6 +3,7 @@ import 'package:cha_sa_jo_flutter/widget/chatting/new_message.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -12,8 +13,10 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  RxBool _isLightTheme = true.obs;
   final _authentication = FirebaseAuth.instance;
   User? loggedUser;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -35,6 +38,21 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: ObxValue(
+          (data) => Switch(
+            value: _isLightTheme.value,
+            onChanged: (val) {
+              _isLightTheme.value = val;
+              Get.changeThemeMode(
+                _isLightTheme.value ? ThemeMode.light : ThemeMode.dark,
+              );
+              // _saveThemeStatus();
+            },
+          ),
+          false.obs,
+        ),
+      ),
       body: Container(
         height: MediaQuery.of(context).size.height,
         child: Column(
