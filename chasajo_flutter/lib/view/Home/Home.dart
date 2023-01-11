@@ -17,8 +17,8 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
-
+  const Home({super.key, this.tabIndex});
+  final tabIndex;
   @override
   State<Home> createState() => _HomeState();
 }
@@ -30,7 +30,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   void initState() {
     // TODO: implement initState
     super.initState();
-    controller = PersistentTabController();
+
+    controller = PersistentTabController(initialIndex: widget.tabIndex);
   }
 
   @override

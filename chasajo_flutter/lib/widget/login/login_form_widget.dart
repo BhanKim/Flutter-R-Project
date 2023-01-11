@@ -73,7 +73,9 @@ class LoginForm extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return Home();
+                            return Home(
+                              tabIndex: 0,
+                            );
                           },
                         ),
                       );

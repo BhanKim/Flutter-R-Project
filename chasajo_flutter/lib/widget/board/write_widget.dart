@@ -1,7 +1,11 @@
+import 'package:cha_sa_jo_flutter/model/boardtype.dart';
+import 'package:cha_sa_jo_flutter/view/Home/Home.dart';
+import 'package:cha_sa_jo_flutter/view/Home/Home_Page.dart';
 import 'package:cha_sa_jo_flutter/view/board/boardpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
 class WriteWidget extends StatefulWidget {
   const WriteWidget({
@@ -122,7 +126,7 @@ class _WriteWidgetState extends State<WriteWidget> {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.pop(context);
-                Get.to(const BoardPage());
+                Get.to(const Home(tabIndex: 1));
               },
               child: const Text(
                 'OK',
