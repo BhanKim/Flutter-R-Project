@@ -36,10 +36,6 @@ class _DetailPageState extends State<DetailPage> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       double minScrollExtent1 = scroller.initialScrollOffset;
       double maxScrollExtent1 = scroller.initialScrollOffset;
-      // minScrollExtent1 = scroller.position.minScrollExtent;
-      // maxScrollExtent1 = scroller.position.maxScrollExtent;
-
-      //animateToMaxMin(0.0, 1.0, maxScrollExtent1, 25, scroller);
     });
   }
 
@@ -139,17 +135,6 @@ class _DetailPageState extends State<DetailPage> {
 
     return data;
   }
-
-  // animateToMaxMin(double max, double min, double direction, int seconds,
-  //     ScrollController scrollController) {
-  //   scrollController
-  //       .animateTo(direction,
-  //           duration: Duration(seconds: seconds), curve: Curves.linear)
-  //       .then((value) {
-  //     direction = (direction == max) ? min : max;
-  //     animateToMaxMin(max, min, direction, seconds, scrollController);
-  //   });
-  // }
 
   // 게시물 삭제
   _showDeleteDialog(BuildContext context) {

@@ -15,6 +15,7 @@ class SignUpFormWidget extends StatelessWidget {
     String Nickname = '';
     String email = '';
     String password = '';
+    String password2 = '';
     return Container(
       padding: const EdgeInsets.symmetric(vertical: tFormHeight - 10),
       child: Form(
@@ -55,6 +56,16 @@ class SignUpFormWidget extends StatelessWidget {
               ),
               onChanged: (value) {
                 password = value;
+              },
+            ),
+            const SizedBox(height: tFormHeight - 20),
+            TextFormField(
+              decoration: const InputDecoration(
+                label: Text(cPassword),
+                prefixIcon: Icon(Icons.fingerprint),
+              ),
+              onChanged: (value) {
+                password2 = value;
               },
             ),
             const SizedBox(height: tFormHeight - 10),

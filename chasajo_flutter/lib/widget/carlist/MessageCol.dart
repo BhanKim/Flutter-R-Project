@@ -4,6 +4,7 @@ class Message {
   static String brand = '';
   static String model = '';
   static String carimage = '';
+  static String username = '';
 
   static List<TodoList> todoList = [];
   static bool action = false;

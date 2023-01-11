@@ -51,6 +51,12 @@ public class carController {
 	public void deleteStudnetProfile(@PathVariable("sid") String id,@PathVariable("sseq") String sseq) {
 		mapper.deleteSearchRow(id, sseq);
 	}	
+	
+	// TEST
+	@GetMapping("/search/list/all")
+	public List<carsearchlist> getList(){
+		return mapper.getList();
+	}
 
 
 }

@@ -7,6 +7,7 @@ const String tEmail = "E-Mail";
 const String tSignup = "Signup";
 const String tPhoneNo = "Phone No";
 const String tPassword = "Password";
+const String cPassword = "Confirm Password";
 const String tFullName = "Full Name";
 const String tForgetPassword = "Did you forget your password?";
 const String tSignInWithGoogle = "Sign-In with Google";
