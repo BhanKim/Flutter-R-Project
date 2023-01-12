@@ -41,8 +41,8 @@ const String tRememberMe = "Remember Me?";
 const String tDontHaveAnAccount = "Don't have an Account? ";
 
 // -- Sign Up Screen Text
-const String tSignUpTitle = "Get On Board!";
-const String tSignUpSubTitle = "Create your profile to start your Journey.";
+const String tSignUpTitle = "Join Our App!";
+const String tSignUpSubTitle = "Create your profile to start.";
 const String tAlreadyHaveAnAccount = "Already have an Account? ";
 
 // -- Forget Password Text
