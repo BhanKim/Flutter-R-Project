@@ -29,9 +29,9 @@ class _BoardPageState extends State<BoardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('firebase R&D'),
-      ),
+      // appBar: AppBar(
+      //   title: const Text('firebase R&D'),
+      // ),
       body: BoardStream(username: username),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

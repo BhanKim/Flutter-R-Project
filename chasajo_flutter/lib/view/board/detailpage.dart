@@ -48,42 +48,45 @@ class _DetailPageState extends State<DetailPage> {
           return CircularProgressIndicator();
         } else {
           return Scaffold(
-            appBar: AppBar(
-              title: const Text('Detail'),
-              actions: [
-                (widget.username == creator)
-                    ? Row(
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => UpdatePage(
-                                    id: widget.id,
-                                    title: title,
-                                    content: content,
-                                    username: widget.username,
-                                  ),
-                                ),
-                              );
-                            },
-                            icon: const Icon(Icons.edit),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              _showDeleteDialog(context);
-                            },
-                            icon: const Icon(
-                              Icons.delete,
-                            ),
-                          ),
-                        ],
-                      )
-                    : Text(""),
-              ],
-            ),
+            // appBar: AppBar(
+            //   title: const Text('Detail'),
+            //   actions: [
+            //     (widget.username == creator)
+            //         ? Row(
+            //             children: [
+            //               IconButton(
+            //                 onPressed: () {
+            //                   Navigator.pop(context);
+            //                   Navigator.push(
+            //                     context,
+            //                     MaterialPageRoute(
+            //                       builder: (context) => UpdatePage(
+            //                         id: widget.id,
+            //                         title: title,
+            //                         content: content,
+            //                         username: widget.username,
+            //                       ),
+            //                     ),
+            //                   );
+            //                 },
+            //                 icon: const Icon(Icons.edit),
+            //               ),
+            //               IconButton(
+            //                 onPressed: () {
+            //                   _showDeleteDialog(context);
+            //                 },
+            //                 icon: const Icon(
+            //                   Icons.delete,
+            //                 ),
+            //               ),
+            //             ],
+            //           )
+            //         // : Text(""),
+            //         : SizedBox(
+            //             height: 0,
+            //           )
+            //   ],
+            // ),
             body: Stack(
               children: [
                 SingleChildScrollView(
@@ -93,11 +96,13 @@ class _DetailPageState extends State<DetailPage> {
                   child: Column(
                     children: [
                       BoardDetail(
+                        id: widget.id,
                         title: title,
                         content: content,
                         creator: creator,
                         count: count,
                         initdate: initdate,
+                        username: widget.username,
                       ),
                       BoardComments(
                         id: widget.id,
