@@ -10,12 +10,10 @@ class LineChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double max = 0;
-    double min = 0;
     return Scaffold(
         appBar: AppBar(
           title: const Text('Line'),
         ),
-        body: LineChartWidget(max, min));
+        body: const LineChartWidget());
   }
 }

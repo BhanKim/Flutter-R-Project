@@ -50,7 +50,6 @@ class _CarselectListState extends State<CarselectList> {
     // TODO: implement initState
     super.initState();
     data.clear();
-    // _Carselect();
     // getJsonData();
     print(userid);
   }
@@ -60,15 +59,12 @@ class _CarselectListState extends State<CarselectList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('gg'),
-      // ),
       body: Center(
         child: FutureBuilder(
           future: getJsonData(),
           builder: (context, snapshot) {
             if (snapshot.hasData == false) {
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             } else {
               return Center(
                 child: data.isEmpty
@@ -79,28 +75,17 @@ class _CarselectListState extends State<CarselectList> {
                           return Dismissible(
                             key: Key("${data[index]['sseq']}"),
                             onDismissed: (direction) {
-                              setState(() {
-                                sseq = data[index]['sseq'];
-                                deleteList();
-                                data.removeAt(index);
-                              });
+                              // setState(() {
+                              sseq = data[index]['sseq'];
+                              deleteList();
+                              // data.clear();
+                              data.removeAt(index);
+                              // });
                             },
                             child: GestureDetector(
                               onTap: () {},
-                              //sbrand smodel stransmission sfueltype smileage smpg syear senginesize
-                              onLongPress: () {
-                                sseq = data[index]['sseq'];
-                                sbrand = data[index]['sbrand'];
-                                smodel = data[index]['smodel'];
-                                stransmission = data[index]['stransmission'];
-                                sfueltype = data[index]['sfueltype'];
-                                smileage = data[index]['smileage'];
-                                smpg = data[index]['smpg'];
-                                syear = data[index]['syear'];
-                                senginesize = data[index]['senginesize'];
-                              },
                               child: Padding(
-                                padding: const EdgeInsets.all(1.0),
+                                padding: const EdgeInsets.all(6.0),
                                 child: Container(
                                   child: Card(
                                     color: Color.fromARGB(255, 37, 64, 129),
@@ -113,22 +98,34 @@ class _CarselectListState extends State<CarselectList> {
                                               const Text(
                                                 'no : ',
                                                 style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.white),
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
                                               ),
-                                              Text('${data[index]['sseq']}')
+                                              Text(
+                                                '${data[index]['sseq']}',
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              )
                                             ],
                                           ),
                                           // "sid":"dudgur@gmail.com"
                                           Row(
                                             children: [
                                               const Text(
-                                                'id : ',
+                                                'user ID : ',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
                                                 ),
                                               ),
-                                              Text(data[index]['sid'])
+                                              Text(
+                                                data[index]['sid'],
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              )
                                             ],
                                           ),
                                           Row(
@@ -137,9 +134,15 @@ class _CarselectListState extends State<CarselectList> {
                                                 'brand : ',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
                                                 ),
                                               ),
-                                              Text(data[index]['sbrand'])
+                                              Text(
+                                                data[index]['sbrand'],
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              )
                                             ],
                                           ),
                                           Row(
@@ -148,9 +151,15 @@ class _CarselectListState extends State<CarselectList> {
                                                 'model : ',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
                                                 ),
                                               ),
-                                              Text(data[index]['smodel'])
+                                              Text(
+                                                data[index]['smodel'],
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              )
                                             ],
                                           ),
                                           //[{"sseq":1,"sid":"dudgur@gmail.com","sbrand":"BMW","smodel":"5Series","stransmission":"Automatic","sfueltype":"Diesel","smileage":15000,"smpg":16,"syear":2014,"senginesize":2.0},
@@ -160,9 +169,15 @@ class _CarselectListState extends State<CarselectList> {
                                                 'transmission : ',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
                                                 ),
                                               ),
-                                              Text(data[index]['stransmission'])
+                                              Text(
+                                                data[index]['stransmission'],
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              )
                                             ],
                                           ),
                                           Row(
@@ -171,9 +186,15 @@ class _CarselectListState extends State<CarselectList> {
                                                 'fueltype : ',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
                                                 ),
                                               ),
-                                              Text(data[index]['sfueltype'])
+                                              Text(
+                                                data[index]['sfueltype'],
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              )
                                             ],
                                           ),
                                           Row(
@@ -182,9 +203,15 @@ class _CarselectListState extends State<CarselectList> {
                                                 'mileage : ',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
                                                 ),
                                               ),
-                                              Text('${data[index]['smileage']}')
+                                              Text(
+                                                '${data[index]['smileage']}',
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              )
                                             ],
                                           ),
                                           Row(
@@ -193,9 +220,15 @@ class _CarselectListState extends State<CarselectList> {
                                                 'mpg : ',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
                                                 ),
                                               ),
-                                              Text('${data[index]['smpg']}')
+                                              Text(
+                                                '${data[index]['smpg']}',
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              )
                                             ],
                                           ),
                                           Row(
@@ -204,9 +237,15 @@ class _CarselectListState extends State<CarselectList> {
                                                 'year : ',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
                                                 ),
                                               ),
-                                              Text('${data[index]['syear']}')
+                                              Text(
+                                                '${data[index]['syear']}',
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              )
                                             ],
                                           ),
                                           Row(
@@ -215,10 +254,15 @@ class _CarselectListState extends State<CarselectList> {
                                                 'enginesize : ',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
                                                 ),
                                               ),
                                               Text(
-                                                  '${data[index]['senginesize']}')
+                                                '${data[index]['senginesize']}',
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              )
                                             ],
                                           )
                                         ],
@@ -254,10 +298,8 @@ class _CarselectListState extends State<CarselectList> {
   // data 2023/01/11(수)
   deleteList() async {
     var url = Uri.parse('http://localhost:8080/search/delete/$userid/$sseq');
-    data.clear();
     await http.get(url);
-    // var dataConvertedJson = json.decode(utf8.decode(respnse.bodyBytes));
-    // data.addAll(dataConvertedJson);
+    // getJsonData();
   }
 
   ///search/delete/{sid}/{sseq}
