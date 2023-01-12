@@ -1,6 +1,6 @@
 import 'package:cha_sa_jo_flutter/model/boardtype.dart';
 import 'package:cha_sa_jo_flutter/view/Home/Home.dart';
-import 'package:cha_sa_jo_flutter/view/Home/Home_Page.dart';
+
 import 'package:cha_sa_jo_flutter/view/board/boardpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';

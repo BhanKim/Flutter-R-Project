@@ -5,6 +5,7 @@ import 'package:cha_sa_jo_flutter/view/login/login_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SignUpFormWidget extends StatelessWidget {
   const SignUpFormWidget({super.key});
@@ -50,6 +51,7 @@ class SignUpFormWidget extends StatelessWidget {
             // ),
             const SizedBox(height: tFormHeight - 20),
             TextFormField(
+              obscureText: true,
               decoration: const InputDecoration(
                 label: Text(tPassword),
                 prefixIcon: Icon(Icons.fingerprint),
@@ -60,6 +62,7 @@ class SignUpFormWidget extends StatelessWidget {
             ),
             const SizedBox(height: tFormHeight - 20),
             TextFormField(
+              obscureText: true,
               decoration: const InputDecoration(
                 label: Text(cPassword),
                 prefixIcon: Icon(Icons.fingerprint),
@@ -74,40 +77,8 @@ class SignUpFormWidget extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () async {
                   //
-                  try {
-                    final newUser =
-                        await _authentication.createUserWithEmailAndPassword(
-                      email: email,
-                      password: password,
-                    );
-                    await FirebaseFirestore.instance
-                        .collection('user')
-                        .doc(newUser.user!.uid)
-                        .set({
-                      'userName': Nickname,
-                      'email': email,
-                      //'password': password,
-                    });
-
-                    if (newUser.user != null) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            // return ChatListScreen();
-                            return LoginScreen();
-                          },
-                        ),
-                      );
-                    }
-                  } catch (e) {
-                    print(e);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text("이메일 비밀번호 확인하셈"),
-                      ),
-                    );
-                  }
+                  _SignupCheck(Nickname, email, password, password2, context);
+                  //_Signup(email, password, Nickname, context);
                 },
                 child: Text(tSignup.toUpperCase()),
               ),
@@ -117,4 +88,100 @@ class SignUpFormWidget extends StatelessWidget {
       ),
     );
   }
+
+//------------------Funtions --------------------------------
+  Future<void> _Signup(String email, String password, String Nickname,
+      BuildContext context) async {
+    try {
+      final newUser =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      await FirebaseFirestore.instance
+          .collection('user')
+          .doc(newUser.user!.uid)
+          .set({
+        'userName': Nickname,
+        'email': email,
+      });
+      _showDialog(context);
+    } catch (e) {
+      print(e);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("이메일 및 비밀번호 확인하세요."),
+        ),
+      );
+    }
+  }
+
+  void _SignupCheck(String Nickname, String Email, String password1,
+      String password2, BuildContext context) {
+    if (Nickname == '') {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("닉네임을 입력해주세요."),
+        ),
+      );
+    } else if (Email == '') {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("이메일을 입력해주세요."),
+        ),
+      );
+    } else if (password1 == '') {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("비밀번호를 입력해주세요."),
+        ),
+      );
+    } else if (password1.length < 6) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("비밀번호는 6글자 이상 입력해주세요"),
+        ),
+      );
+    } else if (password2 == '') {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("비밀번호확인를 입력해주세요."),
+        ),
+      );
+    } else if (password1 != password2) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("비밀번호가 맞지 않습니다"),
+        ),
+      );
+    } else {
+      _Signup(Email, password1, Nickname, context);
+    }
+  }
+
+  _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('입력 결과'),
+          content: const Text('작성되었습니다.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.pop(context);
+                Get.to(const LoginScreen());
+              },
+              child: const Text(
+                'OK',
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+  //---------------End--------------------------------
 }

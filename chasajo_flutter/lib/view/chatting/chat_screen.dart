@@ -40,33 +40,6 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: ObxValue(
-          (data) => Switch(
-            value: _isLightTheme.value,
-            onChanged: (val) {
-              _isLightTheme.value = val;
-              Get.changeThemeMode(
-                _isLightTheme.value ? ThemeMode.light : ThemeMode.dark,
-              );
-              // _saveThemeStatus();
-            },
-          ),
-          false.obs,
-        ),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) {
-                    return BoardPage();
-                  },
-                ));
-              },
-              icon: Icon(Icons.abc))
-        ],
-      ),
       body: Container(
         height: MediaQuery.of(context).size.height,
         child: Column(

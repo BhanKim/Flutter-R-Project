@@ -89,20 +89,27 @@ class MyApp extends StatelessWidget {
   //   ),
   // );
   // ---
-  ThemeData _darkTheme = ThemeData(
+  final ThemeData _darkTheme = ThemeData(
       accentColor: Colors.red,
       brightness: Brightness.dark,
       primaryColor: Colors.amber,
-      buttonTheme: ButtonThemeData(
+      buttonTheme: const ButtonThemeData(
         buttonColor: Colors.amber,
         disabledColor: Colors.grey,
-      ));
+      ),
+      textTheme: const TextTheme(
+        bodyText1: TextStyle(color: Colors.white),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.grey,
+      )));
 
-  ThemeData _lightTheme = ThemeData(
+  final ThemeData _lightTheme = ThemeData(
       accentColor: Colors.pink,
       brightness: Brightness.light,
       primaryColor: Colors.blue,
-      buttonTheme: ButtonThemeData(
+      buttonTheme: const ButtonThemeData(
         buttonColor: Colors.blue,
         disabledColor: Colors.grey,
       ));

@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.javalec.base.model.carModel;
+import com.javalec.base.model.carcnt;
 import com.javalec.base.model.carsearchlist;
 
 @Mapper
@@ -33,5 +34,6 @@ public interface modelMapper {
 	int deleteSearchRow(@Param("sid") String id, @Param("sseq") String sseq);
 	
 	@Select("SELECT sbrand, smodel, count(smodel) AS cnt FROM carsearchlist GROUP BY sbrand, smodel ORDER BY cnt DESC LIMIT 3")
-	List<carsearchlist> getList()
-;}
+	List<carcnt> getList();
+	
+}
