@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:ffi';
+import 'dart:io';
 
+import 'package:cha_sa_jo_flutter/constants/colors.dart';
 import 'package:cha_sa_jo_flutter/widget/carlist/MessageCol.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,7 +20,8 @@ import 'C.select.dart';
 class InsertCar extends StatefulWidget {
   final brand;
   final model;
-  const InsertCar({super.key, this.brand, this.model});
+  final carimage;
+  const InsertCar({super.key, this.brand, this.model, this.carimage});
 
   @override
   State<InsertCar> createState() => _InsertCarState();
@@ -62,6 +65,7 @@ class _InsertCarState extends State<InsertCar> {
   String sid = '';
   String sbrand = '';
   String smodel = '';
+  String carimage = '';
   String stransmission = 'Diesel';
   String sfueltype = 'Menual';
   int smileage = 0;
@@ -73,6 +77,8 @@ class _InsertCarState extends State<InsertCar> {
   Map<String, dynamic> userData = {};
   String username = '';
   String fileName = 'Audi_A3.rds';
+  List priceResult = [];
+  double test2 = 0;
 
 //sseq sid sbrand smodel stransmission
 //sfueltype smileage smpg syear senginesize
@@ -82,6 +88,7 @@ class _InsertCarState extends State<InsertCar> {
     super.initState();
     sbrand = '${widget.brand}';
     smodel = '${widget.model}';
+    carimage = '${widget.carimage}';
     fileName = '${sbrand}_${smodel}.rds';
     // Mile values for
     for (int i = 0; i < 21; i++) {
@@ -130,7 +137,7 @@ class _InsertCarState extends State<InsertCar> {
           body: Column(
             children: [
               Image.asset(
-                'images/$sbrand$smodel.png',
+                '$carimage',
                 width: 200,
                 height: 120,
               ),
@@ -196,8 +203,8 @@ class _InsertCarState extends State<InsertCar> {
                   min: 0,
                   max: values.length - 1,
                   divisions: values.length - 1,
-                  activeColor: Colors.blue.shade700,
-                  inactiveColor: Colors.blue.shade100,
+                  activeColor: tPrimaryColor,
+                  inactiveColor: Colors.blue.shade200,
                   onChanged: (double value) {
                     setState(() {
                       _currentSliderValue = value.toInt();
@@ -230,8 +237,8 @@ class _InsertCarState extends State<InsertCar> {
                   min: 0,
                   max: enginvalues.length - 1,
                   divisions: enginvalues.length - 1,
-                  activeColor: Color.fromARGB(255, 25, 210, 185),
-                  inactiveColor: Color.fromARGB(255, 187, 251, 243),
+                  activeColor: Colors.indigoAccent.shade200,
+                  inactiveColor: Colors.indigoAccent.shade100,
                   onChanged: (double enginvalues) {
                     setState(() {
                       _enginSliderValue = enginvalues.toInt();
@@ -272,8 +279,8 @@ class _InsertCarState extends State<InsertCar> {
                 customWidths: const [160.0, 160.0],
                 cornerRadius: 20.0,
                 activeBgColors: const [
-                  [Colors.cyan],
-                  [Colors.redAccent]
+                  [tPrimaryColor],
+                  [tPrimaryColor]
                 ],
                 activeFgColor: Colors.white,
                 inactiveBgColor: Colors.grey,
@@ -296,8 +303,8 @@ class _InsertCarState extends State<InsertCar> {
                 customWidths: const [160.0, 160.0],
                 cornerRadius: 20.0,
                 activeBgColors: const [
-                  [Colors.cyan],
-                  [Colors.redAccent]
+                  [tPrimaryColor],
+                  [tPrimaryColor]
                 ],
                 activeFgColor: Colors.white,
                 inactiveBgColor: Colors.grey,
@@ -323,34 +330,50 @@ class _InsertCarState extends State<InsertCar> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    onPressed: () {
-                      // sbrand = '${widget.brand}';
-                      // smodel = '${widget.model}';
-                      if (fuelType_D == "TRUE") {
-                        stransmission = "Diesel";
-                      } else if (fuelType_D == "FALSE") {
-                        stransmission = "Petrol";
-                      }
-                      if (Manual == "TRUE") {
-                        sfueltype = "Menual";
-                      } else if (Manual == "FALSE") {
-                        sfueltype = "Autometic";
-                      }
-                      if (engineSize > 0 && actionSiwtchP == false) {
-                        // GetRds();
-                        carinsert(userData['email']);
+                      onPressed: () {
+                        // sbrand = '${widget.brand}';
+                        // smodel = '${widget.model}';
+                        if (fuelType_D == "TRUE") {
+                          stransmission = "Diesel";
+                        } else if (fuelType_D == "FALSE") {
+                          stransmission = "Petrol";
+                        }
+                        if (Manual == "TRUE") {
+                          sfueltype = "Menual";
+                        } else if (Manual == "FALSE") {
+                          sfueltype = "Autometic";
+                        }
+                        if (engineSize > 0 && actionSiwtchP == false) {
+                          // GetRds();
+                          carinsert(userData['email']);
+
+                          Getjasondata();
+
+                          Get.to(
+                            const LineChartWidget(),
+                            arguments: [
+                              smodel,
+                              mileage,
+                              min,
+                              max,
+                              year,
+                              sbrand,
+                              carimage
+                            ],
+                          );
+                        } else {
+                          _inputcheck(context);
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: tPrimaryColor,
+                      ),
+                      child: const Text('예측!')),
+                  ElevatedButton(
+                      onPressed: () {
                         Getjasondata();
-                        // Getjasondata();
-                        Get.to(
-                          const LineChartWidget(),
-                          arguments: [smodel, mileage, min, max, year, sbrand],
-                        );
-                      } else {
-                        _inputcheck(context);
-                      }
-                    },
-                    child: const Text('예측!'),
-                  ),
+                      },
+                      child: const Text("gg"))
                 ],
               ),
             ],
@@ -367,7 +390,7 @@ class _InsertCarState extends State<InsertCar> {
 
   // desc 예측을 위한 피쳐 컬럼 값  입력.
   // date 2023.01.09
-  Getjasondata() async {
+  Future<int> Getjasondata() async {
     var url = Uri.parse(
         "http://localhost:8080/urlcar?year=$year&mileage=$mileage&engineSize=$engineSize"
         "&mpg=$mpg&Manual=$Manual&fuelType_D=$fuelType_D&fuelType_p=$fuelType_p&fileName=$fileName");
@@ -378,32 +401,73 @@ class _InsertCarState extends State<InsertCar> {
     );
     result = dataConvertedJson["result"];
     result2 = int.parse(result);
-    setState(() {
-      if (fileName == "Audi_A3.rds") {
-        minresult = [14650, 7490, 15470, 8490, 4290, 9690];
-        maxresult = [29490, 20450, 36990, 29991, 16950, 22995];
-      }
-      if (fileName == "Audi_A4.rds") {
-        minresult = [14650, 7490, 15470, 8490, 4290, 9690];
-        maxresult = [29490, 20450, 36990, 29991, 16950, 22995];
-      }
-      if (fileName == "Audi_Q3.rds") {
-        minresult = [14650, 7490, 15470, 8490, 4290, 9690];
-        maxresult = [29490, 20450, 36990, 29991, 16950, 22995];
-      }
-      if (fileName == "Benz_A_Class.rds") {
-        minresult = [14650, 7490, 15470, 8490, 4290, 9690];
-        maxresult = [29490, 20450, 36990, 29991, 16950, 22995];
-      }
-      for (int i = -1; i < 6; i++) {
-        moo = i + 1;
-        if (result2 == moo) {
-          moo = moo - 1;
-          min = minresult[moo];
-          max = maxresult[moo];
-        }
-      }
-    });
+    sleep(Duration(seconds: 2));
+    // setState(
+    //   () {
+    //     if (fileName == "Audi_A3.rds") {
+    //       minresult = [14650, 7490, 15470, 8490, 4290, 9690];
+    //       maxresult = [29490, 20450, 36990, 29991, 16950, 22995];
+    //     }
+    //     if (fileName == "Audi_A4.rds") {
+    //       minresult = [14650, 7490, 15470, 8490, 4290, 9690];
+    //       maxresult = [29490, 20450, 36990, 29991, 16950, 22995];
+    //     }
+    //     if (fileName == "Audi_Q3.rds") {
+    //       minresult = [14650, 7490, 15470, 8490, 4290, 9690];
+    //       maxresult = [29490, 20450, 36990, 29991, 16950, 22995];
+    //     }
+    //     if (fileName == "Benz_A_Class.rds") {
+    //       minresult = [14650, 7490, 15470, 8490, 4290, 9690];
+    //       maxresult = [29490, 20450, 36990, 29991, 16950, 22995];
+    //     }
+    //     for (int i = -1; i < 6; i++) {
+    //       moo = i + 1;
+    //       if (result2 == moo) {
+    //         moo = moo - 1;
+    //         min = minresult[moo];
+    //         max = maxresult[moo];
+    //       }
+    //     }
+    // },
+    // );
+    return result2;
+  }
+
+  minMax() async {
+    await Getjasondata().then(
+      (value) {
+        setState(
+          () {
+            if (fileName == "Audi_A3.rds") {
+              minresult = [14650, 7490, 15470, 8490, 4290, 9690];
+              maxresult = [29490, 20450, 36990, 29991, 16950, 22995];
+            }
+            if (fileName == "Audi_A4.rds") {
+              minresult = [14650, 7490, 15470, 8490, 4290, 9690];
+              maxresult = [29490, 20450, 36990, 29991, 16950, 22995];
+            }
+            if (fileName == "Audi_Q3.rds") {
+              minresult = [14650, 7490, 15470, 8490, 4290, 9690];
+              maxresult = [29490, 20450, 36990, 29991, 16950, 22995];
+            }
+            if (fileName == "Benz_A_Class.rds") {
+              minresult = [14650, 7490, 15470, 8490, 4290, 9690];
+              maxresult = [29490, 20450, 36990, 29991, 16950, 22995];
+            }
+            for (int i = -1; i < 6; i++) {
+              moo = i + 1;
+              if (result2 == moo) {
+                moo = moo - 1;
+                min = minresult[moo];
+                max = maxresult[moo];
+              }
+            }
+            priceResult.add(min);
+            priceResult.add(max);
+          },
+        );
+      },
+    );
   }
 
   carinsert(String userEmail) async {

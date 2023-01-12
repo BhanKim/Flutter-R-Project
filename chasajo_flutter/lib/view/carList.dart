@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-import '../widget/carlist/d.dart';
+import '../widget/carlist/Collection.dart';
 
 // Collection collec = Collection();
 
@@ -13,9 +13,6 @@ class carList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('carList'),
-        ),
         body: Collection(),
       ),
     );
