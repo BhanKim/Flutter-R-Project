@@ -1,5 +1,4 @@
 import 'package:cha_sa_jo_flutter/model/tabbar.dart';
-import 'package:cha_sa_jo_flutter/view/Home/Home_Page.dart';
 
 import 'package:cha_sa_jo_flutter/view/board/boardpage.dart';
 import 'package:cha_sa_jo_flutter/view/carList.dart';
@@ -26,6 +25,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late PersistentTabController controller;
   RxBool _isLightTheme = true.obs;
+  bool darkMode = false;
   @override
   void initState() {
     // TODO: implement initState
@@ -38,18 +38,50 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: ObxValue(
-          (data) => Switch(
-            value: _isLightTheme.value,
-            onChanged: (val) {
-              _isLightTheme.value = val;
-              Get.changeThemeMode(
-                _isLightTheme.value ? ThemeMode.light : ThemeMode.dark,
-              );
-              // _saveThemeStatus();
-            },
-          ),
-          false.obs,
+        leading: Row(
+          children: [
+            // ObxValue(
+            //   (data) => Switch(
+            //     value: _isLightTheme.value,
+            //     onChanged: (val) {
+            //       _isLightTheme.value = val;
+            //       Get.changeThemeMode(
+            //         _isLightTheme.value ? ThemeMode.light : ThemeMode.dark,
+            //       );
+            //       // _saveThemeStatus();
+            //     },
+            //   ),
+            //   false.obs,
+            // ),
+            // SizedBox(
+            //   width: 10,
+            // ),
+            darkMode
+                ? IconButton(
+                    onPressed: () {
+                      _isLightTheme.value = true;
+                      Get.changeThemeMode(
+                        _isLightTheme.value ? ThemeMode.light : ThemeMode.dark,
+                      );
+                      setState(() {
+                        darkMode = false;
+                      });
+                    },
+                    icon: Icon(Icons.light_mode_outlined),
+                  )
+                : IconButton(
+                    onPressed: () {
+                      _isLightTheme.value = false;
+                      Get.changeThemeMode(
+                        _isLightTheme.value ? ThemeMode.light : ThemeMode.dark,
+                      );
+                      setState(() {
+                        darkMode = true;
+                      });
+                    },
+                    icon: Icon(Icons.dark_mode_outlined),
+                  ),
+          ],
         ),
         actions: [
           IconButton(
@@ -68,7 +100,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       body: PersistentTabView(
         context,
         screens: [
-          HomePage(),
+          carList(),
           BoardPage(),
           ChatScreen(),
         ],
