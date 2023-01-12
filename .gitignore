@@ -158,5 +158,6 @@ $RECYCLE.BIN/
 .runtimeconfig.json
 .firebase/
 
+application.properties
 # End of https://www.toptal.com/developers/gitignore/api/firebase
 # End of https://www.gitignore.io/api/git,java,maven,windows,eclipse
