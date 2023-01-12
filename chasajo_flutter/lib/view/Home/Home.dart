@@ -67,7 +67,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         darkMode = false;
                       });
                     },
-                    icon: Icon(Icons.light_mode_outlined),
+                    icon: Icon(Icons.dark_mode_outlined),
                   )
                 : IconButton(
                     onPressed: () {
@@ -79,7 +79,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         darkMode = true;
                       });
                     },
-                    icon: Icon(Icons.dark_mode_outlined),
+                    icon: Icon(Icons.light_mode_outlined),
                   ),
           ],
         ),
