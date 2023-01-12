@@ -24,9 +24,9 @@ class _chartpageState extends State<StatefulWidget> {
   final Color dark = const Color(0xff3b8c75);
   final Color normal = const Color(0xff64caad);
   final Color light = const Color(0xff73e8c9);
+  final Chart = Get.arguments ?? "_";
 
 //Audi_A3.rds
-  var Chart = Get.arguments ?? "_";
   late List dogchart = [];
   late List<double> dateList = [];
   late List<double> priceList = [];
@@ -43,18 +43,24 @@ class _chartpageState extends State<StatefulWidget> {
   String smodel = '';
   String sbrand = '';
   double smileage = 0;
-  double min1 = 0;
-  double max1 = 0;
+  double min1 = 13;
+  double max1 = 13;
+  String carimage = '';
   // Chart[1];
   @override
   void initState() {
     // TODO: implement initState
+    print(smodel);
+    setState(() {
+      smodel = Chart[0];
+      smileage = Chart[1];
+      min1 = Chart[2];
+      max1 = Chart[3];
+      sbrand = Chart[5];
+      carimage = Chart[6];
+    });
     super.initState();
-    smodel = Chart[0];
-    smileage = Chart[1];
-    min1 = Chart[2];
-    max1 = Chart[3];
-    sbrand = Chart[5];
+    print(smodel);
     dogsizeSelect2();
   }
 
@@ -67,12 +73,12 @@ class _chartpageState extends State<StatefulWidget> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Image.asset(
-              'images/$sbrand$smodel.png',
-              width: 300,
+              '$carimage',
+              width: 200,
               height: 200,
             ),
             Row(
@@ -186,7 +192,6 @@ class _chartpageState extends State<StatefulWidget> {
     // Ddate.clear();
     var dataConvertedJson2 = json.decode(utf8.decode(respnse.bodyBytes));
     dataConvertedJson2;
-    print(dataConvertedJson2);
 
     return dataConvertedJson2;
   }

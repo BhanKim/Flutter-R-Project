@@ -104,7 +104,7 @@ class _CollectionState extends State<Collection> {
                                   color: Colors.brown),
                             ),
                           ],
-                          totalRepeatCount: 10,
+                          totalRepeatCount: 100,
                           pause: const Duration(milliseconds: 1000),
                           displayFullTextOnTap: true,
                           stopPauseOnTap: true,
@@ -193,7 +193,11 @@ class _CollectionState extends State<Collection> {
                                         Message.model =
                                             Message.todoList[0].model;
                                         model = Message.model;
-                                        _showhero(context, brand, model);
+                                        Message.carimage =
+                                            Message.todoList[0].carimage;
+                                        carimage = Message.carimage;
+                                        _showhero(
+                                            context, brand, model, carimage);
                                       },
                                       child: Image.asset(
                                         Message.todoList[0].carimage,
@@ -229,7 +233,11 @@ class _CollectionState extends State<Collection> {
                                         Message.model =
                                             Message.todoList[1].model;
                                         model = Message.model;
-                                        _showhero(context, brand, model);
+                                        Message.carimage =
+                                            Message.todoList[1].carimage;
+                                        carimage = Message.carimage;
+                                        _showhero(
+                                            context, brand, model, carimage);
                                       },
                                       child: Image.asset(
                                         Message.todoList[1].carimage,
@@ -264,7 +272,11 @@ class _CollectionState extends State<Collection> {
                                         Message.model =
                                             Message.todoList[2].model;
                                         model = Message.model;
-                                        _showhero(context, brand, model);
+                                        Message.carimage =
+                                            Message.todoList[2].carimage;
+                                        carimage = Message.carimage;
+                                        _showhero(
+                                            context, brand, model, carimage);
                                       },
                                       child: Image.asset(
                                         Message.todoList[2].carimage,
@@ -351,7 +363,11 @@ class _CollectionState extends State<Collection> {
                                         Message.model =
                                             Message.todoList[3].model;
                                         model = Message.model;
-                                        _showhero(context, brand, model);
+                                        Message.carimage =
+                                            Message.todoList[3].carimage;
+                                        carimage = Message.carimage;
+                                        _showhero(
+                                            context, brand, model, carimage);
                                       },
                                       child: Image.asset(
                                         Message.todoList[3].carimage,
@@ -387,7 +403,11 @@ class _CollectionState extends State<Collection> {
                                         Message.model =
                                             Message.todoList[4].model;
                                         model = Message.model;
-                                        _showhero(context, brand, model);
+                                        Message.carimage =
+                                            Message.todoList[4].carimage;
+                                        carimage = Message.carimage;
+                                        _showhero(
+                                            context, brand, model, carimage);
                                       },
                                       child: Image.asset(
                                         Message.todoList[4].carimage,
@@ -422,7 +442,11 @@ class _CollectionState extends State<Collection> {
                                         Message.model =
                                             Message.todoList[5].model;
                                         model = Message.model;
-                                        _showhero(context, brand, model);
+                                        Message.carimage =
+                                            Message.todoList[5].carimage;
+                                        carimage = Message.carimage;
+                                        _showhero(
+                                            context, brand, model, carimage);
                                       },
                                       child: Image.asset(
                                         Message.todoList[5].carimage,
@@ -509,7 +533,11 @@ class _CollectionState extends State<Collection> {
                                         Message.model =
                                             Message.todoList[6].model;
                                         model = Message.model;
-                                        _showhero(context, brand, model);
+                                        Message.carimage =
+                                            Message.todoList[6].carimage;
+                                        carimage = Message.carimage;
+                                        _showhero(
+                                            context, brand, model, carimage);
                                       },
                                       child: Image.asset(
                                         Message.todoList[6].carimage,
@@ -545,7 +573,11 @@ class _CollectionState extends State<Collection> {
                                         Message.model =
                                             Message.todoList[7].model;
                                         model = Message.model;
-                                        _showhero(context, brand, model);
+                                        Message.carimage =
+                                            Message.todoList[7].carimage;
+                                        carimage = Message.carimage;
+                                        _showhero(
+                                            context, brand, model, carimage);
                                       },
                                       child: Image.asset(
                                         Message.todoList[7].carimage,
@@ -580,7 +612,11 @@ class _CollectionState extends State<Collection> {
                                         Message.model =
                                             Message.todoList[8].model;
                                         model = Message.model;
-                                        _showhero(context, brand, model);
+                                        Message.carimage =
+                                            Message.todoList[8].carimage;
+                                        carimage = Message.carimage;
+                                        _showhero(
+                                            context, brand, model, carimage);
                                       },
                                       child: Image.asset(
                                         Message.todoList[8].carimage,
@@ -667,7 +703,11 @@ class _CollectionState extends State<Collection> {
                                         Message.model =
                                             Message.todoList[9].model;
                                         model = Message.model;
-                                        _showhero(context, brand, model);
+                                        Message.carimage =
+                                            Message.todoList[9].carimage;
+                                        carimage = Message.carimage;
+                                        _showhero(
+                                            context, brand, model, carimage);
                                       },
                                       child: Image.asset(
                                         Message.todoList[9].carimage,
@@ -704,7 +744,11 @@ class _CollectionState extends State<Collection> {
                                         Message.model =
                                             Message.todoList[10].model;
                                         model = Message.model;
-                                        _showhero(context, brand, model);
+                                        Message.carimage =
+                                            Message.todoList[10].carimage;
+                                        carimage = Message.carimage;
+                                        _showhero(
+                                            context, brand, model, carimage);
                                       },
                                       child: Image.asset(
                                         Message.todoList[10].carimage,
@@ -740,7 +784,11 @@ class _CollectionState extends State<Collection> {
                                         Message.model =
                                             Message.todoList[11].model;
                                         model = Message.model;
-                                        _showhero(context, brand, model);
+                                        Message.carimage =
+                                            Message.todoList[11].carimage;
+                                        carimage = Message.carimage;
+                                        _showhero(
+                                            context, brand, model, carimage);
                                       },
                                       child: Image.asset(
                                         Message.todoList[11].carimage,
@@ -828,7 +876,11 @@ class _CollectionState extends State<Collection> {
                                         Message.model =
                                             Message.todoList[12].model;
                                         model = Message.model;
-                                        _showhero(context, brand, model);
+                                        Message.carimage =
+                                            Message.todoList[12].carimage;
+                                        carimage = Message.carimage;
+                                        _showhero(
+                                            context, brand, model, carimage);
                                       },
                                       child: Image.asset(
                                         Message.todoList[12].carimage,
@@ -865,7 +917,11 @@ class _CollectionState extends State<Collection> {
                                         Message.model =
                                             Message.todoList[13].model;
                                         model = Message.model;
-                                        _showhero(context, brand, model);
+                                        Message.carimage =
+                                            Message.todoList[13].carimage;
+                                        carimage = Message.carimage;
+                                        _showhero(
+                                            context, brand, model, carimage);
                                       },
                                       child: Image.asset(
                                         Message.todoList[13].carimage,
@@ -901,7 +957,11 @@ class _CollectionState extends State<Collection> {
                                         Message.model =
                                             Message.todoList[14].model;
                                         model = Message.model;
-                                        _showhero(context, brand, model);
+                                        Message.carimage =
+                                            Message.todoList[14].carimage;
+                                        carimage = Message.carimage;
+                                        _showhero(
+                                            context, brand, model, carimage);
                                       },
                                       child: Image.asset(
                                         Message.todoList[14].carimage,
@@ -924,11 +984,11 @@ class _CollectionState extends State<Collection> {
         });
   } // function
 
-  _showhero(BuildContext context, brand, model) {
+  _showhero(BuildContext context, brand, model, carimage) {
     setState(() {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         // 아래 오타아님 바꾸면 안됨.
-        return InsertCar(brand: model, model: brand);
+        return InsertCar(brand: model, model: brand, carimage: carimage);
       }));
       brand = Message.brand;
     });
