@@ -11,7 +11,7 @@ import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 
 class LineChartWidget extends StatefulWidget {
-  const LineChartWidget(double max, double min, {super.key});
+  const LineChartWidget({super.key});
 
   // final model;
 
@@ -21,11 +21,17 @@ class LineChartWidget extends StatefulWidget {
 }
 
 class _chartpageState extends State<StatefulWidget> {
+  final Color dark = const Color(0xff3b8c75);
+  final Color normal = const Color(0xff64caad);
+  final Color light = const Color(0xff73e8c9);
+
 //Audi_A3.rds
+  var Chart = Get.arguments ?? "_";
   late List dogchart = [];
   late List<double> dateList = [];
   late List<double> priceList = [];
   late List<FlSpot> flList = [];
+  late List<BarChartGroupData> barchart = [];
   List<Color> gradientColors = [
     const Color(0xff23b6e6),
     const Color(0xff02d39a),
@@ -34,115 +40,153 @@ class _chartpageState extends State<StatefulWidget> {
   double k = 0;
   int myDouble = 0;
   int myDouble2 = 0;
-
+  String smodel = '';
+  String sbrand = '';
+  double smileage = 0;
+  double min1 = 0;
+  double max1 = 0;
+  // Chart[1];
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    print(myDouble);
+    smodel = Chart[0];
+    smileage = Chart[1];
+    min1 = Chart[2];
+    max1 = Chart[3];
+    sbrand = Chart[5];
+    dogsizeSelect2();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: FutureBuilder(
-            future: _asd(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData == false) {
-                return CircularProgressIndicator();
-              } else {
-                return Column(
-                  children: [
-                    Text(" 꺽은 선  차트"),
-                    SizedBox(height: 30),
-                    AspectRatio(
-                      aspectRatio: 0.8,
-                      child: LineChart(
-                        LineChartData(
-                          borderData: FlBorderData(
-                              show: false,
-                              border: Border.all(
-                                  color: Colors.black,
-                                  width: 1.0,
-                                  style: BorderStyle.solid)),
-                          backgroundColor: Color.fromARGB(255, 12, 1, 100),
-                          minX: 2009,
-                          maxX: 2021,
-                          minY: 0,
-                          maxY: 50000,
-                          gridData: FlGridData(
-                            show: false,
+      appBar: AppBar(
+        title: const Text('chart'),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 30,
+            ),
+            Image.asset(
+              'images/$sbrand$smodel.png',
+              width: 300,
+              height: 200,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('$sbrand $smodel의 예상 가격 은 '),
+                Text('$min1£'),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('$sbrand $smodel의 예상 가격 은 '),
+                Text('$max1£'),
+              ],
+            ),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FutureBuilder(
+                  future: _asd(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData == false) {
+                      return const CircularProgressIndicator();
+                    } else {
+                      return Column(
+                        children: [
+                          const SizedBox(height: 30),
+                          SizedBox(
+                            width: 400,
+                            child: AspectRatio(
+                              aspectRatio: 1,
+                              child: LineChart(
+                                LineChartData(
+                                  borderData: FlBorderData(
+                                      show: false,
+                                      border: Border.all(
+                                          color: Colors.black,
+                                          width: 1.0,
+                                          style: BorderStyle.solid)),
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 12, 1, 100),
+                                  minX: 2009,
+                                  maxX: 2021,
+                                  minY: 0,
+                                  maxY: 50000,
+                                  gridData: FlGridData(
+                                    show: false,
+                                  ),
+                                  lineBarsData: [
+                                    LineChartBarData(
+                                      spots: flList,
+                                      isCurved: false,
+                                      //myDouble2 < 20000 ||
+                                      color:
+                                          myDouble2 < 20000 && myDouble == 2017
+                                              ? Colors.amber
+                                              : Colors.green,
 
-                            // getDrawingHorizontalLine: (value) {
-                            //   return FlLine(
-                            //     color: Color.fromARGB(255, 255, 255, 255),
-                            //     strokeWidth: 0.5,
-                            //   );
-                            // },
-                            // drawHorizontalLine: true,
-                            // getDrawingVerticalLine: (value) {
-                            //   return FlLine(
-                            //     color: Color.fromARGB(255, 255, 255, 255),
-                            //     strokeWidth: 0.5,
-                            //   );
-                            // },
-                          ),
-                          lineBarsData: [
-                            LineChartBarData(
-                              spots: flList,
-                              isCurved: false,
-                              //myDouble2 < 20000 ||
-                              color: myDouble2 < 20000 && myDouble == 2017
-                                  ? Colors.amber
-                                  : Colors.green,
-                              // gradientColors[0],
-                              barWidth: 0,
-                              dotData: FlDotData(show: true),
-                              // belowBarData: BarAreaData(
-                              //   show: true,
-                              //   gradient: LinearGradient(
-                              //     colors: [
-                              //       const Color(0xff12c2e9).withOpacity(0.4),
-                              //       const Color(0xffc471ed).withOpacity(0.4),
-                              //       const Color(0xfff64f59).withOpacity(0.4),
-                              //     ],
-                              //   ),
-                              // ),
-
-                              // gradient: const LinearGradient(
-                              //   colors: [
-                              //     Color(0xff12c2e9),
-                              //     Color(0xffc471ed),
-                              //     Color(0xfff64f59),
-                              //   ],
-                              //   stops: [0.2, 0.5, 0.9],
-                              // ),
+                                      barWidth: 0,
+                                      dotData: FlDotData(show: true),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              }
-            },
-          ),
+                          ),
+                          const SizedBox(
+                            height: 50,
+                          ),
+                          SizedBox(
+                            width: 400,
+                            child: AspectRatio(
+                              aspectRatio: 1,
+                              child: BarChart(
+                                BarChartData(
+                                  borderData: FlBorderData(
+                                      border: const Border(
+                                    top: BorderSide.none,
+                                    right: BorderSide.none,
+                                    left: BorderSide(width: 1),
+                                    bottom: BorderSide(width: 1),
+                                  )),
+                                  groupsSpace: 10,
+                                  backgroundColor:
+                                      Color.fromARGB(255, 255, 255, 255),
+                                  barGroups: barchart,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      );
+                    }
+                  },
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
   } //
 
   Future<List> dogsizeSelect2() async {
-    var url = Uri.parse('http://localhost:8080/carmodel/list/A3');
+    var url = Uri.parse(
+        'http://localhost:8080/carmodel/list/$smodel?smileage=$smileage');
     var respnse = await http.get(url);
     // dogchart.clear();
     // Dweight.clear();
     // Ddate.clear();
     var dataConvertedJson2 = json.decode(utf8.decode(respnse.bodyBytes));
     dataConvertedJson2;
+    print(dataConvertedJson2);
 
     return dataConvertedJson2;
   }
@@ -161,6 +205,14 @@ class _chartpageState extends State<StatefulWidget> {
         dateList.add(myDouble.toDouble());
         priceList.add(myDouble2.toDouble());
         flList.add(FlSpot(myDouble.toDouble(), myDouble2.toDouble()));
+        barchart
+            .add(BarChartGroupData(x: myDouble - 2000, barsSpace: 2, barRods: [
+          BarChartRodData(
+            toY: myDouble2.toDouble(),
+            // rodStackItems: [BarChartRodStackItem(0, myDouble2.toDouble(), dark)],
+            // borderRadius: BorderRadius.zero,
+          )
+        ]));
       }
     });
     return dateList;

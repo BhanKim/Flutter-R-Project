@@ -45,6 +45,7 @@ dependencies:
   persistent_bottom_nav_bar: ^5.0.2
   http: ^0.13.5
   toggle_switch: ^2.0.1
+  animated_text_kit: ^4.2.2
 
 
 dev_dependencies:

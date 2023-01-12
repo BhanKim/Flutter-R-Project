@@ -50,7 +50,6 @@ class _CarselectListState extends State<CarselectList> {
     // TODO: implement initState
     super.initState();
     data.clear();
-    // _Carselect();
     // getJsonData();
     print(userid);
   }
@@ -65,7 +64,7 @@ class _CarselectListState extends State<CarselectList> {
           future: getJsonData(),
           builder: (context, snapshot) {
             if (snapshot.hasData == false) {
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             } else {
               return Center(
                 child: data.isEmpty
@@ -73,152 +72,201 @@ class _CarselectListState extends State<CarselectList> {
                     : ListView.builder(
                         itemCount: data.length,
                         itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () {},
-                            //sbrand smodel stransmission sfueltype smileage smpg syear senginesize
-                            onLongPress: () {
-                              // getJSONDate2();
-                              // getJsonData();
+                          return Dismissible(
+                            key: Key("${data[index]['sseq']}"),
+                            onDismissed: (direction) {
+                              // setState(() {
                               sseq = data[index]['sseq'];
-                              sbrand = data[index]['sbrand'];
-                              smodel = data[index]['smodel'];
-                              stransmission = data[index]['stransmission'];
-                              sfueltype = data[index]['sfueltype'];
-                              smileage = data[index]['smileage'];
-                              smpg = data[index]['smpg'];
-                              syear = data[index]['syear'];
-                              senginesize = data[index]['senginesize'];
-
-                              // Get.to(
-                              //   const deletePage(),
-                              // )?.then(
-                              //   (value) => getJsonData(),
-                              // );
-                              // arguments: Message.data[index]['code']);
+                              deleteList();
+                              // data.clear();
+                              data.removeAt(index);
+                              // });
                             },
-                            child: Padding(
-                              padding: const EdgeInsets.all(1.0),
-                              child: Container(
-                                child: Card(
-                                  color: Color.fromARGB(255, 37, 64, 129),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            const Text(
-                                              'no : ',
-                                              style: TextStyle(
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: Padding(
+                                padding: const EdgeInsets.all(6.0),
+                                child: Container(
+                                  child: Card(
+                                    color: Color.fromARGB(255, 37, 64, 129),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              const Text(
+                                                'no : ',
+                                                style: TextStyle(
                                                   fontWeight: FontWeight.bold,
-                                                  color: Colors.white),
-                                            ),
-                                            Text('${data[index]['sseq']}')
-                                          ],
-                                        ),
-                                        // "sid":"dudgur@gmail.com"
-                                        Row(
-                                          children: [
-                                            const Text(
-                                              'id : ',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
                                               ),
-                                            ),
-                                            Text(data[index]['sid'])
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Text(
-                                              'brand : ',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
+                                              Text(
+                                                '${data[index]['sseq']}',
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          // "sid":"dudgur@gmail.com"
+                                          Row(
+                                            children: [
+                                              const Text(
+                                                'user ID : ',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
                                               ),
-                                            ),
-                                            Text(data[index]['sbrand'])
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Text(
-                                              'model : ',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
+                                              Text(
+                                                data[index]['sid'],
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              const Text(
+                                                'brand : ',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
                                               ),
-                                            ),
-                                            Text(data[index]['smodel'])
-                                          ],
-                                        ),
-                                        //[{"sseq":1,"sid":"dudgur@gmail.com","sbrand":"BMW","smodel":"5Series","stransmission":"Automatic","sfueltype":"Diesel","smileage":15000,"smpg":16,"syear":2014,"senginesize":2.0},
-                                        Row(
-                                          children: [
-                                            const Text(
-                                              'transmission : ',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
+                                              Text(
+                                                data[index]['sbrand'],
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              const Text(
+                                                'model : ',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
                                               ),
-                                            ),
-                                            Text(data[index]['stransmission'])
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Text(
-                                              'fueltype : ',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
+                                              Text(
+                                                data[index]['smodel'],
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          //[{"sseq":1,"sid":"dudgur@gmail.com","sbrand":"BMW","smodel":"5Series","stransmission":"Automatic","sfueltype":"Diesel","smileage":15000,"smpg":16,"syear":2014,"senginesize":2.0},
+                                          Row(
+                                            children: [
+                                              const Text(
+                                                'transmission : ',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
                                               ),
-                                            ),
-                                            Text(data[index]['sfueltype'])
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Text(
-                                              'mileage : ',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
+                                              Text(
+                                                data[index]['stransmission'],
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              const Text(
+                                                'fueltype : ',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
                                               ),
-                                            ),
-                                            Text('${data[index]['smileage']}')
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Text(
-                                              'mpg : ',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
+                                              Text(
+                                                data[index]['sfueltype'],
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              const Text(
+                                                'mileage : ',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
                                               ),
-                                            ),
-                                            Text('${data[index]['smpg']}')
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Text(
-                                              'year : ',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
+                                              Text(
+                                                '${data[index]['smileage']}',
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              const Text(
+                                                'mpg : ',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
                                               ),
-                                            ),
-                                            Text('${data[index]['syear']}')
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Text(
-                                              'enginesize : ',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
+                                              Text(
+                                                '${data[index]['smpg']}',
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              const Text(
+                                                'year : ',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
                                               ),
-                                            ),
-                                            Text(
-                                                '${data[index]['senginesize']}')
-                                          ],
-                                        )
-                                      ],
+                                              Text(
+                                                '${data[index]['syear']}',
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              const Text(
+                                                'enginesize : ',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                              Text(
+                                                '${data[index]['senginesize']}',
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -244,11 +292,23 @@ class _CarselectListState extends State<CarselectList> {
     return data;
   }
 
+  // list search end
+
+  // desc 조회한 차 리스트 삭제.
+  // data 2023/01/11(수)
+  deleteList() async {
+    var url = Uri.parse('http://localhost:8080/search/delete/$userid/$sseq');
+    await http.get(url);
+    // getJsonData();
+  }
+
+  ///search/delete/{sid}/{sseq}
   // Future<List> _Carselect(userData) async {
   //   getJsonData().then((value) {
   //     print(value);
   //     data.addAll(value);
   //   });
   //   return data;
+
   // }
 }//end

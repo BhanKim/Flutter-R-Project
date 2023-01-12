@@ -18,8 +18,8 @@ public interface modelMapper {
 	@Select("SELECT * FROM audi WHERE cseq =#{cseq}")
 	carModel getCarModelInformation(@Param("cseq")String id);
 	
-	@Select("SELECT * FROM audi WHERE model=#{model}")
-	List<carModel> getCarModelList(@Param("model")String model);
+	@Select("SELECT * FROM audi WHERE model=#{model} and  mileage>#{smileage}  and #{smileage} + 1000 >mileage order by year")
+	List<carModel> getCarModelList(@Param("model")String model,@Param("smileage")String smileage);
 
 	// SEARCH LIST 
 	@Select("SELECT * FROM carsearchlist WHERE sid = #{sid} ")
