@@ -2,6 +2,7 @@ import 'package:cha_sa_jo_flutter/constants/sizes.dart';
 import 'package:cha_sa_jo_flutter/constants/text_strings.dart';
 import 'package:cha_sa_jo_flutter/view/Home/Home.dart';
 import 'package:cha_sa_jo_flutter/view/chatting/chat_screen.dart';
+import 'package:cha_sa_jo_flutter/view/login/login_forget.dart';
 import 'package:cha_sa_jo_flutter/view/signup/singup_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,7 @@ class LoginForm extends StatelessWidget {
                   // forget password
                   onPressed: () {
                     //비밀번호찾기 화면 추가
+                    Get.to(loginForget());
                   },
                   child: const Text(tForgetPassword)),
             ),
@@ -60,8 +62,6 @@ class LoginForm extends StatelessWidget {
               child: ElevatedButton(
                 // login 실행
                 onPressed: () async {
-                  print(loginEmail);
-                  print(loginPassword);
                   try {
                     final newUser =
                         await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -73,7 +73,9 @@ class LoginForm extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return Home();
+                            return Home(
+                              tabIndex: 0,
+                            );
                           },
                         ),
                       );

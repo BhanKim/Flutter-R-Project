@@ -1,3 +1,5 @@
+import 'package:cha_sa_jo_flutter/view/Home/Home.dart';
+import 'package:cha_sa_jo_flutter/view/board/boardpage.dart';
 import 'package:cha_sa_jo_flutter/widget/chatting/message.dart';
 import 'package:cha_sa_jo_flutter/widget/chatting/new_message.dart';
 
@@ -38,21 +40,6 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: ObxValue(
-          (data) => Switch(
-            value: _isLightTheme.value,
-            onChanged: (val) {
-              _isLightTheme.value = val;
-              Get.changeThemeMode(
-                _isLightTheme.value ? ThemeMode.light : ThemeMode.dark,
-              );
-              // _saveThemeStatus();
-            },
-          ),
-          false.obs,
-        ),
-      ),
       body: Container(
         height: MediaQuery.of(context).size.height,
         child: Column(

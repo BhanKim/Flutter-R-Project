@@ -17,12 +17,19 @@ class _WritePageState extends State<WritePage> {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Write Page'),
-        ),
-        body: Center(
-          child: WriteWidget(username: widget.username),
-        ),
+        // appBar: AppBar(
+        //   title: const Text('Write Page'),
+        // ),
+        body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          const Text(
+            '게시물 작성',
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          WriteWidget(username: widget.username),
+        ]),
       ),
     );
   }
