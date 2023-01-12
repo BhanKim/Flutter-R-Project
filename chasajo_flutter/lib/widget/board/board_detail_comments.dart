@@ -66,9 +66,9 @@ class _BoardCommentsState extends State<BoardComments> {
             padding: EdgeInsets.zero,
             height: 30,
             // color: Color(0xffE6E6E6),
-            color: _isLightTheme.isTrue
-                ? Color(0xffE6E6E6)
-                : Color.fromARGB(255, 76, 76, 76),
+            // color: _isLightTheme.isTrue
+            //     ? Color(0xffE6E6E6)
+            //     : Color.fromARGB(255, 76, 76, 76),
             child: Align(
               alignment: Alignment.centerLeft,
               child: Row(
@@ -88,6 +88,9 @@ class _BoardCommentsState extends State<BoardComments> {
                 ],
               ),
             ),
+          ),
+          Divider(
+            thickness: 3,
           ),
           Column(
             children: [
@@ -339,7 +342,9 @@ class _BoardCommentsState extends State<BoardComments> {
 
   Future<List<Comment>> deleteComment(String commentid) async {
     await FirebaseFirestore.instance
-        .collection("comments")
+        .collection("carboard")
+        .doc(widget.id)
+        .collection('comments')
         .doc(commentid)
         .delete();
 

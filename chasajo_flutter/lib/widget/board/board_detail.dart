@@ -114,7 +114,7 @@ class _BoardDetailState extends State<BoardDetail> {
           height: 1,
         ),
         const Divider(
-          thickness: 1,
+          thickness: 5,
         ),
       ],
     );
