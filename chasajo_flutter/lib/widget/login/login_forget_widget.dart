@@ -3,11 +3,8 @@ import 'package:cha_sa_jo_flutter/constants/sizes.dart';
 import 'package:cha_sa_jo_flutter/constants/text_strings.dart';
 import 'package:cha_sa_jo_flutter/view/login/login_screen.dart';
 import 'package:cha_sa_jo_flutter/widget/signup/form_header_widget.dart';
-import 'package:cha_sa_jo_flutter/widget/signup/signup_footer_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class LoginForgetWidget extends StatefulWidget {
@@ -28,7 +25,9 @@ class _LoginForgetWidgetState extends State<LoginForgetWidget> {
         child: Column(
           children: [
             const FormHeaderWidget(
-                image: tSplashImage, title: '하핳', subTitle: '비밀번호찾기'),
+                image: tSplashImage,
+                title: 'Reset Password',
+                subTitle: 'Check your Email and reset your password.'),
             const SizedBox(
               height: 20,
             ),
