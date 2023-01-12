@@ -25,11 +25,11 @@ class UpdatePage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             '게시물 수정',
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           UpdateWidget(

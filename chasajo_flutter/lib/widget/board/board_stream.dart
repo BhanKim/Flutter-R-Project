@@ -150,16 +150,16 @@ class _BoardStreamState extends State<BoardStream> {
     QuerySnapshot<Map<String, dynamic>> querySnapshot =
         await collectionReference.orderBy('createdate', descending: true).get();
 
-    print(querySnapshot);
+    // print(querySnapshot);
 
     for (var doc in querySnapshot.docs) {
       Comment comment = Comment.fromQuerySnapShot(doc);
       setState(() {
         comments.add(comment);
-        print(comments);
+        // print(comments);
       });
     }
-    print(comments);
+    // print(comments);
 
     return comments;
 
