@@ -2,10 +2,7 @@ import 'dart:convert';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cha_sa_jo_flutter/view/list/listinsert.dart';
-import 'package:cha_sa_jo_flutter/widget/carlist/todoCol.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import 'MessageCol.dart';
 import 'list.dart';
@@ -122,7 +119,7 @@ class _CollectionState extends State<Collection> {
                               ),
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 173, 32, 33),
                               )
                             ],
                           ),
@@ -157,7 +154,7 @@ class _CollectionState extends State<Collection> {
                               ),
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 173, 32, 33),
                               )
                             ],
                           ),
@@ -298,7 +295,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 38, 87, 242),
                               )
                             ],
                           ),
@@ -327,7 +324,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 38, 87, 242),
                               )
                             ],
                           ),
@@ -468,7 +465,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 127, 127, 127),
                               )
                             ],
                           ),
@@ -497,7 +494,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 127, 127, 127),
                               )
                             ],
                           ),
@@ -638,7 +635,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 0, 169, 132),
                               )
                             ],
                           ),
@@ -667,7 +664,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 0, 169, 132),
                               )
                             ],
                           ),
@@ -811,7 +808,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 16, 42, 77),
                               )
                             ],
                           ),
@@ -840,7 +837,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 16, 42, 77),
                               )
                             ],
                           ),
