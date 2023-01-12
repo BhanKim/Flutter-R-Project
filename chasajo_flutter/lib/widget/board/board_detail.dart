@@ -1,3 +1,4 @@
+import 'package:cha_sa_jo_flutter/view/Home/Home.dart';
 import 'package:cha_sa_jo_flutter/view/board/boardpage.dart';
 import 'package:cha_sa_jo_flutter/view/board/updatepage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -137,7 +138,7 @@ class _BoardDetailState extends State<BoardDetail> {
                 Navigator.of(context).pop();
                 Navigator.pop(context);
                 setState(() {
-                  Get.to(const BoardPage());
+                  Get.to(const Home(tabIndex: 1));
                 });
               },
               child: const Text(

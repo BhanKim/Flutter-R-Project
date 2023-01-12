@@ -1,3 +1,4 @@
+import 'package:cha_sa_jo_flutter/view/Home/Home.dart';
 import 'package:cha_sa_jo_flutter/view/board/boardpage.dart';
 import 'package:cha_sa_jo_flutter/view/board/updatepage.dart';
 import 'package:cha_sa_jo_flutter/widget/board/board_detail.dart';
@@ -29,22 +30,11 @@ class _DetailPageState extends State<DetailPage> {
   ScrollController scroller = ScrollController();
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      double minScrollExtent1 = scroller.initialScrollOffset;
-      double maxScrollExtent1 = scroller.initialScrollOffset;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: _getPost(),
       builder: (context, snapshot) {
-        if (snapshot.hasData == false) {
+        if (!snapshot.hasData) {
           return CircularProgressIndicator();
         } else {
           return Scaffold(
@@ -128,56 +118,19 @@ class _DetailPageState extends State<DetailPage> {
     Map<String, dynamic> data = {};
     final post =
         await FirebaseFirestore.instance.collection("carboard").doc(widget.id);
-    await post.get().then((DocumentSnapshot doc) {
-      data = doc.data() as Map<String, dynamic>;
-    });
 
-    title = data['title'];
-    content = data['content'];
-    creator = data['creator'];
-    count = data['count'];
-    initdate = data['initdate'];
-
+    if (post.get() != null) {
+      await post.get().then((DocumentSnapshot doc) {
+        if (doc.data() != null) {
+          data = doc.data() as Map<String, dynamic>;
+          title = data['title'];
+          content = data['content'];
+          creator = data['creator'];
+          count = data['count'];
+          initdate = data['initdate'];
+        }
+      });
+    }
     return data;
-  }
-
-  // 게시물 삭제
-  _showDeleteDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('삭제'),
-          content: const Text('정말로 삭제하시겠습니까?'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                deleteBoard();
-                Navigator.of(context).pop();
-                Navigator.pop(context);
-                setState(() {
-                  Get.to(const BoardPage());
-                });
-              },
-              child: const Text(
-                '네',
-              ),
-            ),
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('아니오'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  Future<void> deleteBoard() async {
-    await FirebaseFirestore.instance
-        .collection("carboard")
-        .doc(widget.id)
-        .delete();
   }
 } // End
