@@ -117,19 +117,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return [
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.car),
-        title: ("시세검색"),
+        title: ("Search Car"),
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.groups),
-        title: ("게시판"),
+        title: ("Board"),
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.chat_bubble_2_fill),
-        title: ("대화방"),
+        title: ("Chat"),
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
