@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:html';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cha_sa_jo_flutter/view/list/C.select.dart';

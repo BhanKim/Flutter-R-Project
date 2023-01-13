@@ -22,22 +22,24 @@ class UpdatePage extends StatelessWidget {
       // appBar: AppBar(
       //   title: const Text('수정화면'),
       // ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            'Edit Post',
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          UpdateWidget(
-            id: id,
-            title: title,
-            content: content,
-          )
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Edit Post',
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            UpdateWidget(
+              id: id,
+              title: title,
+              content: content,
+            )
+          ],
+        ),
       ),
     );
   }

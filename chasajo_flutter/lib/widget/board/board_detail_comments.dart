@@ -77,7 +77,7 @@ class _BoardCommentsState extends State<BoardComments> {
                     width: 10,
                   ),
                   const Text(
-                    '댓글',
+                    'Comments',
                   ),
                   const SizedBox(
                     width: 5,

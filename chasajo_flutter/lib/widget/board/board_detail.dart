@@ -50,6 +50,7 @@ class _BoardDetailState extends State<BoardDetail> {
           padding: const EdgeInsets.fromLTRB(14, 8, 0, 0),
           child: Row(
             children: [
+              Text('Writer : '),
               Text(
                 widget.creator,
               ),
@@ -60,7 +61,7 @@ class _BoardDetailState extends State<BoardDetail> {
           padding: const EdgeInsets.fromLTRB(14, 8, 14, 8),
           child: Row(
             children: [
-              Text('조회수: ${widget.count}  '),
+              Text('View: ${widget.count}  '),
               // Text('댓글: ${comments.length}'),
               Spacer(),
               Text(
