@@ -10,6 +10,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 
+import '../../constants/colors.dart';
+
 class LineChartWidget extends StatefulWidget {
   const LineChartWidget({super.key});
 
@@ -21,6 +23,7 @@ class LineChartWidget extends StatefulWidget {
 }
 
 class _chartpageState extends State<StatefulWidget> {
+  late double touchedValue;
   final Color dark = const Color(0xff3b8c75);
   final Color normal = const Color(0xff64caad);
   final Color light = const Color(0xff73e8c9);
@@ -50,7 +53,7 @@ class _chartpageState extends State<StatefulWidget> {
   @override
   void initState() {
     // TODO: implement initState
-    print(smodel);
+    touchedValue = -1;
     setState(() {
       smodel = Chart[0];
       smileage = Chart[1];
@@ -60,7 +63,6 @@ class _chartpageState extends State<StatefulWidget> {
       carimage = Chart[6];
     });
     super.initState();
-    print(smodel);
     dogsizeSelect2();
   }
 
@@ -84,15 +86,45 @@ class _chartpageState extends State<StatefulWidget> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('$sbrand $smodel의 예상 가격 은 '),
-                Text('$min1£'),
+                Text(
+                  '$sbrand $smodel의 예상 가격 ',
+                  style: const TextStyle(
+                    fontSize: 22,
+                  ),
+                ),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('$sbrand $smodel의 예상 가격 은 '),
-                Text('$max1£'),
+                const Text(
+                  '최소  ',
+                  style: TextStyle(
+                    fontSize: 22,
+                  ),
+                ),
+                Text(
+                  '$min1£  ',
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: tPrimaryColor,
+                  ),
+                ),
+                const Text(
+                  '최대  ',
+                  style: TextStyle(
+                    fontSize: 22,
+                  ),
+                ),
+                Text(
+                  '$max1£',
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: tPrimaryColor,
+                  ),
+                ),
               ],
             ),
             Center(
@@ -114,11 +146,13 @@ class _chartpageState extends State<StatefulWidget> {
                               child: LineChart(
                                 LineChartData(
                                   borderData: FlBorderData(
-                                      show: false,
-                                      border: Border.all(
-                                          color: Colors.black,
-                                          width: 1.0,
-                                          style: BorderStyle.solid)),
+                                    show: false,
+                                    border: Border.all(
+                                      color: Colors.black,
+                                      width: 1.0,
+                                      style: BorderStyle.solid,
+                                    ),
+                                  ),
                                   backgroundColor:
                                       const Color.fromARGB(255, 12, 1, 100),
                                   minX: 2009,
@@ -128,15 +162,46 @@ class _chartpageState extends State<StatefulWidget> {
                                   gridData: FlGridData(
                                     show: false,
                                   ),
+                                  titlesData: FlTitlesData(
+                                    bottomTitles: AxisTitles(
+                                      sideTitles: _bottomTitles,
+                                      axisNameWidget: const Text(
+                                        '년도(2000)',
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.bold,
+                                          color: tPrimaryColor,
+                                        ),
+                                      ),
+                                    ),
+                                    leftTitles: AxisTitles(
+                                      sideTitles: _LeftSideTitles,
+                                    ),
+                                    topTitles: AxisTitles(
+                                      axisNameWidget: const Text(
+                                        '년도별 가격 분포도',
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.bold,
+                                          color: tPrimaryColor,
+                                        ),
+                                      ),
+                                      sideTitles: SideTitles(showTitles: false),
+                                    ),
+                                    rightTitles: AxisTitles(
+                                        sideTitles: SideTitles(
+                                      showTitles: false,
+                                    )),
+                                  ),
                                   lineBarsData: [
                                     LineChartBarData(
                                       spots: flList,
                                       isCurved: false,
                                       //myDouble2 < 20000 ||
-                                      color:
-                                          myDouble2 < 20000 && myDouble == 2017
-                                              ? Colors.amber
-                                              : Colors.green,
+                                      color: myDouble2 < 20000 &&
+                                              myDouble == 2017
+                                          ? Colors.amber
+                                          : Color.fromARGB(255, 204, 214, 1),
 
                                       barWidth: 0,
                                       dotData: FlDotData(show: true),
@@ -146,30 +211,6 @@ class _chartpageState extends State<StatefulWidget> {
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 50,
-                          ),
-                          SizedBox(
-                            width: 400,
-                            child: AspectRatio(
-                              aspectRatio: 1,
-                              child: BarChart(
-                                BarChartData(
-                                  borderData: FlBorderData(
-                                      border: const Border(
-                                    top: BorderSide.none,
-                                    right: BorderSide.none,
-                                    left: BorderSide(width: 1),
-                                    bottom: BorderSide(width: 1),
-                                  )),
-                                  groupsSpace: 10,
-                                  backgroundColor:
-                                      Color.fromARGB(255, 255, 255, 255),
-                                  barGroups: barchart,
-                                ),
-                              ),
-                            ),
-                          )
                         ],
                       );
                     }
@@ -183,9 +224,97 @@ class _chartpageState extends State<StatefulWidget> {
     );
   } //
 
+  SideTitles get _LeftSideTitles => SideTitles(
+        showTitles: true,
+        reservedSize: 30,
+        getTitlesWidget: (value, meta) {
+          String text = '';
+          switch (value.toInt()) {
+            case 0:
+              text = '0';
+              break;
+            case 10000:
+              text = '10K';
+              break;
+            case 20000:
+              text = '20K';
+              break;
+            case 30000:
+              text = '30K';
+              break;
+            case 40000:
+              text = '40k';
+              break;
+            case 50000:
+              text = '50K';
+              break;
+          }
+
+          return Text(
+            text,
+            style: const TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.bold,
+              color: tPrimaryColor,
+            ),
+          );
+        },
+      );
+
+  SideTitles get _bottomTitles => SideTitles(
+        showTitles: true,
+        reservedSize: 25,
+        getTitlesWidget: (value, meta) {
+          String text = '';
+          switch (value.toInt()) {
+            case 2010:
+              text = '10';
+              break;
+            case 2011:
+              text = '11';
+              break;
+            case 2012:
+              text = '12';
+              break;
+            case 2013:
+              text = '13';
+              break;
+            case 2014:
+              text = '14';
+              break;
+            case 2015:
+              text = '15';
+              break;
+            case 2016:
+              text = '16';
+              break;
+            case 2017:
+              text = '17';
+              break;
+            case 2018:
+              text = '18';
+              break;
+            case 2019:
+              text = '19';
+              break;
+            case 2020:
+              text = '20';
+              break;
+          }
+
+          return Text(
+            text,
+            style: const TextStyle(
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+              color: tPrimaryColor,
+            ),
+          );
+        },
+      );
+
   Future<List> dogsizeSelect2() async {
-    var url = Uri.parse(
-        'http://localhost:8080/carmodel/list/$smodel?smileage=$smileage');
+    var url = Uri.parse('http://localhost:8080/carmodel/list/$smodel');
     var respnse = await http.get(url);
     // dogchart.clear();
     // Dweight.clear();
@@ -202,22 +331,11 @@ class _chartpageState extends State<StatefulWidget> {
       //print(dogchart);
       for (int i = -1; i < dogchart.length - 1; i++) {
         num1 = (i + 1);
-        // print(dogchart[num1]["years"]);
         myDouble = dogchart[num1]["year"];
         myDouble2 = dogchart[num1]["price"];
-        // print(myDouble);
-        // print(dogchart[num1]["years"]);
         dateList.add(myDouble.toDouble());
         priceList.add(myDouble2.toDouble());
         flList.add(FlSpot(myDouble.toDouble(), myDouble2.toDouble()));
-        barchart
-            .add(BarChartGroupData(x: myDouble - 2000, barsSpace: 2, barRods: [
-          BarChartRodData(
-            toY: myDouble2.toDouble(),
-            // rodStackItems: [BarChartRodStackItem(0, myDouble2.toDouble(), dark)],
-            // borderRadius: BorderRadius.zero,
-          )
-        ]));
       }
     });
     return dateList;

@@ -2,11 +2,18 @@ import 'dart:convert';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cha_sa_jo_flutter/view/list/listinsert.dart';
+
 import 'package:cha_sa_jo_flutter/widget/carlist/todoCol.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
+import 'package:flutter/material.dart';
+
+import '../../view/list/C.select.dart';
 import 'MessageCol.dart';
 import 'list.dart';
 import 'package:http/http.dart' as http;
@@ -19,6 +26,7 @@ class Collection extends StatefulWidget {
 }
 
 class _CollectionState extends State<Collection> {
+  final user = FirebaseAuth.instance.currentUser!.uid;
   late String heroList = '';
   Carimages carimages = Carimages();
   INput input = INput();
@@ -32,6 +40,7 @@ class _CollectionState extends State<Collection> {
   String Topmodel = '';
   int Count = 0;
   List Top3List = [];
+  String username = '';
 
   @override
   void initState() {
@@ -49,6 +58,18 @@ class _CollectionState extends State<Collection> {
     }
   }
 
+  Future<Map<String, dynamic>> _sendMessage() async {
+    final docRef = FirebaseFirestore.instance.collection("user").doc(user);
+    Map<String, dynamic> userData = {};
+    await docRef.get().then(
+      (DocumentSnapshot doc) {
+        userData = doc.data() as Map<String, dynamic>;
+      },
+      onError: (e) => print("Error getting document: $e"),
+    );
+    return userData;
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -61,12 +82,19 @@ class _CollectionState extends State<Collection> {
               body: SingleChildScrollView(
                 child: Column(
                   children: [
-                    //Text( 'Brand : ${Top3List[0]['sbrand']}     '),
-                    // Text( 'Model : ${Top3List[0]['smodel']} '),
-                    // Text('Count : ${Top3List[0]['cnt']}
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return CarselectList();
+                            },
+                          ));
+                          // Get.to(CarselectList());
+                        },
+                        child: const Text('Search List')),
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -118,11 +146,11 @@ class _CollectionState extends State<Collection> {
                           child: Column(
                             children: [
                               const SizedBox(
-                                height: 60,
+                                height: 30,
                               ),
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 173, 32, 33),
                               )
                             ],
                           ),
@@ -131,7 +159,7 @@ class _CollectionState extends State<Collection> {
                           child: Column(
                             children: [
                               const SizedBox(
-                                height: 60,
+                                height: 30,
                               ),
                               Container(
                                 height: 50,
@@ -153,11 +181,11 @@ class _CollectionState extends State<Collection> {
                           child: Column(
                             children: [
                               const SizedBox(
-                                height: 60,
+                                height: 30,
                               ),
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 173, 32, 33),
                               )
                             ],
                           ),
@@ -298,7 +326,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 38, 87, 242),
                               )
                             ],
                           ),
@@ -327,7 +355,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 38, 87, 242),
                               )
                             ],
                           ),
@@ -468,7 +496,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 127, 127, 127),
                               )
                             ],
                           ),
@@ -497,7 +525,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 127, 127, 127),
                               )
                             ],
                           ),
@@ -638,7 +666,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 0, 169, 132),
                               )
                             ],
                           ),
@@ -667,7 +695,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 0, 169, 132),
                               )
                             ],
                           ),
@@ -811,7 +839,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 16, 42, 77),
                               )
                             ],
                           ),
@@ -840,7 +868,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 16, 42, 77),
                               )
                             ],
                           ),
@@ -1001,7 +1029,7 @@ class _CollectionState extends State<Collection> {
       utf8.decode(response.bodyBytes),
     );
     Top3List = dataConvertedJson;
-    print(Top3List);
+    // print(Top3List);
 
     return Top3List;
   }
