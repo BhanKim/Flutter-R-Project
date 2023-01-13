@@ -17,96 +17,98 @@ class LoginForm extends StatelessWidget {
     String loginEmail = "";
     String loginPassword = "";
     return Form(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: tFormHeight - 10),
-        child: Column(
-          children: [
-            TextFormField(
-              onChanged: (value) {
-                loginEmail = value;
-              },
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.person_outline_outlined),
-                labelText: tEmail,
-                hintText: tEmail,
-                border: OutlineInputBorder(),
+      child: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: tFormHeight - 10),
+          child: Column(
+            children: [
+              TextFormField(
+                onChanged: (value) {
+                  loginEmail = value;
+                },
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.person_outline_outlined),
+                  labelText: tEmail,
+                  hintText: tEmail,
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-            const SizedBox(height: tFormHeight - 20),
-            TextFormField(
-              onChanged: (value) {
-                loginPassword = value;
-              },
-              obscureText: true,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.fingerprint),
-                labelText: tPassword,
-                hintText: tPassword,
-                border: OutlineInputBorder(),
+              const SizedBox(height: tFormHeight - 20),
+              TextFormField(
+                onChanged: (value) {
+                  loginPassword = value;
+                },
+                obscureText: true,
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.fingerprint),
+                  labelText: tPassword,
+                  hintText: tPassword,
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-            const SizedBox(height: tFormHeight - 20),
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                  // forget password
-                  onPressed: () {
-                    //비밀번호찾기 화면 추가
-                    Get.to(loginForget());
-                  },
-                  child: const Text(tForgetPassword)),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                // login 실행
-                onPressed: () async {
-                  try {
-                    final newUser =
-                        await FirebaseAuth.instance.signInWithEmailAndPassword(
-                      email: loginEmail,
-                      password: loginPassword,
-                    );
-                    if (newUser.user != null) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return Home(
-                              tabIndex: 0,
-                            );
-                          },
+              const SizedBox(height: tFormHeight - 20),
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                    // forget password
+                    onPressed: () {
+                      //비밀번호찾기 화면 추가
+                      Get.to(loginForget());
+                    },
+                    child: const Text(tForgetPassword)),
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  // login 실행
+                  onPressed: () async {
+                    try {
+                      final newUser = await FirebaseAuth.instance
+                          .signInWithEmailAndPassword(
+                        email: loginEmail,
+                        password: loginPassword,
+                      );
+                      if (newUser.user != null) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return Home(
+                                tabIndex: 0,
+                              );
+                            },
+                          ),
+                        );
+                      }
+                    } catch (e) {
+                      print(e);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Please check your ID password."),
                         ),
                       );
                     }
-                  } catch (e) {
-                    print(e);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text("아이디 비밀번호를 확인해 주세요"),
-                      ),
-                    );
-                  }
-                },
-                child: Text(tLogin.toUpperCase()),
-              ),
-            ),
-            const Text("OR"),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                  onPressed: () {
-                    // Navigator.push(context, MaterialPageRoute(
-                    //   builder: (context) {
-                    //     return SignupScreen();
-                    //   },
-                    // ));
-                    Get.to(SignupScreen());
                   },
-                  child: Text('SING UP')),
-            )
-          ],
+                  child: Text(tLogin.toUpperCase()),
+                ),
+              ),
+              const Text("OR"),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                    onPressed: () {
+                      // Navigator.push(context, MaterialPageRoute(
+                      //   builder: (context) {
+                      //     return SignupScreen();
+                      //   },
+                      // ));
+                      Get.to(SignupScreen());
+                    },
+                    child: Text('SING UP')),
+              )
+            ],
+          ),
         ),
       ),
     );
