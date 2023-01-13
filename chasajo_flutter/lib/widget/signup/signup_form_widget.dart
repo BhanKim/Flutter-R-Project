@@ -110,7 +110,7 @@ class SignUpFormWidget extends StatelessWidget {
       print(e);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Please check your email and password."),
+          content: Text("이메일 및 비밀번호 확인하세요."),
         ),
       );
     }
@@ -121,37 +121,37 @@ class SignUpFormWidget extends StatelessWidget {
     if (Nickname == '') {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Please enter a nickname."),
+          content: Text("닉네임을 입력해주세요."),
         ),
       );
     } else if (Email == '') {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Please enter your email."),
+          content: Text("이메일을 입력해주세요."),
         ),
       );
     } else if (password1 == '') {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Please enter your password."),
+          content: Text("비밀번호를 입력해주세요."),
         ),
       );
     } else if (password1.length < 6) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Please enter the password in at least 6 characters."),
+          content: Text("비밀번호는 6글자 이상 입력해주세요"),
         ),
       );
     } else if (password2 == '') {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Please enter password verification."),
+          content: Text("비밀번호확인를 입력해주세요."),
         ),
       );
     } else if (password1 != password2) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("The password doesn't match."),
+          content: Text("비밀번호가 맞지 않습니다"),
         ),
       );
     } else {
@@ -165,8 +165,8 @@ class SignUpFormWidget extends StatelessWidget {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('SingUp'),
-          content: const Text('Welcome.\nSingUp completed.'),
+          title: const Text('회원가입'),
+          content: const Text('환영합니다.\n회원가입이 완료되었습니다.'),
           actions: [
             TextButton(
               onPressed: () {

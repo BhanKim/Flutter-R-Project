@@ -189,7 +189,7 @@ class _BoardCommentsState extends State<BoardComments> {
                       TextFormField(
                         controller: commentController,
                         decoration: const InputDecoration(
-                          hintText: 'Please enter the Comments',
+                          hintText: '댓글을 입력해주세요',
                           border: OutlineInputBorder(),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.blue),
@@ -199,7 +199,7 @@ class _BoardCommentsState extends State<BoardComments> {
                         textInputAction: TextInputAction.newline,
                         validator: (value) {
                           if (value!.isEmpty) {
-                            return 'Please enter the Content';
+                            return '내용을 입력해주세요.';
                           }
                           return null;
                         },
@@ -288,8 +288,8 @@ class _BoardCommentsState extends State<BoardComments> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Result'),
-          content: const Text('Completed'),
+          title: const Text('입력 결과'),
+          content: const Text('작성되었습니다.'),
           actions: [
             TextButton(
               onPressed: () {
@@ -313,8 +313,8 @@ class _BoardCommentsState extends State<BoardComments> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Delete'),
-          content: const Text('Are you sure you want to delete?'),
+          title: const Text('삭제'),
+          content: const Text('정말로 삭제하시겠습니까?'),
           actions: [
             TextButton(
               onPressed: () {
@@ -327,12 +327,12 @@ class _BoardCommentsState extends State<BoardComments> {
                 Navigator.pop(context);
               },
               child: const Text(
-                'Yes',
+                '네',
               ),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text('No'),
+              child: const Text('아니오'),
             ),
           ],
         );

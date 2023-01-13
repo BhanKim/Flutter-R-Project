@@ -53,7 +53,7 @@ class _NewMessageState extends State<NewMessage> {
                   controller: _controller,
                   maxLines: null,
                   decoration: const InputDecoration(
-                    labelText: 'Insert Message Please.',
+                    labelText: '메세지를 입력해주세요.',
                   ),
                 ),
               ),

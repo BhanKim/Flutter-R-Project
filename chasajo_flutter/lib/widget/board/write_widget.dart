@@ -46,7 +46,7 @@ class _WriteWidgetState extends State<WriteWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  'Title : ',
+                  '제목 : ',
                 ),
                 const SizedBox(
                   width: 10,
@@ -56,7 +56,7 @@ class _WriteWidgetState extends State<WriteWidget> {
                   child: TextField(
                     controller: titleController,
                     decoration: const InputDecoration(
-                      hintText: 'Please enter the Title',
+                      hintText: '제목을 입력해주세요',
                     ),
                   ),
                 ),
@@ -67,7 +67,7 @@ class _WriteWidgetState extends State<WriteWidget> {
               child: TextFormField(
                 controller: contentController,
                 decoration: const InputDecoration(
-                  hintText: 'Please enter the Content',
+                  hintText: '내용을 입력해주세요',
                   border: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue),
@@ -77,7 +77,7 @@ class _WriteWidgetState extends State<WriteWidget> {
                 textInputAction: TextInputAction.newline,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Please enter the Content';
+                    return '내용을 입력해주세요.';
                   }
                   return null;
                 },
@@ -90,7 +90,7 @@ class _WriteWidgetState extends State<WriteWidget> {
 
                 _addAction(title, content, widget.username);
               },
-              child: const Text("Post"),
+              child: const Text("작성하기"),
             ),
           ],
         ),
@@ -119,8 +119,8 @@ class _WriteWidgetState extends State<WriteWidget> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Result'),
-          content: const Text('Completed'),
+          title: const Text('입력 결과'),
+          content: const Text('작성되었습니다.'),
           actions: [
             TextButton(
               onPressed: () {

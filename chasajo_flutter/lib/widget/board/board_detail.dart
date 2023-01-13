@@ -129,8 +129,8 @@ class _BoardDetailState extends State<BoardDetail> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Delete'),
-          content: const Text('Are you sure you want to delete?'),
+          title: const Text('삭제'),
+          content: const Text('정말로 삭제하시겠습니까?'),
           actions: [
             TextButton(
               onPressed: () {
@@ -142,12 +142,12 @@ class _BoardDetailState extends State<BoardDetail> {
                 });
               },
               child: const Text(
-                'Yes',
+                '네',
               ),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text('No'),
+              child: const Text('아니오'),
             ),
           ],
         );
