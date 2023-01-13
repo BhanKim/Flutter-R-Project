@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.javalec.base.mapper.modelMapper;
 import com.javalec.base.model.carModel;
+import com.javalec.base.model.carModel2;
 import com.javalec.base.model.carcnt;
 import com.javalec.base.model.carsearchlist;
 
@@ -27,8 +28,14 @@ public class carController {
 	}
 	// FOR CHART LIST USE THIS
 	@GetMapping("/carmodel/list/{model}")
-	public List<carModel> getCarModelList(@PathVariable("model")String model){
-		return mapper.getCarModelList(model);
+	public List<carModel> getCarAudiModelList(@PathVariable("model")String model){
+		return mapper.getCarAudiModelList(model);
+	}
+	
+	// FOR CHART LIST USE THIS
+	@GetMapping("/carmodel/VWlist/{model}")
+	public List<carModel2> getCarVWModelList(@PathVariable("model")String model){
+		return mapper.getCarVWModelList(model);
 	}
 	
 	

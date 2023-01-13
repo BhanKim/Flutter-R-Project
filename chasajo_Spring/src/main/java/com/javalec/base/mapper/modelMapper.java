@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.javalec.base.model.carModel;
+import com.javalec.base.model.carModel2;
 import com.javalec.base.model.carcnt;
 import com.javalec.base.model.carsearchlist;
 
@@ -19,7 +20,10 @@ public interface modelMapper {
 	carModel getCarModelInformation(@Param("cseq")String id);
 	
 	@Select("SELECT * FROM audi WHERE model=#{model}")
-	List<carModel> getCarModelList(@Param("model")String model);
+	List<carModel> getCarAudiModelList(@Param("model")String model);
+	
+	@Select("SELECT * FROM vw_tiguan WHERE model=#{model}")
+	List<carModel2> getCarVWModelList(@Param("model")String model);
 
 	// SEARCH LIST 
 	@Select("SELECT * FROM carsearchlist WHERE sid = #{sid} ")

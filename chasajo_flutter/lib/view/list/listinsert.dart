@@ -91,6 +91,10 @@ class _InsertCarState extends State<InsertCar> {
     smodel = '${widget.model}';
     carimage = '${widget.carimage}';
     fileName = '${sbrand}_${smodel}.rds';
+    print(smodel);
+    print(sbrand);
+    print(fileName);
+
     // Mile values for
     for (int i = 1; i < 21; i++) {
       num1 = (i * 0.5);
@@ -390,14 +394,6 @@ class _InsertCarState extends State<InsertCar> {
   // date 2023.01.09
   Future<int> Getjasondata() async {
     var enginSizeCC = engineSize + 1;
-    print(year);
-    print(mileage);
-    print(enginSizeCC);
-    print(mpg);
-    print(Manual);
-    print(fuelType_D);
-    print(fuelType_p);
-    print(fileName);
     var url = Uri.parse(
         "http://localhost:8080/urlcar?year=$year&mileage=$mileage&engineSize=$enginSizeCC"
         "&mpg=$mpg&Manual=$Manual&fuelType_D=$fuelType_D&fuelType_p=$fuelType_p&fileName=$fileName");
@@ -421,17 +417,48 @@ class _InsertCarState extends State<InsertCar> {
               minresult = [14650, 7490, 15470, 8490, 4290, 9690];
               maxresult = [29490, 20450, 36990, 29991, 16950, 22995];
             }
-            if (fileName == "Audi_A4.rds") {
-              minresult = [10990, 13495, 9000, 17998, 12300, 11490, 8999, 5995];
+            if (fileName == "VW_Tiguan.rds") {
+              minresult = [
+                20950,
+                11990,
+                18599,
+                8498,
+                11990,
+                18507,
+                12850,
+                10990
+              ];
               maxresult = [
+                39999,
+                24995,
+                35490,
+                16291,
+                28990,
+                30000,
+                25741,
+                22990
+              ];
+            }
+            if (fileName == "Audi_A4.rds") {
+              minresult = [
+                11500,
+                10990,
+                8795,
+                5995,
+                14400,
+                11559,
+                10000,
+                18698
+              ];
+              maxresult = [
+                24495,
                 27600,
-                28995,
-                16950,
-                47990,
+                15940,
+                14998,
                 26495,
+                19995,
                 18990,
-                18990,
-                12995
+                47990
               ];
             }
             //6
@@ -462,7 +489,7 @@ class _InsertCarState extends State<InsertCar> {
               minresult = [7490, 8290, 11995, 12491, 7500, 13750, 3350];
               maxresult = [19490, 23450, 38555, 31723, 20990, 28875, 14490];
             }
-            for (int i = -1; i < 6; i++) {
+            for (int i = -1; i < result2; i++) {
               moo = i + 1;
               if (result2 == moo) {
                 moo = moo - 1;
@@ -470,8 +497,7 @@ class _InsertCarState extends State<InsertCar> {
                 max = maxresult[moo];
               }
             }
-            priceResult.add(min);
-            priceResult.add(max);
+            print("==========================$result2================");
             Get.to(
               const LineChartWidget(),
               arguments: [smodel, mileage, min, max, year, sbrand, carimage],

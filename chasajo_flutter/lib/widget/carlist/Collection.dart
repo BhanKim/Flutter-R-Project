@@ -41,12 +41,13 @@ class _CollectionState extends State<Collection> {
   int Count = 0;
   List Top3List = [];
   String username = '';
+  String VW = "images/VW.png";
+  bool darkMode = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // Getjasondata();
     brand = '';
     model = '';
     carimage = '';
@@ -55,6 +56,11 @@ class _CollectionState extends State<Collection> {
     if (Message.action == false) {
       carimages.Listset();
       // input.Output();
+    }
+    if (darkMode = false) {
+      VW = "images/VW.png";
+    } else if (darkMode = true) {
+      VW = "images/WVW.png";
     }
   }
 
@@ -682,7 +688,7 @@ class _CollectionState extends State<Collection> {
                                   children: [
                                     GestureDetector(
                                       onTap: () {},
-                                      child: Image.asset('images/VW.png'),
+                                      child: Image.asset(VW),
                                     ),
                                   ],
                                 ),

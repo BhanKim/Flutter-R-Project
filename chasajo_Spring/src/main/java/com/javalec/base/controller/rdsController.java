@@ -27,8 +27,9 @@ public class rdsController {
 		String fuelType_D = request.getParameter("fuelType_D");
 		String fuelType_p = request.getParameter("fuelType_p");
 		String fileName = request.getParameter("fileName");
-		
 		RConnection conn1 = new RConnection();
+
+		
 
 		conn1.voidEval("library(randomForest)");
 		conn1.voidEval("library(e1071)");

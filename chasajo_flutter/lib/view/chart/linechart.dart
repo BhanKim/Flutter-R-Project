@@ -63,7 +63,8 @@ class _chartpageState extends State<StatefulWidget> {
       carimage = Chart[6];
     });
     super.initState();
-    dogsizeSelect2();
+    // carchartaudi();
+    // carchartaudi();
   }
 
   @override
@@ -313,7 +314,7 @@ class _chartpageState extends State<StatefulWidget> {
         },
       );
 
-  Future<List> dogsizeSelect2() async {
+  Future<List> carchartaudi() async {
     var url = Uri.parse('http://localhost:8080/carmodel/list/$smodel');
     var respnse = await http.get(url);
     // dogchart.clear();
@@ -325,8 +326,32 @@ class _chartpageState extends State<StatefulWidget> {
     return dataConvertedJson2;
   }
 
+  Future<List> carchartaudi2() async {
+    var url = Uri.parse('http://localhost:8080/carmodel/VWlist/$smodel');
+    var respnse = await http.get(url);
+    // dogchart.clear();
+    // Dweight.clear();
+    // Ddate.clear();
+    var dataConvertedJson2 = json.decode(utf8.decode(respnse.bodyBytes));
+    dataConvertedJson2;
+
+    return dataConvertedJson2;
+  }
+
   Future<List> _asd() async {
-    await dogsizeSelect2().then((value) {
+    await carchartaudi().then((value) {
+      dogchart.addAll(value);
+      //print(dogchart);
+      for (int i = -1; i < dogchart.length - 1; i++) {
+        num1 = (i + 1);
+        myDouble = dogchart[num1]["year"];
+        myDouble2 = dogchart[num1]["price"];
+        dateList.add(myDouble.toDouble());
+        priceList.add(myDouble2.toDouble());
+        flList.add(FlSpot(myDouble.toDouble(), myDouble2.toDouble()));
+      }
+    });
+    await carchartaudi2().then((value) {
       dogchart.addAll(value);
       //print(dogchart);
       for (int i = -1; i < dogchart.length - 1; i++) {
@@ -340,4 +365,4 @@ class _chartpageState extends State<StatefulWidget> {
     });
     return dateList;
   }
-} // end
+} // end  http://localhost:8080/carmodel/VWlist/Tiguan
