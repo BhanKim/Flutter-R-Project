@@ -19,42 +19,44 @@ class _LoginForgetWidgetState extends State<LoginForgetWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-      padding: const EdgeInsets.all(tDefaultSize),
-      child: Center(
-        child: Column(
-          children: [
-            const FormHeaderWidget(
-                image: tSplashImage,
-                title: 'Reset Password',
-                subTitle: 'Check your Email and reset your password.'),
-            const SizedBox(
-              height: 20,
-            ),
-            TextFormField(
-              onChanged: (value) {
-                Email = value;
-              },
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Icons.person_outline_outlined),
-                labelText: tEmail,
-                hintText: tEmail,
-                border: OutlineInputBorder(),
+        body: SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(tDefaultSize),
+        child: Center(
+          child: Column(
+            children: [
+              const FormHeaderWidget(
+                  image: tSplashImage,
+                  title: 'Reset Password',
+                  subTitle: 'Check your Email and reset your password.'),
+              const SizedBox(
+                height: 20,
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                  onPressed: () {
-                    resetPassword(Email, context);
-                  },
-                  child: const Text('Send Email')),
-            ),
-          ],
+              TextFormField(
+                onChanged: (value) {
+                  Email = value;
+                },
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(
+                  prefixIcon: Icon(Icons.person_outline_outlined),
+                  labelText: tEmail,
+                  hintText: tEmail,
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                    onPressed: () {
+                      resetPassword(Email, context);
+                    },
+                    child: const Text('Send Email')),
+              ),
+            ],
+          ),
         ),
       ),
     ));
@@ -67,7 +69,7 @@ class _LoginForgetWidgetState extends State<LoginForgetWidget> {
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("등록되지않은 이메일 입니다."),
+          content: Text("This email is not registered."),
         ),
       );
     }
@@ -79,8 +81,8 @@ class _LoginForgetWidgetState extends State<LoginForgetWidget> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('전송 결과'),
-          content: const Text('메일을 전송하였습니다.'),
+          title: const Text('Transmission Results'),
+          content: const Text('I sent you an email.'),
           actions: [
             TextButton(
               onPressed: () {

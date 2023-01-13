@@ -41,7 +41,7 @@ class ChatBubble extends StatelessWidget {
               Flexible(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: userName == '관리자'
+                    color: userName == 'Admin'
                         ? Colors.red
                         : isMe
                             ? Colors.blue[200]
