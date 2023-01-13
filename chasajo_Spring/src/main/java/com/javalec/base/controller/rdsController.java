@@ -1,23 +1,14 @@
 package com.javalec.base.controller;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
+import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.json.simple.JSONObject;
 import org.rosuda.REngine.Rserve.RConnection;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.ContentDisposition;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -40,10 +31,8 @@ public class rdsController {
 		RConnection conn1 = new RConnection();
 
 		conn1.voidEval("library(randomForest)");
-        //get real path rfs <- readRDS("http://localhost:8080/show_rds?name=Audi_A3.rds",'rb')
-//		conn1.voidEval("rfs <- readRDS(\"http://localhost:8080/show_rds?name="+ fileName + "\",'rb')");
+		conn1.voidEval("library(e1071)");
 		 String rdsRoot = System.getProperty("user.dir", "UTF-8") + "/src/main/resources/webapp/rds/";
-		 System.out.println(rdsRoot);
 		
 		conn1.voidEval("rfs <- readRDS(\"" +rdsRoot+ fileName + "\",'rb')");
 		conn1.voidEval("result <- as.character(predict(rfs, (list(year=" + year + ", mileage=" + mileage + ","
@@ -53,15 +42,17 @@ public class rdsController {
 
 	
 		String result2 = conn1.eval("result").asString();
-		System.out.println(result2);
+		
+
 		
 		
 		 Map<String, Object> map = new HashMap<>();
 		 map.put("result", result2);
 		 
 		 JSONObject jsonObject2 = new JSONObject(map);
-
+		 conn1.close();
 		return jsonObject2;
+		
 		
 		
 	}

@@ -27,8 +27,8 @@ public class carController {
 	}
 	// FOR CHART LIST USE THIS
 	@GetMapping("/carmodel/list/{model}")
-	public List<carModel> getCarModelList(@PathVariable("model")String model,@RequestParam("smileage")String smileage){
-		return mapper.getCarModelList(model, smileage);
+	public List<carModel> getCarModelList(@PathVariable("model")String model){
+		return mapper.getCarModelList(model);
 	}
 	
 	
