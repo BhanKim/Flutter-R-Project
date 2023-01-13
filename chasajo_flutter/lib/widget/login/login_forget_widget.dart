@@ -79,8 +79,8 @@ class _LoginForgetWidgetState extends State<LoginForgetWidget> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('입력 결과'),
-          content: const Text('작성되었습니다.'),
+          title: const Text('전송 결과'),
+          content: const Text('메일을 전송하였습니다.'),
           actions: [
             TextButton(
               onPressed: () {

@@ -335,47 +335,44 @@ class _InsertCarState extends State<InsertCar> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    width: 85,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          // sbrand = '${widget.brand}';
-                          // smodel = '${widget.model}';
-                          if (fuelType_D == "TRUE") {
-                            stransmission = "Diesel";
-                          } else if (fuelType_D == "FALSE") {
-                            stransmission = "Petrol";
-                          }
-                          if (Manual == "TRUE") {
-                            sfueltype = "Menual";
-                          } else if (Manual == "FALSE") {
-                            sfueltype = "Autometic";
-                          }
-                          carinsert(userData['email']);
-                          minMax();
-                          // if (actionSiwtchP == false) {
-                          //   // GetRds();
-                          //   carinsert(userData['email']);
-
-                          //   minMax();
-                          // } else {
-                          //   _inputcheck(context);
-                          // }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: tPrimaryColor,
-                        ),
-                        child: const Text('예측!')),
-                  ),
                   ElevatedButton(
                       onPressed: () {
-                        Navigator.pop(context, MaterialPageRoute(
-                          builder: (context) {
-                            return Collection();
-                          },
-                        ));
+                        // sbrand = '${widget.brand}';
+                        // smodel = '${widget.model}';
+                        if (fuelType_D == "TRUE") {
+                          stransmission = "Diesel";
+                        } else if (fuelType_D == "FALSE") {
+                          stransmission = "Petrol";
+                        }
+                        if (Manual == "TRUE") {
+                          sfueltype = "Menual";
+                        } else if (Manual == "FALSE") {
+                          sfueltype = "Autometic";
+                        }
+                        carinsert(userData['email']);
+                        minMax();
+                        // if (actionSiwtchP == false) {
+                        //   // GetRds();
+                        //   carinsert(userData['email']);
+
+                        //   minMax();
+                        // } else {
+                        //   _inputcheck(context);
+                        // }
                       },
-                      child: const Text('돌아가기'))
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: tPrimaryColor,
+                      ),
+                      child: const Text('Prediction')),
+                  // ElevatedButton(
+                  //     onPressed: () {
+                  //       Navigator.pop(context, MaterialPageRoute(
+                  //         builder: (context) {
+                  //           return Collection();
+                  //         },
+                  //       ));
+                  //     },
+                  //     child: const Text('돌아가기'))
                 ],
               ),
             ],

@@ -1,3 +1,4 @@
+import 'package:cha_sa_jo_flutter/constants/colors.dart';
 import 'package:cha_sa_jo_flutter/view/board/writepage.dart';
 import 'package:cha_sa_jo_flutter/widget/board/board_stream.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -42,7 +43,7 @@ class _BoardPageState extends State<BoardPage> {
             ),
           );
         },
-        backgroundColor: Colors.red,
+        backgroundColor: tPrimaryColor,
         child: const Icon(
           Icons.add,
         ),

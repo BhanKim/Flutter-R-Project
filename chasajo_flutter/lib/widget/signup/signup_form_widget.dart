@@ -165,8 +165,8 @@ class SignUpFormWidget extends StatelessWidget {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('입력 결과'),
-          content: const Text('작성되었습니다.'),
+          title: const Text('회원가입'),
+          content: const Text('환영합니다.\n회원가입이 완료되었습니다.'),
           actions: [
             TextButton(
               onPressed: () {

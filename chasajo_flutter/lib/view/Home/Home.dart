@@ -92,7 +92,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               },
               icon: Icon(
                 Icons.logout,
-                color: Colors.black,
+                color: Colors.white,
               ))
         ],
         elevation: 0,
