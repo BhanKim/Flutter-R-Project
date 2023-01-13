@@ -88,8 +88,16 @@ class _chartpageState extends State<StatefulWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '$sbrand $smodel의 예상 가격 ',
+                  '$sbrand $smodel ',
                   style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: tPrimaryColor,
+                  ),
+                ),
+                const Text(
+                  'estimated price',
+                  style: TextStyle(
                     fontSize: 22,
                   ),
                 ),
@@ -99,7 +107,7 @@ class _chartpageState extends State<StatefulWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  '최소  ',
+                  'Min ',
                   style: TextStyle(
                     fontSize: 22,
                   ),
@@ -113,7 +121,7 @@ class _chartpageState extends State<StatefulWidget> {
                   ),
                 ),
                 const Text(
-                  '최대  ',
+                  'Max  ',
                   style: TextStyle(
                     fontSize: 22,
                   ),
@@ -167,7 +175,7 @@ class _chartpageState extends State<StatefulWidget> {
                                     bottomTitles: AxisTitles(
                                       sideTitles: _bottomTitles,
                                       axisNameWidget: const Text(
-                                        '년도(2000)',
+                                        'year(2000)',
                                         style: TextStyle(
                                           fontSize: 13,
                                           fontWeight: FontWeight.bold,
@@ -180,7 +188,7 @@ class _chartpageState extends State<StatefulWidget> {
                                     ),
                                     topTitles: AxisTitles(
                                       axisNameWidget: const Text(
-                                        '년도별 가격 분포도',
+                                        'Price Distribution by Year',
                                         style: TextStyle(
                                           fontSize: 13,
                                           fontWeight: FontWeight.bold,
