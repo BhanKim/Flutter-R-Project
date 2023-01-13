@@ -48,7 +48,7 @@ class _UpdateWidgetState extends State<UpdateWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  '제목 : ',
+                  'Title : ',
                   style: TextStyle(fontSize: 19),
                 ),
                 const SizedBox(
@@ -76,7 +76,7 @@ class _UpdateWidgetState extends State<UpdateWidget> {
                 textInputAction: TextInputAction.newline,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return '내용을 입력해주세요.';
+                    return 'Please enter the Content';
                   }
                   return null;
                 },
@@ -89,7 +89,7 @@ class _UpdateWidgetState extends State<UpdateWidget> {
 
                 _updateAction(title, content);
               },
-              child: const Text("작성하기"),
+              child: const Text("Edit"),
             ),
           ],
         ),
@@ -111,8 +111,8 @@ class _UpdateWidgetState extends State<UpdateWidget> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('입력 결과'),
-          content: const Text('수정되었습니다.'),
+          title: const Text('Result'),
+          content: const Text('Completed'),
           actions: [
             TextButton(
               onPressed: () {

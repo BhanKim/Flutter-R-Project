@@ -22,7 +22,7 @@ class _WritePageState extends State<WritePage> {
         // ),
         body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           const Text(
-            '게시물 작성',
+            'Writing a Post',
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
           const SizedBox(
