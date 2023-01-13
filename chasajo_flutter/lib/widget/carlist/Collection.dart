@@ -79,30 +79,30 @@ class _CollectionState extends State<Collection> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            TypewriterAnimatedText(
-                              '1st : ${Top3List[0]['sbrand']} '
-                              '${Top3List[0]['smodel']}  ',
-                              textStyle: const TextStyle(
-                                  fontSize: 28.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.amber),
-                            ),
-                            TypewriterAnimatedText(
-                              '2nd : ${Top3List[1]['sbrand']} '
-                              '${Top3List[1]['smodel']}  ',
-                              textStyle: const TextStyle(
-                                  fontSize: 28.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey),
-                            ),
-                            TypewriterAnimatedText(
-                              '3rd : ${Top3List[2]['sbrand']}  '
-                              '${Top3List[2]['smodel']}  ',
-                              textStyle: const TextStyle(
-                                  fontSize: 28.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.brown),
-                            ),
+                            // TypewriterAnimatedText(
+                            //   '1st : ${Top3List[0]['sbrand']} '
+                            //   '${Top3List[0]['smodel']}  ',
+                            //   textStyle: const TextStyle(
+                            //       fontSize: 28.0,
+                            //       fontWeight: FontWeight.bold,
+                            //       color: Colors.amber),
+                            // ),
+                            // TypewriterAnimatedText(
+                            //   '2nd : ${Top3List[1]['sbrand']} '
+                            //   '${Top3List[1]['smodel']}  ',
+                            //   textStyle: const TextStyle(
+                            //       fontSize: 28.0,
+                            //       fontWeight: FontWeight.bold,
+                            //       color: Colors.grey),
+                            // ),
+                            // TypewriterAnimatedText(
+                            //   '3rd : ${Top3List[2]['sbrand']}  '
+                            //   '${Top3List[2]['smodel']}  ',
+                            //   textStyle: const TextStyle(
+                            //       fontSize: 28.0,
+                            //       fontWeight: FontWeight.bold,
+                            //       color: Colors.brown),
+                            // ),
                           ],
                           totalRepeatCount: 100,
                           pause: const Duration(milliseconds: 1000),
@@ -122,7 +122,7 @@ class _CollectionState extends State<Collection> {
                               ),
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 173, 32, 33),
                               )
                             ],
                           ),
@@ -157,7 +157,7 @@ class _CollectionState extends State<Collection> {
                               ),
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 173, 32, 33),
                               )
                             ],
                           ),
@@ -298,7 +298,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 38, 82, 242),
                               )
                             ],
                           ),
@@ -327,7 +327,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 38, 82, 242),
                               )
                             ],
                           ),
@@ -468,7 +468,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 127, 127, 127),
                               )
                             ],
                           ),
@@ -497,7 +497,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 127, 127, 127),
                               )
                             ],
                           ),
@@ -638,7 +638,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 0, 169, 132),
                               )
                             ],
                           ),
@@ -667,7 +667,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 0, 169, 132),
                               )
                             ],
                           ),
@@ -811,7 +811,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 16, 42, 77),
                               )
                             ],
                           ),
@@ -840,7 +840,7 @@ class _CollectionState extends State<Collection> {
                             children: [
                               Container(
                                 height: 5,
-                                color: Colors.lightGreen,
+                                color: Color.fromARGB(255, 16, 42, 77),
                               )
                             ],
                           ),
@@ -995,13 +995,13 @@ class _CollectionState extends State<Collection> {
   }
 
   Future<List> Getjasondata() async {
-    var url = Uri.parse("http://localhost:8080/search/list/top/all");
-    var response = await http.get(url);
-    var dataConvertedJson = json.decode(
-      utf8.decode(response.bodyBytes),
-    );
-    Top3List = dataConvertedJson;
-    print(Top3List);
+    // var url = Uri.parse("http://localhost:8080/search/list/top/all");
+    // var response = await http.get(url);
+    // var dataConvertedJson = json.decode(
+    //   utf8.decode(response.bodyBytes),
+    // );
+    // Top3List = dataConvertedJson;
+    // print(Top3List);
 
     return Top3List;
   }
