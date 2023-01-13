@@ -34,24 +34,12 @@ class _CarselectListState extends State<CarselectList> {
   final user = FirebaseAuth.instance.currentUser;
   Map<String, dynamic> userData = {};
 
-  Future<void> _sendMessage() async {
-    FocusScope.of(context).unfocus();
-    final docRef = FirebaseFirestore.instance.collection("user").doc(user!.uid);
-    await docRef.get().then(
-      (DocumentSnapshot doc) {
-        userData = doc.data() as Map<String, dynamic>;
-      },
-      onError: (e) => print("Error getting document: $e"),
-    );
-  }
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     data.clear();
     // getJsonData();
-    print(userid);
   }
 
   //sseq sbrand smodel stransmission sfueltype smileage smpg syear senginesize
@@ -285,7 +273,12 @@ class _CarselectListState extends State<CarselectList> {
 
 // funtion
   Future<List> getJsonData() async {
-    var url = Uri.parse('http://localhost:8080/search/list/$userid');
+    String userName = '';
+    await _sendMessage().then((value) {
+      userName = value;
+    });
+
+    var url = await Uri.parse('http://localhost:8080/search/list/${userName}');
     var respnse = await http.get(url);
     var dataConvertedJson = json.decode(utf8.decode(respnse.bodyBytes));
     data.addAll(dataConvertedJson);
@@ -311,4 +304,19 @@ class _CarselectListState extends State<CarselectList> {
   //   return data;
 
   // }
+
+  Future<String> _sendMessage() async {
+    String userName = '';
+    FocusScope.of(context).unfocus();
+    final docRef = FirebaseFirestore.instance.collection("user").doc(user!.uid);
+    await docRef.get().then(
+      (DocumentSnapshot doc) {
+        userData = doc.data() as Map<String, dynamic>;
+        userName = userData['userName'];
+      },
+      onError: (e) => print("Error getting document: $e"),
+    );
+
+    return userName;
+  }
 }//end
