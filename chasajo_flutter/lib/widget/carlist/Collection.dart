@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cha_sa_jo_flutter/view/list/listinsert.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
+import '../../view/list/C.select.dart';
 import 'MessageCol.dart';
 import 'list.dart';
 import 'package:http/http.dart' as http;
@@ -38,6 +40,7 @@ class _CollectionState extends State<Collection> {
     // TODO: implement initState
     super.initState();
     // Getjasondata();
+    // Getjasondata();
     brand = '';
     model = '';
     carimage = '';
@@ -67,42 +70,53 @@ class _CollectionState extends State<Collection> {
                     const SizedBox(
                       height: 20,
                     ),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CarselectList(),
+                            ),
+                          );
+                        },
+                        child: const Text('Select List')),
+
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         AnimatedTextKit(
                           animatedTexts: [
                             TypewriterAnimatedText(
-                              '실시간 차량 가격조회 순위',
+                              'price check ranking',
                               textStyle: const TextStyle(
                                 fontSize: 28.0,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            // TypewriterAnimatedText(
-                            //   '1st : ${Top3List[0]['sbrand']} '
-                            //   '${Top3List[0]['smodel']}  ',
-                            //   textStyle: const TextStyle(
-                            //       fontSize: 28.0,
-                            //       fontWeight: FontWeight.bold,
-                            //       color: Colors.amber),
-                            // ),
-                            // TypewriterAnimatedText(
-                            //   '2nd : ${Top3List[1]['sbrand']} '
-                            //   '${Top3List[1]['smodel']}  ',
-                            //   textStyle: const TextStyle(
-                            //       fontSize: 28.0,
-                            //       fontWeight: FontWeight.bold,
-                            //       color: Colors.grey),
-                            // ),
-                            // TypewriterAnimatedText(
-                            //   '3rd : ${Top3List[2]['sbrand']}  '
-                            //   '${Top3List[2]['smodel']}  ',
-                            //   textStyle: const TextStyle(
-                            //       fontSize: 28.0,
-                            //       fontWeight: FontWeight.bold,
-                            //       color: Colors.brown),
-                            // ),
+                            TypewriterAnimatedText(
+                              '1st : ${Top3List[0]['sbrand']} '
+                              '${Top3List[0]['smodel']}  ',
+                              textStyle: const TextStyle(
+                                  fontSize: 28.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.amber),
+                            ),
+                            TypewriterAnimatedText(
+                              '2nd : ${Top3List[1]['sbrand']} '
+                              '${Top3List[1]['smodel']}  ',
+                              textStyle: const TextStyle(
+                                  fontSize: 28.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey),
+                            ),
+                            TypewriterAnimatedText(
+                              '3rd : ${Top3List[2]['sbrand']}  '
+                              '${Top3List[2]['smodel']}  ',
+                              textStyle: const TextStyle(
+                                  fontSize: 28.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.brown),
+                            ),
                           ],
                           totalRepeatCount: 100,
                           pause: const Duration(milliseconds: 1000),
@@ -995,13 +1009,13 @@ class _CollectionState extends State<Collection> {
   }
 
   Future<List> Getjasondata() async {
-    // var url = Uri.parse("http://localhost:8080/search/list/top/all");
-    // var response = await http.get(url);
-    // var dataConvertedJson = json.decode(
-    //   utf8.decode(response.bodyBytes),
-    // );
-    // Top3List = dataConvertedJson;
-    // print(Top3List);
+    var url = Uri.parse("http://localhost:8080/search/list/top/all");
+    var response = await http.get(url);
+    var dataConvertedJson = json.decode(
+      utf8.decode(response.bodyBytes),
+    );
+    Top3List = dataConvertedJson;
+    print(Top3List);
 
     return Top3List;
   }
