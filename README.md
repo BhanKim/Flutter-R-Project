@@ -1,22 +1,63 @@
-## `R`을 이용하여 **머신러닝** 예측모델 생성 후 `FLUTTER`를 이용한 중고차 시세예측 앱
-<!-- Table 양식 -->
-|Header|Description|
-|:--:|:--:|
-|Cell1|Cell2|
-|Cell1|Cell2|
-|Image|<img src = "https://w.namu.la/s/0c6301df01fc4f180ec65717bad3d0254258abf0be33299e55df7c261040f517518eb9008a1a2cd3d7b8b7777d70182c185bc891b1054dc57b11cc46fd29130a09000bb9b00ca67eb4e44d3353a2d5859e5cd6fa895e5054d66971cb6d0de237">|
-|test| ![KakaoTalk_20220716_161745723](https://user-images.githubusercontent.com/113099982/212533373-0bcb2505-5bb9-4475-b446-b16611fe3592.png)
+<center><h1> 중고차 시세예측 앱 </h1> </center>
+
+<img src =https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/1667px-PDF_file_icon.svg.png width = 20,m height = 20 > **포트폴리오**  [PDF]()
+
+<img src =https://cdn-icons-png.flaticon.com/512/1384/1384060.png width = 20,m height = 20 > **동영상** [Youtube]()
 
 ___
 
-![영킴](https://user-images.githubusercontent.com/113099982/212533453-8e043ae3-b96a-4f1b-b844-48bdea5a6198.gif)
-<br>
-test text mode **bold**
-<br>
-Click [Here](https://www.google.com/?&bih=1329&biw=2560&hl=ko)
-```java
-system.out.print('Hello world')
-```
-```Mysql
-SELECT * FROM carModel
-```
+
+<h2>List</h2>
+1. 개발환경 <br>
+2. R 분석요약 <br>
+3. Flutter 기능구현 <br>
+4. Spring Rest Controller
+  
+___
+
+>**개발환경**
+- 프론트엔드
+  - Flutter(ver 3.3)
+- 백엔드 
+  - Spring boot(ver 3.0.1)
+  - R(ver 4.2.2)
+  - Firebase
+    - Firebase_core(ver 2.4.1)
+    - Firebase_cloud(ver 4.3.0)
+    - Firebase_auth(ver 4.2.5)
+  - MySQL(ver 8.0ce)
+  - Apache Tomcat(ver 9.0)
+
+___
+
+> **R** [분석]()
+- DATA 컬럼소개 및 모델 선정
+- Column 정제
+  - Price & Year 
+  - Transmission Column 
+  - Fuel Type & Tax Column
+  - Mileage Column
+  - Engine Size
+- K means & 군집분포
+- 브랜드 모델 별 예측모델 표
+
+___
+
+> **Flutter** [기능]()
+- System Flow Diagram
+- 기능구현
+  - Splash 효과
+  - 로그인
+  - 회원가입
+  - 비밀번호 찾기
+  - 중고차 예측값 입력 및 조회
+  - 게시판
+  - 채팅
+  - 다크모드
+___
+
+> **Spring boot** [기능]()
+- Rest Controller
+- Rconnect
+
+___
