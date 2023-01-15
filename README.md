@@ -4,4 +4,7 @@
 |:--:|:--:|
 |Cell1|Cell2|
 
+```java
+system.out.print('Hello world')
+```
 
