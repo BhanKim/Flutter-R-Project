@@ -7,4 +7,6 @@
 ```java
 system.out.print('Hello world')
 ```
-
+```Mysql
+SELECT * FROM carModel
+```
