@@ -30,7 +30,7 @@ ___
 
 ___
 
-> **R** [분석]()
+> **R** [분석](https://github.com/BhanKim/Flutter-R-Project/blob/main/03.chasajo_Portfolio/R_%EB%B6%84%EC%84%9D%EC%9A%94%EC%95%BD.pdf)
 - DATA 컬럼소개 및 모델 선정
 - Column 정제
   - Price & Year 
@@ -43,7 +43,7 @@ ___
 
 ___
 
-> **Flutter** [기능]()
+> **Flutter** [기능](https://github.com/BhanKim/Flutter-R-Project/blob/main/03.chasajo_Portfolio/Flutter.pdf)
 - System Flow Diagram
 - 기능구현
   - Splash 효과
@@ -56,7 +56,7 @@ ___
   - 다크모드
 ___
 
-> **Spring boot** [기능]()
+> **Spring boot** [기능](https://github.com/BhanKim/Flutter-R-Project/blob/main/03.chasajo_Portfolio/RESTful%20API.pdf)
 - Rest Controller
 - Rconnect
 
